@@ -18,6 +18,7 @@ function Login() {
       }),
     });
     const data = await response.json();
+
     if (data.user) {
       localStorage.setItem("token", data.user);
       alert("Good job, you logged in");
