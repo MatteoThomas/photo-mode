@@ -5,11 +5,6 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 
 const App = () => {
-  window.process = {
-    env: {
-      NODE_ENV: "development",
-    },
-  };
   return (
     <div>
       <Routes>
