@@ -18,6 +18,12 @@ function Login() {
       }),
     });
     const data = await response.json();
+    if (data.user) {
+      alert("Good job, you logged in");
+      window.location.href = "/dashboard";
+    } else {
+      alert("Check your name and password");
+    }
     console.log(data);
   }
 

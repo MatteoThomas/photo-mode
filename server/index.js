@@ -34,7 +34,14 @@ app.post("/api/login", async (req, res) => {
     password: req.body.password,
   });
   if (user) {
-    return res.json({ status: "ok", user: true });
+    const token = jwt.sign(
+      {
+        name: user.name,
+        email: user.email,
+      },
+      process.env.REACT_APP_SECRET
+    );
+    return res.json({ status: "ok", user: token });
   } else {
     return res.json({ status: "error", user: false });
   }
