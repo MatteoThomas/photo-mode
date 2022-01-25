@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "../App.css";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -30,7 +31,7 @@ function Login() {
   }
 
   return (
-    <div>
+    <div className="container">
       <h1>Login</h1>
       <form onSubmit={loginUser}>
         <input

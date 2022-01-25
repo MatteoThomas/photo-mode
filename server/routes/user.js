@@ -25,22 +25,22 @@ const fileFilter = (req, file, cb) => {
 
 let upload = multer({ storage, fileFilter });
 
-router.route("/add").post(upload.single("photo"), (req, res) => {
-  const name = req.body.name;
-  const description = req.body.description;
-  const photo = req.file.filename;
-  const newUserData = {
-    name,
-    description,
-    photo,
-  };
-  const newUser = new User(newUserData);
+// router.route("/add").post(upload.single("photo"), (req, res) => {
+//   const name = req.body.name;
+//   const description = req.body.description;
+//   const photo = req.file.filename;
+//   const newUserData = {
+//     name,
+//     description,
+//     photo,
+//   };
+//   const newUser = new User(newUserData);
 
-  newUser
-    .save()
-    .then(() => res.json("User Added"))
-    .catch((err) => res.status(400).json("Error: " + err));
-});
+//   newUser
+//     .save()
+//     .then(() => res.json("User Added"))
+//     .catch((err) => res.status(400).json("Error: " + err));
+// });
 
 // router.route("/rec").get((req, res) => {
 //   User.find()

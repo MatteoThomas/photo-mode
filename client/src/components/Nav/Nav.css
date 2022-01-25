@@ -1,0 +1,17 @@
+.nav {
+  background-color: rgb(41, 41, 41);
+  /* margin: 1rem 0 1rem 13rem; */
+  color: rgb(240, 223, 223);
+  font-size: 3rem;
+  margin: 1rem 0 2rem 10rem;
+  padding: 1rem 0 1rem 10%;
+  display: flex;
+}
+
+.link {
+  text-decoration: none;
+  color: rgb(255, 160, 160);
+  font-size: 2rem;
+  /* margin: 0 0 2rem 1rem; */
+  padding: 2rem 0 1rem 2rem;
+}

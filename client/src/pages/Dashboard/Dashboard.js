@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import jwt from "jsonwebtoken";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
+import "../../App.css";
+import "../Dashboard/Dashboard.css";
 const Dashboard = () => {
   const history = useNavigate();
   const [quote, setQuote] = useState("");
   const [tempQuote, setTempQuote] = useState("");
+  const [name, setName] = useState("");
+  const [images, setImages] = useState("");
 
   async function populateQuote() {
     const req = await fetch("http://localhost:8080/api/quote", {
@@ -22,6 +25,36 @@ const Dashboard = () => {
     }
   }
 
+  async function populateName() {
+    const req = await fetch("http://localhost:8080/api/login", {
+      headers: {
+        "x-access-token": localStorage.getItem("token"),
+      },
+    });
+    const data = await req.json();
+    // console.log(data);
+    if (data.status === "ok") {
+      setName(data.name);
+    } else {
+      alert(data.error);
+    }
+  }
+
+  async function populateImages() {
+    const req = await fetch("http://localhost:8080/api/images", {
+      headers: {
+        "x-access-token": localStorage.getItem("token"),
+      },
+    });
+    const data = await req.json();
+    console.log(data);
+    if (data.status === "ok") {
+      setImages(data.image);
+    } else {
+      alert(data.error);
+    }
+  }
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -31,6 +64,8 @@ const Dashboard = () => {
         history.replace("/login");
       } else {
         populateQuote();
+        populateName();
+        populateImages();
       }
     }
   }, []);
@@ -58,10 +93,16 @@ const Dashboard = () => {
   }
 
   return (
-    <div>
-      <h1>Your quote: {quote || "No quote"} </h1>
+    <div className="container">
+      <h1>
+        Dashboard for <br />
+        <span className="name"> {name || "I don't know..."}</span>{" "}
+      </h1>
+
+      <h2> {quote || "Do what?"} </h2>
       <form onSubmit={updateQuote}>
         <input
+          className="input"
           type="text"
           placeholder="Quote"
           value={tempQuote}

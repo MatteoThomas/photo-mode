@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import "../App.css";
+
 function Register() {
   const navigate = useNavigate();
   const [name, setName] = useState("");
@@ -30,7 +32,7 @@ function Register() {
   }
 
   return (
-    <div>
+    <div className="container">
       <h1>Register</h1>
       <form onSubmit={registerUser}>
         <input
