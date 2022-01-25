@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import jwt from "jsonwebtoken";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Dashboard = () => {
   const history = useNavigate();
@@ -55,6 +56,7 @@ const Dashboard = () => {
       alert(data.error);
     }
   }
+
   return (
     <div>
       <h1>Your quote: {quote || "No quote"} </h1>
