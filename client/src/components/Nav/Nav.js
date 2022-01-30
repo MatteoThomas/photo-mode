@@ -5,7 +5,7 @@ export default function Nav() {
   return (
     <div>
       <nav className="nav">
-        <h1>Photomode</h1>
+        <h1></h1>
         <Link className="link" to="/Register">
           Register
         </Link>
@@ -18,9 +18,9 @@ export default function Nav() {
           Dashboard
         </Link>
         <br />
-        <Link className="link" to="/ImageUpload">
+        {/* <Link className="link" to="/ImageUpload">
           Image Upload
-        </Link>
+        </Link> */}
       </nav>
       <Outlet />
     </div>

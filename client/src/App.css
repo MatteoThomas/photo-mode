@@ -7,7 +7,10 @@ html {
 }
 
 .container {
-  background-color: rgb(170, 183, 194);
-  margin: 2rem 0 0 10rem;
+  color: antiquewhite;
+  background-color: rgb(34, 36, 37);
+  /* margin: 2rem 0 0 10rem; */
   padding: 2rem 0 2rem 10%;
+  width: clamp(400px, 90vw, 1000px);
+  margin: 0 auto;
 }

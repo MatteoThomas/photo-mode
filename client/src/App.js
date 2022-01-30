@@ -21,6 +21,14 @@ const App = () => {
           <Route path="/register" exact element={<Register />} />
           <Route path="/dashboard" exact element={<Dashboard />} />
           <Route path="/imageUpload" exact element={<ImageUpload />} />
+          <Route
+            path="*"
+            element={
+              <main style={{ padding: "1rem" }}>
+                <p>There's nothing here!</p>
+              </main>
+            }
+          />
         </Routes>
       </div>
     </div>
