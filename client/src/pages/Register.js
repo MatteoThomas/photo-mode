@@ -26,7 +26,7 @@ function Register() {
     const data = await response.json();
 
     if (data.status === "ok") {
-      navigate("/login");
+      window.location.href = "/login";
     }
     console.log(data);
   }
