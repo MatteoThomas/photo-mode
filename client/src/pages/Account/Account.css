@@ -1,0 +1,15 @@
+.bio {
+  padding: 1rem 0.5rem 1rem 0;
+  font-size: 1rem;
+  overflow-wrap: break-word;
+  width: 300px;
+}
+
+.updateBioBtn {
+  margin: 0.5rem;
+}
+
+img {
+  width: 200px;
+  height: 200px;
+}

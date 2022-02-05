@@ -16,7 +16,7 @@ app.use("/login", userRoutes);
 
 app.use("/", imageRoutes);
 app.use("/gallery", imageRoutes);
-app.use("/delete", imageRoutes);
+// app.use("/delete", imageRoutes);
 
 app.use(bodyParser.json());
 app.use(cors());

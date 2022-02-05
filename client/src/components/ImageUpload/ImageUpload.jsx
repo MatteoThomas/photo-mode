@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./ImageUpload.css";
-// import del from "../Image/Image"
+import noImg from "./noImage.png"
 
 const ImageUpload = () => {
   const [image, setImage] = useState("");
@@ -26,7 +26,7 @@ const ImageUpload = () => {
   };
 
   const imagePreview = (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     let reader = new FileReader();
     let file = e.target.files[0];
     setImage(file);
@@ -44,11 +44,12 @@ const ImageUpload = () => {
 
   return (
     <div>
-      <div className="wrapper">
+      <div className="imageUpload">
+        <h1>Upload</h1>
         <input type="file" onChange={(e) => imagePreview(e)}></input>
-        {img.imagePreviewUrl ? <img className="image"src={img.imagePreviewUrl} /> : <h3> Uploaded image will be displayed here</h3>
+        {img.imagePreviewUrl ? <img className="image"src={img.imagePreviewUrl} /> : <h1></h1>
         }
-        <button onClick={uploadImage}>Upload</button>
+        <button className="uploadBtn" onClick={uploadImage}>Upload</button>
       </div>
       <div>
       </div>

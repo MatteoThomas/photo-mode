@@ -1,0 +1,51 @@
+.wrapper {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  width: 500px;
+  height: 100px;
+  border: 1px rgb(132, 138, 97) solid;
+  border-radius: 10px;
+  padding: 0.5rem;
+}
+
+span {
+  font-size: 5rem;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: rgb(201, 162, 188);
+}
+
+.uploadBtn {
+}
+
+.uploadBtn:hover {
+}
+
+.header {
+}
+
+.input {
+  border: none;
+  background-color: rgb(46, 80, 69);
+  border-radius: 2px;
+  color: aliceblue;
+}
+
+.image {
+  width: 200px;
+  border-radius: 5px;
+  padding: 1rem;
+}
+
+.noImg {
+  width: 50px;
+}
+
+h3 {
+  padding: 1rem 0;
+  width: 200px;
+  overflow: hidden;
+}

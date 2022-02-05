@@ -1,19 +1,16 @@
-.nav {
-  background-color: rgb(41, 41, 41);
-  width: clamp(400px, 90vw, 1000px);
-  color: rgb(240, 223, 223);
-  font-size: 3rem;
-  margin: 0 auto;
-  padding: 1rem 0 1rem 10%;
-  display: flex;
+.navbar-brand {
+  font-size: 2rem;
+  font-family: "Kaushan Script", cursive;
+  color: antiquewhite;
+  border: 1px antiquewhite solid;
+  border-radius: 5px;
+  padding: 0 1rem 0 0.4rem;
 }
 
-.link {
-  text-decoration: none;
-  color: rgb(46, 80, 69);
-  font-size: 2rem;
-  padding: 2rem 0 1rem 2rem;
+a.link {
+  color: aquamarine;
 }
-.link:hover {
-  color: rgb(201, 162, 188);
+
+.navbar {
+  margin: 1rem 0 1rem 1rem;
 }

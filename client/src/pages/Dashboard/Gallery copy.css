@@ -1,0 +1,45 @@
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.images {
+  border: 1.5px rgb(25, 28, 29) solid;
+  transition: 1s;
+  padding: 1rem;
+  border-radius: 10px;
+  filter: opacity(1);
+  margin: 1rem 0 0 0;
+}
+
+.images:hover {
+  border: 1.5px rgb(235, 199, 199) solid;
+  transition: 1s;
+  filter: opacity(1);
+  /* width: 15vw; */
+}
+
+.image {
+  width: 12rem;
+  margin: 1rem 0;
+}
+
+.tools {
+  line-height: 1.5rem;
+  filter: opacity(0);
+  filter: blur(23px);
+  transition: 1s;
+}
+
+.tools:hover {
+  transition: 0.3s;
+  filter: blur(0.1px);
+}
+
+.tool:hover {
+  transition: 0.3s;
+  cursor: pointer;
+  color: rgb(252, 217, 217);
+  background-color: rgb(214, 183, 200);
+}

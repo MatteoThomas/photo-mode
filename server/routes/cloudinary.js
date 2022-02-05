@@ -20,10 +20,10 @@ router.get("/api/gallery", async (req, res) => {
 
 //DELETE IMAGE
 
-router.post("/api/delete", async (req, res) => {
-  cloudinary.api.destroy(function (result) {
-    console.log(result);
-  });
-});
+// router.post("/api/delete", async (req, res) => {
+//   cloudinary.api.destroy(function (result) {
+//     console.log(result);
+//   });
+// });
 
 module.exports = router;
