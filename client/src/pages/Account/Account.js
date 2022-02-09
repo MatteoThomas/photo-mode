@@ -66,7 +66,7 @@ const Account = () => {
 
   return (
     <div className="container">
-      <div className="row">
+      <div className="row wrapper">
         <div className="col">
           <form onSubmit={updateQuote}>
             <input

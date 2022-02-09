@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import jwt from "jsonwebtoken";
 import { Route, Routes } from "react-router-dom";
 import Form from "./pages/Login/Form";
+import Register from "../src/pages/Login/Register";
 import Login from "../src/pages/Login/Login";
 import Explore from "./pages/Explore/Explore";
 import Dashboard from "./pages/Dashboard/Dashboard";
@@ -43,10 +44,11 @@ const App = () => {
         <div>
           <Routes className="routes">
             <Route path="/login" exact element={<Form />} />
+            <Route path="/register" exact element={<Register />} />
             <Route path="/explore" exact element={<Explore />} />
             <Route path="/dashboard" exact element={<Dashboard />} />
             <Route path="/account" exact element={<Account />} />
-            <Route path="*" element={<Login />} />
+            <Route path="*" element={<Form />} />
           </Routes>
         </div>
       </div>

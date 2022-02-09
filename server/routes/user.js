@@ -66,7 +66,6 @@ router.post("/api/login", async (req, res) => {
 
 router.get("/api/login", async (req, res) => {
   const token = req.headers["x-access-token"];
-  console.log("login req");
   try {
     const decoded = jwt.verify(token, process.env.SECRET);
     const email = decoded.email;

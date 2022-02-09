@@ -1,5 +1,5 @@
 import React from "react";
-import Gallery from "../Dashboard/Gallery";
+import Gallery from "../Explore/Gallery";
 import { useEffect } from "react";
 import jwt from "jsonwebtoken";
 

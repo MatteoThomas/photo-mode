@@ -23,6 +23,7 @@
     "web-vitals": "^2.1.4",
     "webpack": "^4.46.0"
   },
+  "proxy": "http://localhost:8080",
   "scripts": {
     "start": "react-dotenv && react-scripts start",
     "build": "react-dotenv && react-scripts build",

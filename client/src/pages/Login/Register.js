@@ -1,9 +1,7 @@
 import { useState } from "react";
 
-import RandomImages from "../Login/ImageGallery";
-
 import "../../App.css";
-import "./LoginRegister.css";
+import "./Register.css";
 
 function Register() {
   const [name, setName] = useState("");
@@ -30,35 +28,56 @@ function Register() {
       window.location.href = "/login";
     }
     console.log(data);
+    createImageFolder();
+  }
+
+  async function createImageFolder() {
+    const response = await fetch("http://localhost:8080/api/folder", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+      }),
+    });
+    const data = await response.json();
+
+    if (data.status === "ok") {
+      window.location.href = "/login";
+    }
+    console.log(data);
   }
 
   return (
     <>
       <div className="container">
         <h1>Register</h1>
-        <form onSubmit={registerUser}>
+        <form className="form" onSubmit={registerUser}>
           <input
+            className="registerInput"
             value={name}
             onChange={(e) => setName(e.target.value)}
             type="text"
             placeholder="Name"
           />
           <input
+            className="registerInput"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             type="email"
             placeholder="Email"
           />
           <input
+            className="registerInput"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             type="password"
             placeholder="Password"
           />
-          <input type="submit" value="Register" />
+          <input className="input" type="submit" value="Register" />
         </form>
       </div>
-      <RandomImages className="randomImages" />
     </>
   );
 }

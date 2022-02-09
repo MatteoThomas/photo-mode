@@ -1,58 +1,99 @@
 import React, { useState } from "react";
 import "./ImageUpload.css";
-import noImg from "./noImage.png"
+
 
 const ImageUpload = () => {
-  const [image, setImage] = useState("");
-  // const [url, setUrl] = useState("");
-  const [img, setImg] = useState("");
-  const [render, setRender] = useState("");
-  
-  const uploadImage = () => {
-    setRender("true")
-    console.log(render);
-    const data = new FormData();
-    data.append("file", image);
-    data.append("upload_preset", "gallery");
-    data.append("cloud_name", "proj3");
-    fetch("  https://api.cloudinary.com/v1_1/proj3/image/upload", {
-      method: "post",
-      body: data,
-    })
-      .then((resp) => resp.json())
-  
-      .catch((err) => console.log(err));
-    
-  };
+  const [fileInputState, setFileInputState] = useState('');
+  const [previewSource, setPreviewSource] = useState('');
+  const [selectedFile, setSelectedFile] = useState();
+  const [name, setName] = useState('');
+  const [successMsg, setSuccessMsg] = useState('');
+  const [errMsg, setErrMsg] = useState('');
 
-  const imagePreview = (e) => {
+const handleFileInputChange = (e) => {
+  const file = e.target.files[0]
+  previewFile(file)
+  setSelectedFile(file)
+  setFileInputState(e.target.value);
+}
+
+const previewFile = (file) => {
+  const reader = new FileReader()
+  reader.readAsDataURL(file)
+  reader.onloadend = () => {
+    setPreviewSource(reader.result)
+  }
+}
+
+  const handleSubmitFile = (e) => {
     e.preventDefault();
-    let reader = new FileReader();
-    let file = e.target.files[0];
-    setImage(file);
+    if (!selectedFile) return;
+    const reader = new FileReader();
+    reader.readAsDataURL(selectedFile);
     reader.onloadend = () => {
-      setImg({
-        file: file,
-        imagePreviewUrl: reader.result,
-      });
+        uploadImage(reader.result);
     };
+    reader.onerror = () => {
+        console.error('AHHHHHHHH!!');
+        setErrMsg('something went wrong!');
+    };
+};
+  
+  const uploadImage = async (base64encodedImage) => {
+  
+    const allData = JSON.stringify({ data: base64encodedImage, folder: "flat", name: name}) 
+   
+   try {
+          const data = new FormData();
+      data.append("file", selectedFile);
 
-    reader.readAsDataURL(file);
-    console.log(file);
-  };
+      await fetch('/api/upload', {
+        method: "POST",
+        body: allData,
+        headers: { 'Content-Type': 'application/json' },
 
+      })
+      setPreviewSource("");
+  } catch (err) {
+    console.error(err);
+  }
+}
 
   return (
-    <div>
-      <div className="imageUpload">
-        <h1>Upload</h1>
-        <input type="file" onChange={(e) => imagePreview(e)}></input>
-        {img.imagePreviewUrl ? <img className="image"src={img.imagePreviewUrl} /> : <h1></h1>
-        }
-        <button className="uploadBtn" onClick={uploadImage}>Upload</button>
-      </div>
+    <div className="imageUpload">
       <div>
+      <h1>Upload</h1>
       </div>
+      <form onSubmit={handleSubmitFile}>
+       <div className="topBtnRow">
+        <input 
+          type="file" 
+          name="image" 
+          onChange={handleFileInputChange} 
+          value={fileInputState} 
+          className="form-input" 
+        />
+          {previewSource && (
+          <button className="uploadBtn" type="submit">
+            Submit
+          </button>
+          )}
+          </div>
+         <input 
+          type="text" 
+          name="name" 
+          onChange={e => setName(e.target.value)}
+          value={name} 
+          className="form-input"
+          placeholder=" Name"
+        />
+      </form>
+      {previewSource && (
+        <img 
+          src={previewSource} 
+          alt="chosen" 
+          />
+      )}
     </div>
   );
 };

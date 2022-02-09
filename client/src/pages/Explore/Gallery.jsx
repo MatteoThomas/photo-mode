@@ -26,7 +26,7 @@ const Gallery = () => {
           };
         });
         setGallery(images);
-        console.log(images);
+        console.log(images.public_id);
         return <div>!</div>;
       } else {
         alert(data.error);
@@ -38,10 +38,10 @@ const Gallery = () => {
 return (
 
 <div className="gallery">
-{gallery.map((images) => (
-  <div className="images" key={images.id}>
-    <h3>{images.name}</h3>
-      <img  className="image" src={images.image} alt={images.desc} />
+{gallery.map((img) => (
+  <div className="img" key={img.id}>
+    {/* <img src={img.url}/> */}
+      <img  className="image" src={img.image} alt={img.desc} />
       <div className="tools">
         <Tool className="tool" icon="Edit" alt="Edit"/>
         <Tool className="tool" icon="Comment" alt="Comment"/>

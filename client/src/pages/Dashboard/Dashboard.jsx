@@ -3,10 +3,10 @@ import jwt from "jsonwebtoken";
 
 import "../../App.css";
 import "../Dashboard/Dashboard.css";
-import Button from 'react-bootstrap/Button';
+
 
 import ImageUpload from "../../components/ImageUpload/ImageUpload";
-import Gallery from "./Gallery"
+import Gallery from "./UserGallery"
 
 
 
@@ -50,6 +50,7 @@ const Dashboard = () => {
   return (
 
   <div className="container">
+
     <div className="row">
       <div className="col">
         <span className="name"> {name || "I don't know..."}</span>{" "}
@@ -64,11 +65,12 @@ const Dashboard = () => {
       <ImageUpload/>
     </div>
 
+    <div className="col">
       <Gallery/>
-     
     </div>
-      </div>
-
+    </div>
+  </div>
+     
   );
 };
 

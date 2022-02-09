@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import jwt from "jsonwebtoken";
 
 import "./LoginRegister.css";
 
@@ -6,7 +7,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessages, setErrorMessages] = useState({});
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [data, setData] = useState();
 
   const renderErrorMessage = (name) =>
     name === errorMessages.name && (
@@ -28,6 +29,7 @@ function Login() {
     });
 
     const data = await response.json();
+    setData(data);
 
     if (data.user == null) {
       alert("Check your name and password");
@@ -37,36 +39,34 @@ function Login() {
     }
   }
   const renderForm = (
-    <>
-      <div className="list-container">
-        <div className="login-form">
-          <form onSubmit={loginUser}>
-            <input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              type="email"
-              placeholder="Email"
-            />
+    <div className="list-container">
+      <div className="login-form">
+        <form onSubmit={loginUser}>
+          <input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            type="email"
+            placeholder="Email"
+          />
 
-            <input
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              type="password"
-              placeholder="Password"
-            />
+          <input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+            placeholder="Password"
+          />
 
-            <input type="submit" value="Login" />
-          </form>
-        </div>
+          <input type="submit" value="Login" />
+        </form>
       </div>
-    </>
+    </div>
   );
 
   return (
     <>
       <div className="login">
         <div className="title">Login</div>
-        {isSubmitted ? <div>User successfully logged in</div> : renderForm}
+        {data ? <div>User successfully logged in</div> : renderForm}
       </div>
     </>
   );

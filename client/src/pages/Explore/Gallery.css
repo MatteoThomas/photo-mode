@@ -10,3 +10,12 @@
   margin: 0 1rem 1rem 0;
   width: 200px;
 }
+
+.images:hover > .tools {
+  filter: opacity(1);
+  transition: 0.5s;
+}
+.tools {
+  transition: 0.5s;
+  filter: opacity(0);
+}
