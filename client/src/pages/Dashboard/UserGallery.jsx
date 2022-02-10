@@ -7,73 +7,46 @@ function Tool(tool) {
   //DELETE / EDIT / COMMENT BUTTONS HERE
 }
 
-const Gallery = () => {
+const UserGallery = ({ folderDataUser }) => {
     const [userGallery, setUserGallery] = useState([]);
-    const [search, setSearch] = useState([]);
-    const [tempSearch, setTempSearch] = useState([]);
-  //GET IMAGES ON RENDER
-  useEffect(() => {
-    async function populateGallery() {
-      const req = await fetch("http://localhost:8080/api/gallery");
-      const data = await req.json();
-      if (data.status === "ok") {
-        const resources = data.results.resources;
-        const images = resources.map((resource) => {
-        
-          console.log(resources);
-          return {
-      
-            id: resource.asset_id,
-            title: resource.public_id,
-            image: resource.secure_url,
-            name: resource.public_id,
-   
-          };
-        });
-        setUserGallery(images);
+    const [imageCount, setImageCount] = useState("");
 
-    }}
-    populateGallery();
-  }, []);
-  
-  async function updateSearch(event) {
-    event.preventDefault();
-    const req = await fetch("http://localhost:8080/api/search", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-access-token": localStorage.getItem("token"),
-      },
-      body: JSON.stringify({
-        search: tempSearch,
-      }),
-    });
-    const data = await req.json();
-    if (data.status === "ok") {
-      setSearch(tempSearch);
-      setTempSearch("");
-    } else {
-      alert(data.error);
-    }
-  }
-
-
-return (
-  <div className="search">
-        <form onSubmit={updateSearch}>
-            <input
-              maxLength="80"
-              className="input"
-              type="text"
-              placeholder=" Search"
-              value={tempSearch}
-              onChange={(e) => setTempSearch(e.target.value)}
-            />
-            <button className="updateBioBtn" type="submit" value="Update quote">
-              Search
-            </button>
-            </form>
+    //GET IMAGES ON RENDER
+    useEffect(() => {
+      async function populateGallery() {
+        const req = await fetch("http://localhost:8080/api/usergallery");
+        const data = await req.json();
+        // console.log(data)
+        if (data.status === "ok") {
+          const resources = data.results;
+          const count = data.results.total_count;
+          const images = resources.resources.map((resource) => {
           
+            return {
+              id: resource.asset_id,
+              title: resource.public_id,
+              image: resource.secure_url,
+              name: resource.public_id,
+    
+            };
+          });
+          setImageCount(count);
+          setUserGallery(images);
+          // console.log(images.public_id);
+          return <div></div>;
+        } else {
+          alert(data.error);
+        }
+      }
+      populateGallery();
+    }, []);
+
+console.log(userGallery)
+return (
+<>
+
+          
+  <div>Total images: {imageCount}</div>
 <div className="gallery">
 {userGallery.map((images) => (
 
@@ -91,8 +64,8 @@ return (
 
 ))}
 </div>
-</div>
+</>
 
 )}
 
-export default Gallery
+export default UserGallery

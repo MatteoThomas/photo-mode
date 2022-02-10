@@ -6,7 +6,7 @@ import "../Dashboard/Dashboard.css";
 
 
 import ImageUpload from "../../components/ImageUpload/ImageUpload";
-import Gallery from "./UserGallery"
+import UserGallery from "./UserGallery"
 
 
 
@@ -46,7 +46,7 @@ const Dashboard = () => {
     }
   }
 
-  console.log(showUpload);
+  // console.log(showUpload);
   return (
 
   <div className="container">
@@ -62,11 +62,15 @@ const Dashboard = () => {
       </div>
 
     <div className="col">
-      <ImageUpload/>
+      <ImageUpload
+        folderData={name}
+      />
     </div>
 
     <div className="col">
-      <Gallery/>
+      <UserGallery
+      folderDataUser={name}
+      />
     </div>
     </div>
   </div>

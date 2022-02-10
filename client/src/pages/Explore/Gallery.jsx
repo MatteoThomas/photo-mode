@@ -22,12 +22,12 @@ const Gallery = () => {
             id: resource.asset_id,
             title: resource.public_id,
             image: resource.secure_url,
-   
+            name: resource.public_id,
           };
         });
         setGallery(images);
-        console.log(images.public_id);
-        return <div>!</div>;
+        // console.log(images.public_id);
+        return <div></div>;
       } else {
         alert(data.error);
       }
