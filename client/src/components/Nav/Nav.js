@@ -4,25 +4,44 @@ import "./Nav.css";
 export default function Nav() {
   return (
     <div>
-      <nav className="nav">
-        <h1></h1>
-        <Link className="link" to="/Register">
-          Register
-        </Link>
-        <br />
-        <Link className="link" to="/Login">
-          Login
-        </Link>
-        <br />
-        <Link className="link" to="/Dashboard">
+      <nav className="navbar">
+        <a class="navbar-brand" href="#">
+          P
+        </a>
+        <Link className="link nav-link" to="/Dashboard">
           Dashboard
         </Link>
-        <br />
-        {/* <Link className="link" to="/ImageUpload">
-          Image Upload
-        </Link> */}
+        <Link className="link nav-link" to="/Explore">
+          Explore
+        </Link>
+        <Link className="link nav-link" to="/Account">
+          Account
+        </Link>
       </nav>
       <Outlet />
     </div>
   );
 }
+
+<ul class="nav justify-content-center">
+  <li class="nav-item">
+    <a class="nav-link active" href="#">
+      Active
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">
+      Link
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">
+      Link
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" href="#">
+      Disabled
+    </a>
+  </li>
+</ul>;

@@ -1,0 +1,21 @@
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 90vw;
+  margin: 3rem 0 0 0;
+}
+
+.image {
+  margin: 0 1rem 1rem 0;
+  width: 200px;
+}
+
+.images:hover > .tools {
+  filter: opacity(1);
+  transition: 0.5s;
+}
+.tools {
+  transition: 0.5s;
+  filter: opacity(0);
+}

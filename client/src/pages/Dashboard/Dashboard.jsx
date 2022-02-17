@@ -1,155 +1,95 @@
 import React, { useEffect, useState } from "react";
+// import { Col } from "react-bootstrap"
+
 import jwt from "jsonwebtoken";
+
 import "../../App.css";
 import "../Dashboard/Dashboard.css";
-import ImageUpload from "../../components/ImageUpload/ImageUpload";
-import Delete from "../../components/Image/Image"
 
-const logOut = () => {
-  localStorage.removeItem("token");
-  console.log("it worked logout btn");
-  
-};
+import Stats from "./Stats";
+import ImageUpload from "../../components/ImageUpload/ImageUpload";
+import UserGallery from "./UserGallery"
+
+
 
 const Dashboard = () => {
-  const [quote, setQuote] = useState("");
-  const [tempQuote, setTempQuote] = useState("");
-  const [name, setName] = useState("");
-  const [gallery, setGallery] = useState([]);
-
+  const [userName, setUserName] = useState([]);
+  const [userGallery, setUserGallery] = useState([]);
+  const [ count , setCount] = useState("");
+  // console.log(userGallery)
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      const user = jwt.decode(token);
-      if (!user) {
-        localStorage.removeItem("token");
-      } else {
-        populateQuote();
-        populateName();
-      }
-    } else {
-      //REPLACE WITH CONDITIONAL RENDERING ON NAV COMPONENT
-      window.location.href = "/login";
-    }
-  }, []);
-  
-  //GET IMAGES ON RENDER
-  useEffect(() => {
-    async function populateGallery() {
-      const req = await fetch("http://localhost:8080/api/gallery");
+    
+    const fetchName = async() => {
+      const req = await fetch("http://localhost:8080/api/login", {
+        headers: {
+          "x-access-token": localStorage.getItem("token"),
+        },
+      });
       const data = await req.json();
       if (data.status === "ok") {
-        const resources = data.results.resources;
-        const images = resources.map((resource) => {
-        
-          return {
-            id: resource.asset_id,
-            title: resource.public_id,
-            image: resource.secure_url,
-   
-          };
-        });
-        setGallery(images);
-        return <div>!</div>;
+        setUserName(data.name);
+        console.log(userName)
       } else {
         alert(data.error);
       }
     }
-    populateGallery();
-  }, []);
-  
-
-  async function populateQuote() {
-    const req = await fetch("http://localhost:8080/api/quote", {
-      headers: {
-        "x-access-token": localStorage.getItem("token"),
-      },
+    
+    let isSubscribed = true;
+    const fetchGallery = async() => {
+      
+      const req = await fetch(`http://localhost:8080/api/usergallery?folderData=${userName}`, {
+      });
+      
+      const data = await req.json();
+      if (data.status === "ok") {
+        const countData = data.results.total_count;
+        const resources = data.results.resources;
+        const images = resources.map((resource) => {
+          
+        return {
+          id: resource.asset_id,
+          title: resource.public_id,
+          image: resource.secure_url,
+          name: resource.public_id,
+      };
     });
-    const data = await req.json();
-    if (data.status === "ok") {
-      setQuote(data.quote);
+    if (isSubscribed) {
+        setUserGallery(images);
+        setCount(countData)}
     } else {
       alert(data.error);
     }
   }
 
-  async function populateName() {
-    const req = await fetch("http://localhost:8080/api/login", {
-      headers: {
-        "x-access-token": localStorage.getItem("token"),
-      },
-    });
-    const data = await req.json();
-    // console.log(data);
-    if (data.status === "ok") {
-      setName(data.name);
-    } else {
-      alert(data.error);
-    }
-  }
+  fetchGallery()
+  fetchName() 
+  return() => isSubscribed = false
+},[userName]);
 
-  // console.log(images);
-
-  //
-  async function updateQuote(event) {
-    event.preventDefault();
-    const req = await fetch("http://localhost:8080/api/quote", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-access-token": localStorage.getItem("token"),
-      },
-      body: JSON.stringify({
-        quote: tempQuote,
-      }),
-    });
-
-    const data = await req.json();
-    if (data.status === "ok") {
-      setQuote(tempQuote);
-      setTempQuote("");
-    } else {
-      alert(data.error);
-    }
-  }
   return (
-    <div className="container">
-      <div className="header">
-      <h1>
-        Dashboard <br />
-        <span className="name"> {name || "I don't know..."}</span>{" "}
-      </h1>
-      <div className="image"></div>
-      <h2 className="quote"> {quote || "Do what now?"} </h2>
-      <form onSubmit={updateQuote}>
-        <input
-          className="input"
-          type="text"
-          placeholder=" Bio"
-          value={tempQuote}
-          onChange={(e) => setTempQuote(e.target.value)}
+
+  <div className="dashboard">
+    <div className="col">
+      <Stats 
+        name={userName}
+        count={count}
+      />
+    </div>
+    <div className="col">
+        <ImageUpload
+          folderName={userName}
+ 
         />
-        <button className="updateBioBtn" type="submit" value="Update quote" >Update Bio</button>
-      </form>
-      <button type="button" className="logoutBtn" onClick={logOut}>
-        Logout
-      </button>
-      </div>
-      <ImageUpload />
-      <div className="gallery">
-        {gallery.map((images) => (
- <div key={images.id}>
-        <h3 >{images.title}</h3>
-              <img  className="image" src={images.image} alt={images.desc} />
-              <Delete/>
-              
     </div>
-   
-        ))}
-      </div>
+    <div className="col">
+        <UserGallery
+          gallery={userGallery}
+        />
     </div>
-  );
+  </div>
+
+     );
 };
 
 export default Dashboard;

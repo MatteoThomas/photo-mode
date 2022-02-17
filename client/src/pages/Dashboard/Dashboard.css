@@ -1,66 +1,19 @@
-span {
-  font-size: 5rem;
-}
-
-button:hover {
-  cursor: pointer;
-  background-color: rgb(201, 162, 188);
-}
-.quote {
-  margin: 0 1rem;
-  font-family: fantasy;
-}
-
-.header {
-  display: flex;
-}
-
-.input {
-  border: none;
-  background-color: rgb(46, 80, 69);
-  border-radius: 2px;
-  color: aliceblue;
-}
-
-input {
-  all: unset;
-  margin: 0rem 0 0 0;
-}
-
-.logoutBtn {
-  height: 2rem;
-  text-align: center;
-  border-radius: 5%;
-  border: none;
-  margin: 2rem;
-  background-color: rgb(46, 80, 69);
-  color: antiquewhite;
-}
-
-.updateBioBtn {
-  height: 2rem;
-  text-align: center;
-  border-radius: 5%;
-  border: none;
-  margin: 2rem;
-  background-color: rgb(46, 80, 69);
-  color: antiquewhite;
-}
-
-.gallery {
+.dashboard {
   display: flex;
   flex-wrap: wrap;
-  padding: 2rem;
-  gap: 3rem;
+  /* justify-content: left; */
+  /* flex-direction: column; */
+  /* border: 1px grey solid; */
 }
 
-.image {
-  width: 200px;
-  border-radius: 5px;
+.col {
+  border: 0.5px rgb(97, 97, 97) solid;
+  border-radius: 10px;
+  margin: 0.5rem;
+  padding: 0.5rem;
 }
 
-h3 {
-  padding: 1rem 0;
-  width: 200px;
-  overflow: hidden;
+.name {
+  color: aquamarine;
+  font-family: "raleway" sans-serif;
 }

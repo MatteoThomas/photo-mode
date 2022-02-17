@@ -1,0 +1,28 @@
+.stats {
+  /* background-color: rgb(44, 44, 44); */
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: left;
+  align-items: center;
+  /* background-color: aliceblue; */
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+}
+
+.nameEl {
+  /* background-color: red; */
+}
+
+.rowLeft {
+  display: flex;
+  flex-direction: column;
+  /* background-color: rgb(67, 82, 77); */
+}
+
+.rowRight {
+  padding: 0 0 0 2rem;
+  /* background-color: rgb(88, 88, 77); */
+}

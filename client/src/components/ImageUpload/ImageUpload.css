@@ -1,48 +1,65 @@
-.wrapper {
-  width: 500px;
-  border: 1px rgb(132, 138, 97) solid;
-  border-radius: 10px;
-  padding: 1rem;
+.imageUpload {
+  display: grid;
+  width: clamp(300px, 50vw, 100px);
+  font-size: 1rem;
 }
 
-span {
-  font-size: 5rem;
+.form-input {
+  background-color: transparent;
+  margin: 1rem 0 0 0;
+}
+/* CHOSE FILE BUTTON */
+input[type="file"]::file-selector-button {
+  padding: 0.2em 0.4em;
+  border-radius: 0.2em;
+  background-color: transparent;
+  border: 0.5px rgb(118, 219, 131) solid;
+  border-radius: 5px;
+  color: rgb(118, 219, 131);
+  margin: 0 0 1rem 0rem;
+  transition: 0.4s;
 }
 
-button {
-  height: 2rem;
-  text-align: center;
-  border-radius: 5%;
+input[type="file"]::file-selector-button:hover {
+  color: rgb(197, 255, 180);
+  border: 0.5px rgb(181, 247, 155) solid;
+  transition: 0.4s;
+}
+
+/* REMOVE NO FILE CHOSEN TEXT */
+input[type="file"] {
+  color: rgba(0, 0, 0, 0);
+}
+
+/* NAME INPUT */
+input[type="text"] {
   border: none;
-  margin: 2rem;
-  background-color: rgb(46, 80, 69);
   color: antiquewhite;
 }
 
-button:hover {
-  cursor: pointer;
-  background-color: rgb(201, 162, 188);
+.uploadBtn {
+  padding: 0.2em 0.4em;
+  border-radius: 0.2em;
+  background-color: transparent;
+  border: 0.5px rgb(118, 219, 131) solid;
+  border-radius: 5px;
+  color: #edff89;
+  width: fit-content;
+  animation: glowing 1300ms infinite;
 }
 
-.header {
-  display: flex;
-}
-
-.input {
-  border: none;
-  background-color: rgb(46, 80, 69);
-  border-radius: 2px;
-  color: aliceblue;
+@keyframes glowing {
+  0% {
+    border-color: #c2db30;
+  }
+  50% {
+    border-color: #c1db3091;
+  }
+  100% {
+    border-color: #c2db30;
+  }
 }
 
 .image {
-  width: 200px;
-  border-radius: 5px;
-  padding: 1rem;
-}
-
-h3 {
-  padding: 1rem 0;
-  width: 200px;
-  overflow: hidden;
+  margin: 0 auto;
 }

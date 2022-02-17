@@ -1,0 +1,8 @@
+.input:last-of-type {
+}
+
+.registerInput {
+  width: 350px;
+  /* background-color: aqua; */
+  color: aquamarine;
+}

@@ -1,0 +1,24 @@
+.jumbotron {
+  color: antiquewhite;
+  /* border: 1px rgb(250, 238, 238) solid; */
+  height: 200px;
+  background-color: transparent;
+}
+
+.title {
+  width: 100vw;
+  font-size: clamp(5rem, 6vw, 17rem);
+  font-family: "Kaushan Script", cursive;
+  letter-spacing: -0.2rem;
+  line-height: 2rem;
+  padding: 2rem 0 0 0;
+  /* border: 1px rgb(235, 149, 149) solid; */
+}
+
+.jumbotron span {
+  line-height: 0.1em;
+  font-family: "Raleway", sans-serif;
+  font-size: 0.25em;
+  letter-spacing: 0.1rem;
+  /* border: 1px red solid; */
+}
