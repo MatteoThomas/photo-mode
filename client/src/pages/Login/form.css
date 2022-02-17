@@ -2,3 +2,30 @@
   font-family: "Raleway" sans-serif;
   font-size: 3rem;
 }
+
+.form-container {
+  display: flex;
+  /* background-color: rgb(79, 80, 80); */
+  padding: 1rem;
+  border: 1px rgb(26, 207, 192) solid;
+  height: 500px;
+  border-radius: 10px;
+}
+
+.registerBtn {
+  margin: 2rem;
+}
+
+.button-container {
+  display: flex;
+  margin: 2rem 0 0 0;
+}
+
+input {
+  background-color: transparent;
+  border-radius: 10px;
+}
+
+.input-container {
+  background-color: rgb(48, 42, 42);
+}

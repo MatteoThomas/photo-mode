@@ -9,32 +9,38 @@ function Tool(tool) {
 
 const Gallery = () => {
     const [gallery, setGallery] = useState([]);
+    const [count, setCount] = useState();
+
   //GET IMAGES ON RENDER
   useEffect(() => {
-    async function populateGallery() {
+    async function populateUserGallery() {
       const req = await fetch("http://localhost:8080/api/gallery");
       const data = await req.json();
       if (data.status === "ok") {
+        const count = data.results.total_count;
         const resources = data.results.resources;
         const images = resources.map((resource) => {
-        
+
+        // console.log("images returned" , count)
+
           return {
             id: resource.asset_id,
             title: resource.public_id,
             image: resource.secure_url,
             name: resource.public_id,
+            count: count,
           };
         });
+        setCount(count);
         setGallery(images);
-        // console.log(images.public_id);
         return <div></div>;
       } else {
         alert(data.error);
       }
     }
-    populateGallery();
+    populateUserGallery();
   }, []);
-  
+
 return (
 
 <div className="gallery">

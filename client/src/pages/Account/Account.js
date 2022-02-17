@@ -86,7 +86,7 @@ const Account = () => {
         </div>
         <div className="col">
           <div className="avatar">
-            <img src={avatar} />
+            <img src={avatar} alt="avatar" />
           </div>
         </div>
 

@@ -3,7 +3,6 @@ import jwt from "jsonwebtoken";
 import { Route, Routes } from "react-router-dom";
 import Form from "./pages/Login/Form";
 import Register from "../src/pages/Login/Register";
-import Login from "../src/pages/Login/Login";
 import Explore from "./pages/Explore/Explore";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Nav from "./components/Nav/Nav";

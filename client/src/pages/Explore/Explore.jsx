@@ -1,7 +1,9 @@
 import React from "react";
-import Gallery from "../Explore/Gallery";
+import Gallery from "./Gallery";
 import { useEffect } from "react";
 import jwt from "jsonwebtoken";
+
+// import style from "styled-components";
 
 const Explore = () => {
   useEffect(() => {

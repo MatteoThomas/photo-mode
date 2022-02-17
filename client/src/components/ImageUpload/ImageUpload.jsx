@@ -1,118 +1,59 @@
 import React, { useState } from "react";
 import "./ImageUpload.css";
 
+const ImageUpload = ( props ) => {
+  const [image, setImage] = useState("");
+  const [imagePrev, setImagePrev] = useState("");
+  //DESTRUCTURE PROPS
+  const {folderName = ""} =  props
 
-const ImageUpload = ({ folderData }) => {
-  const [fileInputState, setFileInputState] = useState('');
-  const [previewSource, setPreviewSource] = useState('');
-  const [selectedFile, setSelectedFile] = useState();
-  const [tag, setTag] = useState();
-  const [name, setName] = useState('');
-  const [successMsg, setSuccessMsg] = useState('');
-  const [errMsg, setErrMsg] = useState('');
-
-const handleFileInputChange = (e) => {
-  const file = e.target.files[0]
-  previewFile(file)
-  setSelectedFile(file)
-  setFileInputState(e.target.value);
-}
-const previewFile = (file) => {
-  const reader = new FileReader()
-  reader.readAsDataURL(file)
-  reader.onloadend = () => {
-    setPreviewSource(reader.result)
-  }
-}
-
-const handleSubmitFile = (e) => {
-  e.preventDefault();
-  if (!selectedFile) return;
-  const reader = new FileReader();
-  reader.readAsDataURL(selectedFile);
-  reader.onloadend = () => {
-    uploadImage(reader.result);
-  };
-  reader.onerror = () => {
-    console.error('Error');
-    setErrMsg('something went wrong!');
-  };
-};
-
-const uploadImage = async (base64encodedImage) => {
-  const folder = folderData
- console.log(folder)
-  const allData = JSON.stringify({ 
-    data: base64encodedImage, 
-    folder:folder, 
-    name: name, 
-    tag: tag,
-  }) 
-  
-  try {
+  const uploadImage = () => {
+    setImage("");
+    setImagePrev("");
     const data = new FormData();
-    data.append("file", selectedFile);
-    
-      await fetch('/api/upload', {
-        method: "POST",
-        body: allData,
-        headers: { 'Content-Type': 'application/json' },
+    data.append("file", image);
+    data.append("folder", folderName)
+    data.append("upload_preset", "gallery");
+    data.append("cloud_name", "proj3");
+    fetch("  https://api.cloudinary.com/v1_1/proj3/image/upload", {
+      method: "post",
+      body: data,
+    })
+    .then((resp) => resp.json())
+    .catch((err) => console.log(err));
+  };
 
-      })
-      setPreviewSource("");
-  } catch (err) {
-    console.error(err);
-  }
-}
+  const imagePreview = (e) => {
+    e.preventDefault();
+    let reader = new FileReader();
+    let file = e.target.files[0];
+    setImage(file);
+    reader.onloadend = () => {
+      setImagePrev({
+        file: file,
+        imagePreviewUrl: reader.result,
+      });
+    };
+    // console.log(imagePrev.imagePreviewUrl)
+    reader.readAsDataURL(file);
+    // console.log(file);
+  };
+  // CONDITIONALLY RENDERS IMAGE PREVIEW
+  const previewUrl =  imagePrev.imagePreviewUrl ? <img src={imagePrev.imagePreviewUrl} alt="NEED ALT DATA"/>  : ""
+  const uploadButton = imagePrev ? <button className="uploadBtn" onClick={uploadImage}>Upload</button> : <h1></h1>
 
   return (
-    <div className="imageUpload">
-      <div className="titleUpload">
-      <h1>Upload</h1>
-      </div>
-      <form onSubmit={handleSubmitFile}>
-       <div className="topBtnRow">
-        <input 
-          type="file" 
-          name="image" 
-          onChange={handleFileInputChange} 
-          value={fileInputState} 
-          className="form-input" 
-        />
-         <input 
-          type="text" 
-          name="name" 
-          onChange={e => setName(e.target.value)}
-          value={name} 
-          className="form-input"
-          placeholder=" Name"
-          />
-                <input 
-          type="text" 
-          name="tag" 
-          onChange={e => setTag(e.target.value)}
-          value={tag} 
-          className="form-input"
-          placeholder=" Tags"
-          />
-
+    <div>
+      <div className="imageUpload">
+        <h1>Upload</h1>
+        <input type="file" accept="image/png, image/jpeg" onChange={(e) => imagePreview(e)}/>
+        {previewUrl}
+        {uploadButton}
         </div>
-          
-      
-          {previewSource && (
-          <button className="uploadBtn" type="submit">
-            Submit
-          </button>
-          )}
-      </form>
-      {previewSource && (
-        <img 
-        className="previewImg"
-          src={previewSource} 
-          alt="chosen" 
-          />
-      )}
+      <div>
+      </div>
     </div>
   );
 };
+
 export default ImageUpload;

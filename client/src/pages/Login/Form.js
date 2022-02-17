@@ -45,48 +45,47 @@ function App() {
     );
   }
 
-  // JSX code for login form
+  //LOGIN FORM
   const renderForm = (
-    <div className="form">
-      <form onSubmit={loginUser}>
-        <div className="input-container">
-          <label>Email</label>
-          <input
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            type="text"
-            name="uname"
-            required
-          />
+    <form onSubmit={loginUser}>
+      <div className="input-container">
+        <label>Email</label>
+        <br />
+        <input
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          type="text"
+          required
+        />
+      </div>
 
-          {renderErrorMessage("uname")}
-        </div>
-
-        <div className="input-container">
-          <label>Password</label>
-          <input
-            value={password}
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-            name="pass"
-            required
-          />
-
-          {renderErrorMessage("pass")}
-        </div>
+      <div className="input-container">
+        <label>Password</label>
+        <br />
+        <input
+          value={password}
+          type="password"
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
 
         <div className="button-container">
-          <input type="submit" value="Login" />
+          <button type="submit" value="Login">
+            Login
+          </button>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
   );
 
   return (
-    <div className="app">
-      <div className="login-form">
-        <div className="signIn">Sign In</div>
-        {isSubmitted ? <div>User is successfully logged in</div> : renderForm}
+    <div className="form-container">
+      <button className="registerBtn">Register</button>
+      <div className="app">
+        <div className="signIn">Log In</div>
+        <div className="login-form">
+          {isSubmitted ? <div></div> : renderForm}
+        </div>
       </div>
     </div>
   );

@@ -1,3 +1,11 @@
+.dashboard {
+  display: flex;
+  flex-wrap: wrap;
+  /* justify-content: left; */
+  /* flex-direction: column; */
+  /* border: 1px grey solid; */
+}
+
 .col {
   border: 0.5px rgb(97, 97, 97) solid;
   border-radius: 10px;
