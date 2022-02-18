@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
-
+import { Link } from "react-router-dom";
 import "./form.css";
 
 function App() {
@@ -80,7 +80,9 @@ function App() {
 
   return (
     <div className="form-container">
-      <button className="registerBtn">Register</button>
+      <button className="registerBtn">
+        <Link to="/Register">Register</Link>
+      </button>
       <div className="app">
         <div className="signIn">Log In</div>
         <div className="login-form">

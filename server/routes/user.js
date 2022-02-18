@@ -38,29 +38,33 @@ router.post("/api/register", async (req, res) => {
 });
 
 router.post("/api/login", async (req, res) => {
-  const user = await User.findOne({
-    email: req.body.email,
-  });
-  console.log(user);
-  if (!user) {
-    return { status: "error", error: "Invalid login" };
-  }
-  // BCRYPT COMPARING HASHED PASSWORD WITH USER TYPED PASSWORD
-  const isPasswordValid = await bcrypt.compare(
-    req.body.password,
-    user.password
-  );
-  if (isPasswordValid) {
-    const token = jwt.sign(
-      {
-        name: user.name,
-        email: user.email,
-      },
-      process.env.SECRET
+  try {
+    const user = await User.findOne({
+      email: req.body.email,
+    });
+    console.log(user);
+    if (!user) {
+      return { status: "error", error: "Invalid login" };
+    }
+    // BCRYPT COMPARING HASHED PASSWORD WITH USER TYPED PASSWORD
+    const isPasswordValid = await bcrypt.compare(
+      req.body.password,
+      user.password
     );
-    return res.json({ status: "ok", user: token });
-  } else {
-    return res.json({ status: "error", user: false });
+    if (isPasswordValid) {
+      const token = jwt.sign(
+        {
+          name: user.name,
+          email: user.email,
+        },
+        process.env.SECRET
+      );
+      return res.json({ status: "ok", user: token });
+    } else {
+      return res.json({ status: "error", user: false });
+    }
+  } catch (err) {
+    res.json({ error: "/api/login failed" });
   }
 });
 
