@@ -10,20 +10,18 @@
 }
 /* CHOSE FILE BUTTON */
 input[type="file"]::file-selector-button {
-  padding: 0.2em 0.4em;
-  border-radius: 0.2em;
-  background-color: transparent;
-  border: 0.5px rgb(118, 219, 131) solid;
-  border-radius: 5px;
-  color: rgb(118, 219, 131);
-  margin: 0 0 1rem 0rem;
-  transition: 0.4s;
+  background-color: aquamarine;
+  color: black;
+  border: 1px transparent solid;
+  margin: 1rem 0 0 0;
+  border-radius: 4px;
+  width: 100%;
 }
 
 input[type="file"]::file-selector-button:hover {
-  color: rgb(197, 255, 180);
-  border: 0.5px rgb(181, 247, 155) solid;
-  transition: 0.4s;
+  background-color: transparent;
+  border: 1px aquamarine solid;
+  color: aliceblue;
 }
 
 /* REMOVE NO FILE CHOSEN TEXT */
@@ -34,18 +32,16 @@ input[type="file"] {
 /* NAME INPUT */
 input[type="text"] {
   border: none;
-  color: antiquewhite;
+  color: black;
 }
 
-.uploadBtn {
-  padding: 0.2em 0.4em;
-  border-radius: 0.2em;
-  background-color: transparent;
-  border: 0.5px rgb(118, 219, 131) solid;
-  border-radius: 5px;
-  color: #edff89;
-  width: fit-content;
-  animation: glowing 1300ms infinite;
+.Btn {
+  padding: 0.5rem 1rem 2rem 1rem;
+  background-color: aquamarine;
+  color: black;
+  border: 1px transparent solid;
+  margin: 1rem 0 0 0;
+  width: 100%;
 }
 
 @keyframes glowing {

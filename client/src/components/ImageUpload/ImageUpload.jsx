@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {Container, Button} from "react-bootstrap"
 import "./ImageUpload.css";
 
 const ImageUpload = ( props ) => {
@@ -40,19 +41,18 @@ const ImageUpload = ( props ) => {
   };
   // CONDITIONALLY RENDERS IMAGE PREVIEW
   const previewUrl =  imagePrev.imagePreviewUrl ? <img src={imagePrev.imagePreviewUrl} alt="NEED ALT DATA"/>  : ""
-  const uploadButton = imagePrev ? <button className="uploadBtn" onClick={uploadImage}>Upload</button> : <h1></h1>
+  const uploadButton = imagePrev ? <Button className="Btn" onClick={uploadImage}>Upload</Button> : <h1></h1>
 
   return (
-    <div>
-      <div className="imageUpload">
+  
+      <Container className="imageUpload-container">
         <h1>Upload</h1>
         <input type="file" accept="image/png, image/jpeg" onChange={(e) => imagePreview(e)}/>
         {previewUrl}
         {uploadButton}
-        </div>
-      <div>
-      </div>
-    </div>
+
+
+    </Container>
   );
 };
 

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import {Container, Button, Col} from "react-bootstrap"
 import "./Account.css";
 import avatar from "./avatar.jpg";
 import jwt from "jsonwebtoken";
@@ -65,38 +66,38 @@ const Account = () => {
   }
 
   return (
-    <div className="container">
+    <Container className="account-container">
       <div className="row wrapper">
-        <div className="col">
+        <Col className="column">
           <form onSubmit={updateQuote}>
             <input
               maxLength="80"
-              className="input"
+              className="input bio-input"
               type="text"
               placeholder=" Bio"
               value={tempQuote}
               onChange={(e) => setTempQuote(e.target.value)}
             />
-            <button className="updateBioBtn" type="submit" value="Update quote">
+            <Button className="Btn" type="submit" value="Update quote">
               Update Bio
-            </button>
+            </Button>
 
             <div className="bio"> {quote || "Do what now?"} </div>
           </form>
-        </div>
-        <div className="col">
+        </Col>
+        <Col className="column">
           <div className="avatar">
             <img src={avatar} alt="avatar" />
-          </div>
         </div>
+          </Col>
 
-        <div className="col">
-          <button type="button" onClick={logOut}>
+        <Col className="column">
+          <Button className="Btn" type="button" onClick={logOut}>
             Logout
-          </button>
-        </div>
+          </Button>
+        </Col>
       </div>
-    </div>
+    </Container>
   );
 };
 

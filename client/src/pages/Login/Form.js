@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
+import { Button, Container } from "react-bootstrap";
 import "./form.css";
 
 function App() {
@@ -36,15 +37,6 @@ function App() {
     }
   }
 
-  // Generate JSX code for error message
-  function renderErrorMessage(name) {
-    return (
-      name === errorMessages.name && (
-        <div className="error">{errorMessages.message}</div>
-      )
-    );
-  }
-
   //LOGIN FORM
   const renderForm = (
     <form onSubmit={loginUser}>
@@ -68,28 +60,29 @@ function App() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-
-        <div className="button-container">
-          <button type="submit" value="Login">
-            Login
-          </button>
-        </div>
+        <br />
+        <Button className="Btn" type="submit" value="Login">
+          Login
+        </Button>
       </div>
     </form>
   );
 
   return (
-    <div className="form-container">
-      <button className="registerBtn">
-        <Link to="/Register">Register</Link>
-      </button>
-      <div className="app">
-        <div className="signIn">Log In</div>
-        <div className="login-form">
-          {isSubmitted ? <div></div> : renderForm}
+    <>
+      <Container className="form-container">
+        <div className="app">
+          <h1 className="log-in">Log In</h1>
+          <div className="login-form">
+            {isSubmitted ? <div></div> : renderForm}
+            <div className="text">Or</div>
+            <Link className="link" to="/Register">
+              <Button className="Btn">Register</Button>
+            </Link>
+          </div>
         </div>
-      </div>
-    </div>
+      </Container>
+    </>
   );
 }
 

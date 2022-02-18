@@ -26,19 +26,21 @@ const App = () => {
     }
   }, []);
 
+  //CONDITIONALLY RENDER NAV OR HEADER
+  const renderHeader = header ? (
+    <div className="row">
+      <Nav className="col-12" />
+    </div>
+  ) : (
+    <>
+      <Hero />
+      <ImageIndex />
+    </>
+  );
+
   return (
     <>
-      {header ? (
-        <div className="row">
-          <Nav className="col-12" />
-        </div>
-      ) : (
-        <>
-          <Hero />
-          <ImageIndex />
-        </>
-      )}
-
+      {renderHeader}
       <div className="container">
         <div>
           <Routes className="routes">

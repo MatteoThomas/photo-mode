@@ -1,4 +1,5 @@
 import React from "react";
+import {Container} from "react-bootstrap"
 import avatar from "../Account/avatar.jpg";
 import "../../App.css";
 import "./Stats.css"
@@ -8,7 +9,7 @@ const Stats = ( props ) => {
   const {name = "", count = ""} =  props
 
   return (
-    <div className="container stats">
+    <Container className="stats-container">
          <div className="rowLeft">
           {name || "I don't know..."}
          <img className="avatar"src={avatar} alt="avatar" />
@@ -20,7 +21,7 @@ const Stats = ( props ) => {
             Likes:  <br/>
          
         </div>
-    </div>
+    </Container>
 
 );}
 

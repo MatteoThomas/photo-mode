@@ -1,9 +1,6 @@
-.dashboard {
+.dashboard-container {
   display: flex;
   flex-wrap: wrap;
-  /* justify-content: left; */
-  /* flex-direction: column; */
-  /* border: 1px grey solid; */
 }
 
 .col {

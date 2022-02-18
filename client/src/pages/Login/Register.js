@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { Button, Container } from "react-bootstrap";
 import "../../App.css";
 import "./Register.css";
 
@@ -50,35 +50,40 @@ function Register() {
   }
 
   return (
-    <>
-      <div className="container">
-        <h1>Register</h1>
-        <form className="form" onSubmit={registerUser}>
-          <input
-            className="registerInput"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            type="text"
-            placeholder="Name"
-          />
-          <input
-            className="registerInput"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            type="email"
-            placeholder="Email"
-          />
-          <input
-            className="registerInput"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            type="password"
-            placeholder="Password"
-          />
-          <input className="input" type="submit" value="Register" />
-        </form>
-      </div>
-    </>
+    <Container className="register-container">
+      <h1>Register</h1>
+      <form className="form" onSubmit={registerUser}>
+        <label>Name</label>
+        <input
+          className="register-input"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          type="text"
+          placeholder="Name"
+        />
+        <br />
+        <label>Email</label>
+        <input
+          className="register-input"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          type="email"
+          placeholder="Email"
+        />
+        <br />
+        <label>Password</label>
+        <input
+          className="register-input"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          type="password"
+          placeholder="Password"
+        />
+        <Button className="Btn" type="submit" value="Register">
+          Register{" "}
+        </Button>
+      </form>
+    </Container>
   );
 }
 

@@ -15,11 +15,12 @@ img {
   height: 200px;
 }
 
-.container {
-  /* width: calc(300px, 90%, 1500px); */
+.avatar {
   width: fit-content;
+  height: fit-content;
+  margin: 0 auto;
 }
 
-.input {
-  color: antiquewhite;
+.bio-input {
+  width: 100%;
 }

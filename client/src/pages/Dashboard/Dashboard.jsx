@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-// import { Col } from "react-bootstrap"
+import {Container} from "react-bootstrap"
 
 import jwt from "jsonwebtoken";
 
@@ -69,7 +69,7 @@ const Dashboard = () => {
 
   return (
 
-  <div className="dashboard">
+  <Container className="dashboard-container">
     <div className="col">
       <Stats 
         name={userName}
@@ -87,7 +87,7 @@ const Dashboard = () => {
           gallery={userGallery}
         />
     </div>
-  </div>
+  </Container>
 
      );
 };
