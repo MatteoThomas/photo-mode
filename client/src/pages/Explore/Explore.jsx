@@ -1,10 +1,13 @@
 import React from "react";
+import styled from "styled-components";
 import Gallery from "./Gallery";
 import { useEffect } from "react";
 import jwt from "jsonwebtoken";
+import { Container } from "react-bootstrap";
 
-// import style from "styled-components";
-
+const GalleryContainer = styled(Container)`
+color: aliceblue;
+`
 const Explore = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -20,10 +23,10 @@ const Explore = () => {
   }, []);
 
   return (
-    <>
+    <GalleryContainer>
       <h1>Explore</h1>
       <Gallery />
-    </>
+    </GalleryContainer>
   );
 };
 

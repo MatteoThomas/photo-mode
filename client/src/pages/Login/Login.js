@@ -1,55 +1,49 @@
 import React, { useState } from "react";
-import { Button } from "react-bootstrap";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { Button, Container } from "react-bootstrap";
 
-function Register() {
-  const [name, setName] = useState("");
+function App() {
+  // const [isSubmitted, setIsSubmitted] = useState(false);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  async function registerUser(event) {
+  async function loginUser(event) {
     event.preventDefault();
-
-    const response = await fetch("http://localhost:8080/api/register", {
+    // setIsSubmitted(true);
+    const response = await fetch("http://localhost:8080/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name,
         email,
         password,
       }),
     });
+
     const data = await response.json();
 
-    if (data.status === "ok") {
-      window.location.href = "/login";
+    if (data.user == null) {
+      alert("Check your name and password");
+    } else {
+      localStorage.setItem("token", data.user);
+      // alert("Good job, you logged in");
+      window.location.href = "/dashboard";
     }
   }
 
+  //LOGIN FORM
   const renderForm = (
-    <form onSubmit={registerUser}>
-      <div className="input-container">
-        <label>Name</label>
-        <br />
-        <Input
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          type="text"
-          required
-          placeholder="Name"
-        />
-      </div>
-
+    <form onSubmit={loginUser}>
       <div className="input-container">
         <label>Email</label>
         <br />
         <Input
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          type="email"
+          type="text"
           required
           placeholder="Email"
         />
@@ -60,35 +54,40 @@ function Register() {
         <br />
         <Input
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
           type="password"
+          onChange={(e) => setPassword(e.target.value)}
           required
-          placeholder="Password"
+          placeholder="Email"
         />
         <br />
+        <ButtonsWrapper>
+          <StyledButton className="Btn" type="submit" value="Login">
+            Login
+          </StyledButton>
+
+          <Link className="link" to="/Register">
+            <StyledButtonLink className="Btn">Register</StyledButtonLink>
+          </Link>
+        </ButtonsWrapper>
       </div>
-      <ButtonsWrapper>
-        <StyledButton className="Btn" type="submit" value="Register">
-          Register
-        </StyledButton>
-        <Link to="/Login">
-          <StyledButtonLink className="Btn">Login</StyledButtonLink>
-        </Link>
-      </ButtonsWrapper>
     </form>
   );
 
   return (
-    <StyledContainer>
-      <RegisterHeading>Register</RegisterHeading>
-      {renderForm}
-    </StyledContainer>
+    <>
+      <StyledContainer>
+        <div className="app">
+          <LoginHeading>Log In</LoginHeading>
+          <div className="login-form">{renderForm}</div>
+        </div>
+      </StyledContainer>
+    </>
   );
 }
 
-export default Register;
+export default App;
 
-const StyledContainer = styled.div`
+const StyledContainer = styled(Container)`
   display: flex;
   flex-direction: column;
   border-radius: 4px;
@@ -100,7 +99,7 @@ const StyledContainer = styled.div`
   margin: 5rem auto;
 `;
 
-const RegisterHeading = styled.h1`
+const LoginHeading = styled.h1`
   font-family: "Raleway" sans-serif;
   font-size: 3rem;
 `;
@@ -108,7 +107,6 @@ const RegisterHeading = styled.h1`
 const ButtonsWrapper = styled.div`
   display: flex;
 `;
-
 const StyledButton = styled(Button)`
   background-color: aquamarine;
   color: black;
@@ -135,7 +133,6 @@ const StyledButtonLink = styled(Button)`
     background-color: aquamarine;
   }
 `;
-
 const Input = styled.input`
   border-radius: 4px;
   border: none;

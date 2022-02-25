@@ -2,17 +2,3 @@ html {
   /* background-color: rgb(40, 42, 53); */
   /* color: antiquewhite; */
 }
-
-.container {
-  color: antiquewhite;
-}
-
-button {
-  background-color: transparent;
-  color: aquamarine;
-  height: 30px;
-  border: none;
-  border: 1px rgb(6, 248, 196) solid;
-  border-radius: 5px;
-  /* margin: 0.5rem 0 0 0; */
-}

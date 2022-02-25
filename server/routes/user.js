@@ -81,7 +81,8 @@ router.get("/api/login", async (req, res) => {
   }
 });
 
-router.get("/api/quote", async (req, res) => {
+//GETS USER BIO
+router.get("/api/bio", async (req, res) => {
   const token = req.headers["x-access-token"];
 
   try {
@@ -89,20 +90,50 @@ router.get("/api/quote", async (req, res) => {
     const email = decoded.email;
     const user = await User.findOne({ email: email });
 
-    return res.json({ status: "ok", quote: user.quote });
+    return res.json({ status: "ok", bio: user.bio });
   } catch (error) {
     res.json({ status: "error", error: "invalid token!" });
   }
 });
 
-router.post("/api/quote", async (req, res) => {
+//POSTS USER BIO
+router.post("/api/bio", async (req, res) => {
   const token = req.headers["x-access-token"];
 
   try {
     const decoded = jwt.verify(token, process.env.SECRET);
     const email = decoded.email;
-    await User.updateOne({ email: email }, { $set: { quote: req.body.quote } });
+    await User.updateOne({ email: email }, { $set: { bio: req.body.bio } });
 
+    return res.json({ status: "ok" });
+  } catch (error) {
+    res.json({ status: "error", error: "invalid token" });
+  }
+});
+
+//GETS USER AVATAR URL FROM MONGODB - THE URL IS A CLOUDINARY FILE
+router.get("/api/avatarUrl", async (req, res) => {
+  const token = req.headers["x-access-token"];
+  try {
+    const decoded = jwt.verify(token, process.env.SECRET);
+    const email = decoded.email;
+    const user = await User.findOne({ email: email });
+    return res.json({ status: "ok", avatar: user.avatar });
+  } catch (error) {
+    res.json({ status: "error", error: "invalid token!" });
+  }
+});
+
+//POSTS USER AVATAR URL TO MONGODB - THE URL IS A CLOUDINARY FILE
+router.post("/api/avatarUrl", async (req, res) => {
+  const token = req.headers["x-access-token"];
+  try {
+    const decoded = jwt.verify(token, process.env.SECRET);
+    const email = decoded.email;
+    await User.updateOne(
+      { email: email },
+      { $set: { avatar: req.body.avatar } }
+    );
     return res.json({ status: "ok" });
   } catch (error) {
     res.json({ status: "error", error: "invalid token" });

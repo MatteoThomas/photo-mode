@@ -1,8 +1,9 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import jwt from "jsonwebtoken";
 import { Route, Routes } from "react-router-dom";
-import Form from "./pages/Login/Form";
-import Register from "../src/pages/Login/Register";
+import Login from "./pages/Login/Login";
+import Register from "./pages/Login/Register";
 import Explore from "./pages/Explore/Explore";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Nav from "./components/Nav/Nav";
@@ -28,8 +29,8 @@ const App = () => {
 
   //CONDITIONALLY RENDER NAV OR HEADER
   const renderHeader = header ? (
-    <div className="row">
-      <Nav className="col-12" />
+    <div>
+      <Nav />
     </div>
   ) : (
     <>
@@ -44,12 +45,12 @@ const App = () => {
       <div className="container">
         <div>
           <Routes className="routes">
-            <Route path="/login" exact element={<Form />} />
+            <Route path="/login" exact element={<Login />} />
             <Route path="/register" exact element={<Register />} />
             <Route path="/explore" exact element={<Explore />} />
             <Route path="/dashboard" exact element={<Dashboard />} />
             <Route path="/account" exact element={<Account />} />
-            <Route path="*" element={<Form />} />
+            <Route path="*" element={<Login />} />
           </Routes>
         </div>
       </div>

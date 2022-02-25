@@ -1,15 +1,10 @@
-
+import React from "react";
 import { useState, useEffect } from "react";
-import "./Gallery.css"
-
-function Tool(tool) {
-  return <div className="tool" >{tool.icon}</div>
-  //DELETE / EDIT / COMMENT BUTTONS HERE
-}
+import styled from "styled-components"
 
 const Gallery = () => {
     const [gallery, setGallery] = useState([]);
-    const [count, setCount] = useState();
+    const [date, setDate] = useState([]);
 
   //GET IMAGES ON RENDER
   useEffect(() => {
@@ -19,19 +14,20 @@ const Gallery = () => {
       if (data.status === "ok") {
         const count = data.results.total_count;
         const resources = data.results.resources;
+        console.log(resources)
         const images = resources.map((resource) => {
-
-        // console.log("images returned" , count)
-
           return {
             id: resource.asset_id,
             title: resource.public_id,
             image: resource.secure_url,
             name: resource.public_id,
+            folder: resource.folder,
+            date: resource.uploaded_at,
             count: count,
           };
         });
-        setCount(count);
+       
+        setDate(images[11].date)
         setGallery(images);
         return <div></div>;
       } else {
@@ -40,25 +36,63 @@ const Gallery = () => {
     }
     populateUserGallery();
   }, []);
+  
+  async function FormatDate() {
+    let str = await date.toString()
+    let splitDate = await str.split('T');
+    const formattedDate = await splitDate[0] 
+    return await formattedDate
+  }
+  FormatDate()
+  
+  const dateFin = FormatDate && <DateEl>{FormatDate}</DateEl>
+console.log(FormatDate)
+  return (
 
-return (
-
-<div className="gallery">
+<StyledContainer>
 {gallery.map((img) => (
-  <div className="img" key={img.id}>
+  <ImageGallery key={img.name}>
     {/* <img src={img.url}/> */}
-      <img  className="image" src={img.image} alt={img.desc} />
-      <div className="tools">
-        <Tool className="tool" icon="Edit" alt="Edit"/>
-        <Tool className="tool" icon="Comment" alt="Comment"/>
-        <Tool className="tool" icon="Del" alt="Delete"/>
-      </div>
-  </div>
+    <ImageContainer>
+      <Image src={img.image} alt={img.desc}/>
+      {img.folder} 
+  
+    </ImageContainer>
 
+
+  </ImageGallery>
 ))}
-</div>
-
+</StyledContainer>
 
 )}
 
 export default Gallery
+  
+const StyledContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 90vw;
+  margin: 3rem 0 0 0;
+  color: aliceblue;
+`
+  const DateEl = styled.div`
+    
+  `
+const ImageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  color:transparent;
+  transition: all .4s;
+  &:hover {
+  color: aliceblue;
+  }
+`
+const ImageGallery = styled.div`
+  
+`
+const Image = styled.img`
+  margin: 0 1rem 1rem 0;
+  width: 200px;
+  transition: all .4s;
+`

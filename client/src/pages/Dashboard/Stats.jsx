@@ -1,27 +1,32 @@
 import React from "react";
 import {Container} from "react-bootstrap"
-import avatar from "../Account/avatar.jpg";
+import styled from "styled-components"
 import "../../App.css";
-import "./Stats.css"
+
+const StatsContainer = styled(Container)`
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  color:aliceblue;
+`
+
+const RowLeft = styled.div`
+  padding: 0 0 0 1rem;
+`
 
 const Stats = ( props ) => {
     //DESTRUCTURE PROPS
-  const {name = "", count = ""} =  props
+  const { count = ""} =  props
 
   return (
-    <Container className="stats-container">
-         <div className="rowLeft">
-          {name || "I don't know..."}
-         <img className="avatar"src={avatar} alt="avatar" />
-        </div>
-        <div className="rowRight">
-          
+    <StatsContainer className="stats-container">
+
+        <RowLeft>
             Uploads: {count} <br/>
-            Comments:  <br/>
-            Likes:  <br/>
-         
-        </div>
-    </Container>
+            Comments: - <br/>
+            Likes: - <br/>
+        </RowLeft>
+    </StatsContainer>
 
 );}
 

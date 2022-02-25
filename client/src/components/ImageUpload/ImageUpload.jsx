@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {Container, Button} from "react-bootstrap"
-import "./ImageUpload.css";
+import styled from "styled-components";
+import "./file-input-button.css";
 
 const ImageUpload = ( props ) => {
   const [image, setImage] = useState("");
@@ -35,25 +36,58 @@ const ImageUpload = ( props ) => {
         imagePreviewUrl: reader.result,
       });
     };
-    // console.log(imagePrev.imagePreviewUrl)
     reader.readAsDataURL(file);
-    // console.log(file);
   };
-  // CONDITIONALLY RENDERS IMAGE PREVIEW
-  const previewUrl =  imagePrev.imagePreviewUrl ? <img src={imagePrev.imagePreviewUrl} alt="NEED ALT DATA"/>  : ""
-  const uploadButton = imagePrev ? <Button className="Btn" onClick={uploadImage}>Upload</Button> : <h1></h1>
+
+//RENDERS IMAGE PREVIEW IF ONE EXISTS
+const previewUrl =  imagePrev.imagePreviewUrl && <Image src={imagePrev.imagePreviewUrl} alt="NEED ALT DATA"/> 
+//RENDERS UPLOAD BUTTON IF imagePrev EXISTS
+const uploadButton = imagePrev && <UploadButton  onClick={uploadImage}>Upload</UploadButton>
 
   return (
-  
-      <Container className="imageUpload-container">
-        <h1>Upload</h1>
-        <input type="file" accept="image/png, image/jpeg" onChange={(e) => imagePreview(e)}/>
-        {previewUrl}
-        {uploadButton}
+    <UploadContainer>
+      <StyledRow>
+        <h2>Upload</h2>
+        <ChooseButton><input type="file" accept="image/png, image/jpeg, image/svg, image/gif" onChange={(e) => imagePreview(e)}/></ChooseButton>
+      {uploadButton}
+      </StyledRow>
 
+      {previewUrl}
 
-    </Container>
+    </UploadContainer>
   );
 };
 
 export default ImageUpload;
+
+const UploadContainer = styled(Container)`
+  display: grid;
+  font-size: 1rem;
+  color: aliceblue;
+  `
+const ChooseButton = styled.div`
+  margin: 0 0 0 1rem;
+  `
+const UploadButton = styled.button`
+  background-color: aquamarine;
+  color: black;
+  border: 1px transparent solid;
+  border-radius: 4px;
+  border: 1px transparent solid;
+  transition: all .4s;
+    &:hover {
+    transition: all .4s;
+    background-color: transparent;
+    border: 1px aquamarine solid;
+    color: aliceblue;
+  }
+  `
+  const Image = styled.img`
+    margin: 1rem auto 0;
+    width: 300px;
+  `
+  const StyledRow = styled.div`
+    display: flex;
+    justify-content: left;
+    width: 100%;
+  `

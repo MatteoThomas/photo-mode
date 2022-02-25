@@ -5,11 +5,12 @@ const User = new mongoose.Schema(
     name: { type: String, required: true, unique: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    quote: { type: String },
+    bio: { type: String },
     imageData: { type: Buffer },
     imageType: { type: String },
     imageName: { type: String },
     search: { type: String },
+    avatar: { type: Buffer },
   },
   { collection: "user-data" }
 );
