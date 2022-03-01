@@ -1,5 +1,7 @@
 import React from "react";
-import "./ImageIndex.css";
+
+import styled from "styled-components";
+
 import crowd from "./img/crowd.jpg";
 import field from "./img/field.jpg";
 import donkey from "./img/donkey.jpg";
@@ -24,11 +26,16 @@ const ImgIndex = () => {
   const randomIndex = Math.floor(Math.random() * img.length);
   const picture = img[randomIndex];
 
-  return (
-    <div className="glass">
-      <img id="pic" src={picture} alt={img} />
-    </div>
-  );
+  return <Pic src={picture} alt={img} />;
 };
 
 export default ImgIndex;
+
+const Pic = styled.img`
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  object-fit: cover;
+`;

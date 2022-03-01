@@ -1,29 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { fetchName } from "../../UserService";
 
-
-const AvatarUpload = () => {
+const AvatarUpload = ( props ) => {
   const [avatar, setAvatar] = useState("");
   const [avatarPrev, setAvatarPrev] = useState("");
-  const [folderName, setFolderName] = useState("");
-
-  useEffect(() => {
-    //GETS FETCH FUNCTION FROM UserService.js
-      const fetchFolderName = () => {
-        fetchName().then(response => {
-        setFolderName(response.name)
-        })
-      }
-      fetchFolderName()
-    },[]);
+  //DESTRUCTURE PROPS
+  const {folderName = ""} = props
 
   const uploadAvatar = () => {
     setAvatar("");
     setAvatarPrev("");
+
     const data = new FormData();
     data.append("file", avatar);
-
     data.append("tags", "avatar" )
     data.append("folder", folderName)
     data.append("upload_preset", "gallery");
@@ -51,21 +40,23 @@ const AvatarUpload = () => {
     reader.readAsDataURL(file);
   };
 
-//RENDERS IMAGE PREVIEW IF ONE EXISTS
-const previewUrl =  avatarPrev.avatarPreviewUrl && <Image src={avatarPrev.avatarPreviewUrl} alt="avatar preview"/> 
-//RENDERS UPLOAD BUTTON IF imagePrev EXISTS
-const uploadButton = avatarPrev && <UploadButton onClick={uploadAvatar}>Upload</UploadButton>
-
+  //RENDERS IMAGE PREVIEW IF ONE EXISTS
+  const previewUrl =  avatarPrev.avatarPreviewUrl && <Image src={avatarPrev.avatarPreviewUrl} alt="avatar preview"/> 
+  //RENDERS UPLOAD BUTTON IF imagePrev EXISTS
+  const uploadButton = avatarPrev && <UploadButton onClick={uploadAvatar}>Upload</UploadButton>
 
   return (
     <UploadContainer>
       <StyledRow>
-       
         <Input>
-          <input type="file" accept="image/png, image/jpeg, image/svg, image/gif" onChange={(e) => avatarPreview(e)}/>
+          <input 
+            type="file" 
+            accept="image/png, image/jpeg, image/svg, image/gif" 
+            onChange={(e) => avatarPreview(e)}
+          />
         </Input>
-      {previewUrl}
-      {uploadButton}
+        {previewUrl}
+        {uploadButton}
       </StyledRow>
     </UploadContainer>
   );
@@ -79,7 +70,6 @@ const UploadContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   width: 100%;
-  /* background-color: #af8282; */
 `
 
 const StyledRow = styled.div`
@@ -88,7 +78,6 @@ const StyledRow = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   margin: .5rem auto 0;
-  /* background-color: antiquewhite; */
   width: 100%;
 `
 
@@ -97,7 +86,6 @@ const UploadButton = styled.button`
   color: black;
   border: 1px transparent solid;
   border-radius: 4px;
-  /* width: 100%; */
   border: 1px transparent solid;
   &:hover {
     background-color: transparent;
@@ -105,10 +93,9 @@ const UploadButton = styled.button`
   }
 `
 const Input = styled.div`
-
 `
 
 const Image = styled.img`
-    margin: 1rem auto 0;
-    width: 200px;
+  margin: 1rem auto 0;
+  width: 200px;
 `

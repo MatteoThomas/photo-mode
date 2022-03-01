@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import {Container, Button} from "react-bootstrap"
 import styled from "styled-components";
-// import AvatarsList from "./Avatars"
 import AvatarUpload from "./AvatarUpload";
+
+import { motion } from 'framer-motion/dist/framer-motion'
 
 const Account = () => {
   const [avatar, setAvatar] = useState([]);
-  console.log(avatar)
   const [showAvatarGallery, setShowAvatarGallery] = useState(false)
   const [bio, setBio] = useState("");
   const [tempBio, setTempBio] = useState("");
@@ -17,6 +16,7 @@ const Account = () => {
   useEffect(() => {
     populateBio();
     fetchName();
+    fetchAvatar();
   }, [userName]);
   
 //GETS USER NAME FROM MONGODB
@@ -26,11 +26,10 @@ const Account = () => {
         "x-access-token": localStorage.getItem("token"),
       },
     });
-    const data = await req.json();
+  const data = await req.json();
     if (data.status === "ok") {
       //SETS userName
       setUserName(data.name);
-      fetchAvatar();
     } else {
   alert(data.error);
   }}
@@ -101,8 +100,8 @@ const Account = () => {
     }
   }
 
-//RENDERS BIO INPUT FIELD WHEN BUTTON CLICKED AND showBio STATE IS SET TO TRUE
-//INITIAL STATE IS FALSE SO BIO INPUT FIELD IS HIDDEN
+  //RENDERS BIO INPUT FIELD WHEN BUTTON CLICKED AND showBio STATE IS SET TO TRUE
+  //INITIAL STATE IS FALSE SO BIO INPUT FIELD IS HIDDEN
   const bioInput = showBioInput &&
     <Input
       maxLength="80"
@@ -118,15 +117,28 @@ const Account = () => {
       setShowAvatarGallery(false)
       }
     }
-//VARIABLE THAT CHECK CONDITION OF showAvatarGallery THEN RENDERS AvatarUpload COMPONENT or DIV
+
+  //VARIABLE THAT CHECK CONDITION OF showAvatarGallery THEN RENDERS AvatarUpload COMPONENT or DIV
   const userAvatar = avatar.length > 0  ? 
-    <><AvatarImg src={avatar} alt="avatar" onClick={() => handleAvatarClick()} /><div>Click to change</div></> 
+    <><AvatarImg src={avatar} alt="avatar" onClick={() => handleAvatarClick()} />
+      <div>Click to change</div> </> 
     : <div onClick={() => handleAvatarClick()}>No avatar selected, click here to add</div> 
 
-  const avatarUpload = showAvatarGallery && <AvatarUpload/> 
+  const avatarUpload = showAvatarGallery && <AvatarUpload folderName={userName}/> 
+console.log(userName)
+  const container = {
+    hidden: { opacity: 0 },
+    show: { opacity: 1 }
+  }
+
 
   return (
-    <StyledContainer>
+    <StyledContainer
+      variants={container}
+      initial="hidden"
+      animate="show"
+      transition={{ delay: .5}}
+    >
 
       <StyledCol >
         <h1>{userName}</h1>
@@ -164,20 +176,23 @@ const Account = () => {
 
 export default Account;
 
-const StyledContainer = styled.div`
-  color: #fff8f0;
+const StyledContainer = styled(motion.div)`
+  color: aliceblue;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 `
 
-const StyledButton = styled(Button)`
+const StyledButton = styled.button`
   background-color: aquamarine;
   color: black;
   border: 1px transparent solid;
+  border-radius: 4px;
   margin: 1rem 0 0 0;
-  border: 1px transparent solid;
+  transition: all .4s;
   &:hover {
+    transition: all .4s;
+    color: aliceblue;
     background-color: transparent;
     border: 1px aquamarine solid;
   }

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import {Container, Col} from "react-bootstrap"
 import styled from "styled-components";
 import Stats from "./Stats";
-import ImageUpload from "../../components/ImageUpload/ImageUpload";
+import ImageUpload from "./ImageUpload/ImageUpload";
 import UserGallery from "./UserGallery"
+import { motion } from 'framer-motion/dist/framer-motion'
 
 const Dashboard = () => {
-  const [userName, setUserName] = useState([]);
+  const [userName, setUserName] = useState("");
   const [userGallery, setUserGallery] = useState([]);
   const [count , setCount] = useState("");
 
@@ -22,6 +22,7 @@ const Dashboard = () => {
       if (data.status === "ok") {
         //SETS userName
         setUserName(data.name);
+
       } else {
         alert(data.error);
       }
@@ -32,7 +33,6 @@ const Dashboard = () => {
       //SENDS userName AS A SEARCH PARAMETER TO CLOUDINARY
       const req = await fetch(`http://localhost:8080/api/usergallery?folderData=${userName}`, {
       });
-      
       const data = await req.json();
       if (data.status === "ok") {
         //NUMBER OF UPLOADS BY USER
@@ -43,10 +43,12 @@ const Dashboard = () => {
           
         return {
           id: resource.asset_id,
-          title: resource.public_id,
+          //REMOVES THE FOLDER PREFIX AND THE FILE EXTENSION THEN RETURNS THE FILENAME
+          //THIS IS SO THE FILENAME ALONE IS DISPLAYED
+          title: resource.public_id.split(/(?:\/|\.)+/)[1],
           image: resource.secure_url,
           name: resource.public_id,
-        
+     
       };
     });
     if (isSubscribed) {
@@ -62,9 +64,19 @@ const Dashboard = () => {
   return() => isSubscribed = false
 },[userName]);
 
+const container = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1 }
+}
+
   return (
 
-  <DashboardContainer >
+  <DashboardContainer     
+    variants={container}
+    initial="hidden"
+    animate="show"
+    transition={{ delay: .5}}
+  >
     <StyledCol>
       <Stats 
         name={userName}
@@ -78,7 +90,7 @@ const Dashboard = () => {
     </StyledCol>
     <StyledCol>
         <UserGallery
-          gallery={userGallery}
+          userGallery={userGallery}
         />
     </StyledCol>
   </DashboardContainer>
@@ -88,7 +100,7 @@ const Dashboard = () => {
 
 export default Dashboard;
 
-const DashboardContainer = styled(Container)`
+const DashboardContainer = styled(motion.div)`
   display: flex;
   flex-wrap: wrap;
 `

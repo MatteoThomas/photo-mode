@@ -1,29 +1,46 @@
 import React from "react";
 import styled from "styled-components";
-import "./Hero.css";
+
+import { motion } from "framer-motion/dist/framer-motion";
 
 const Hero = () => {
+  const container = {
+    hidden: {
+      opacity: 0,
+    },
+    show: {
+      opacity: 1,
+    },
+  };
+
   return (
-    <Jumbotron>
-      <Title>
-        Photomode <br />
-        <span>Upload, Share, Explore</span>
-      </Title>
-    </Jumbotron>
+    <motion.div
+      variants={container}
+      initial="hidden"
+      animate="show"
+      transition={{ delay: 0.5 }}
+    >
+      <Jumbotron>
+        <Title>
+          Photomode <br />
+          <span>Upload, Share, Explore</span>
+        </Title>
+      </Jumbotron>
+    </motion.div>
   );
 };
 
 export default Hero;
 
 const Jumbotron = styled.div`
-  color: antiquewhite;
+  color: aliceblue;
 
   background-color: transparent;
   & span {
-    line-height: 0.1em;
+    line-height: 0.2em;
     font-family: "Raleway", sans-serif;
     font-size: 0.25em;
-    letter-spacing: 0.1rem;
+    letter-spacing: 0.1em;
     /* border: 1px red solid; */
   }
 `;

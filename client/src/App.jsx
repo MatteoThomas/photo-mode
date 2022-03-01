@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import jwt from "jsonwebtoken";
 import { Route, Routes } from "react-router-dom";
 import Login from "./pages/Login/Login";
-import Register from "./pages/Login/Register";
+import Register from "./pages/Register/Register";
 import Explore from "./pages/Explore/Explore";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Nav from "./components/Nav/Nav";

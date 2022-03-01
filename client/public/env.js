@@ -15,7 +15,7 @@ window.env = {
   "USER": "matthewelliott",
   "COMMAND_MODE": "unix2003",
   "npm_config_globalconfig": "/usr/local/etc/npmrc",
-  "SSH_AUTH_SOCK": "/private/tmp/com.apple.launchd.hr2Uv6rDOK/Listeners",
+  "SSH_AUTH_SOCK": "/private/tmp/com.apple.launchd.JWsV7hfFmU/Listeners",
   "__CF_USER_TEXT_ENCODING": "0x1F5:0x0:0x0",
   "npm_execpath": "/usr/local/lib/node_modules/npm/bin/npm-cli.js",
   "PATH": "/Users/matthewelliott/Coding/photomode/client/node_modules/.bin:/Users/matthewelliott/Coding/photomode/node_modules/.bin:/Users/matthewelliott/Coding/node_modules/.bin:/Users/matthewelliott/node_modules/.bin:/Users/node_modules/.bin:/node_modules/.bin:/usr/local/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/node-gyp-bin:/Users/matthewelliott/Coding/photomode/server/node_modules/.bin:/Users/matthewelliott/Coding/photomode/node_modules/.bin:/Users/matthewelliott/Coding/node_modules/.bin:/Users/matthewelliott/node_modules/.bin:/Users/node_modules/.bin:/node_modules/.bin:/usr/local/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/node-gyp-bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin",

@@ -124,20 +124,4 @@ router.get("/api/avatarUrl", async (req, res) => {
   }
 });
 
-//POSTS USER AVATAR URL TO MONGODB - THE URL IS A CLOUDINARY FILE
-router.post("/api/avatarUrl", async (req, res) => {
-  const token = req.headers["x-access-token"];
-  try {
-    const decoded = jwt.verify(token, process.env.SECRET);
-    const email = decoded.email;
-    await User.updateOne(
-      { email: email },
-      { $set: { avatar: req.body.avatar } }
-    );
-    return res.json({ status: "ok" });
-  } catch (error) {
-    res.json({ status: "error", error: "invalid token" });
-  }
-});
-
 module.exports = router;

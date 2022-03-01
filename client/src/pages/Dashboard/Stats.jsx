@@ -1,9 +1,8 @@
 import React from "react";
-import {Container} from "react-bootstrap"
 import styled from "styled-components"
 import "../../App.css";
 
-const StatsContainer = styled(Container)`
+const StatsContainer = styled.div`
   display: flex;
   justify-content: left;
   align-items: center;
