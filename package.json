@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/MatteoThomas/photomode/issues"
   },
-  "homepage": "https://github.com/MatteoThomas/photomode#readme"
+  "homepage": "https://github.com/MatteoThomas/photomode#readme",
+  "dependencies": {
+    "concurrently": "^7.0.0"
+  }
 }
