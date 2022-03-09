@@ -1,0 +1,19 @@
+{
+  "name": "photomode",
+  "version": "1.0.0",
+  "description": "server\r     npm run dev\r client\r     npm start",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MatteoThomas/photomode.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MatteoThomas/photomode/issues"
+  },
+  "homepage": "https://github.com/MatteoThomas/photomode#readme"
+}
