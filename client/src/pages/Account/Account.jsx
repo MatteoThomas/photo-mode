@@ -13,11 +13,7 @@ const Account = () => {
   const [userName, setUserName] = useState("")
 
   useEffect(() => {
-    populateBio();
-    fetchName();
-    fetchAvatar();
-  }, [userName]);
-  
+    let isSubscribed = true;
 //GETS USER NAME FROM MONGODB
   const fetchName = async() => {
     const req = await fetch("http://localhost:8080/api/login", {
@@ -25,12 +21,12 @@ const Account = () => {
         "x-access-token": localStorage.getItem("token"),
       },
     });
-  const data = await req.json();
+    const data = await req.json();
     if (data.status === "ok") {
       //SETS userName
       setUserName(data.name);
     } else {
-  alert(data.error);
+      alert(data.error);
   }}
 
   //FETCH USER AVATAR FROM CLOUDINARY
@@ -57,29 +53,38 @@ const Account = () => {
       alert(data.error);
     }
   }
+  if (isSubscribed) {
+    populateBio();
+    fetchName();
+    fetchAvatar();
+
+} else {
+  alert("Error");
+}
+  return() => isSubscribed = false
+}, [userName]);
+
+async function updateBio(event) {
+  event.preventDefault();
+  const req = await fetch("http://localhost:8080/api/bio", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "x-access-token": localStorage.getItem("token"),
+    },
+    body: JSON.stringify({
+      bio: tempBio,
+    }),
+  });
   
-  async function updateBio(event) {
-    event.preventDefault();
-    const req = await fetch("http://localhost:8080/api/bio", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-access-token": localStorage.getItem("token"),
-      },
-      body: JSON.stringify({
-        bio: tempBio,
-      }),
-    });
-    
-    const data = await req.json();
-    if (data.status === "ok") {
-      setBio(tempBio);
-      setTempBio("");
-    } else {
-      alert(data.error);
-    }
+  const data = await req.json();
+  if (data.status === "ok") {
+    setBio(tempBio);
+    setTempBio("");
+  } else {
+    alert(data.error);
   }
-  
+}
   const logOut = () => {
     localStorage.removeItem("token");
     console.log("it worked logout btn");

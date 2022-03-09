@@ -40,6 +40,7 @@ function LoginForm() {
                 required
                 placeholder="Email"
             />
+            <br/>
             <label>Password</label>
             <br />
             <Input

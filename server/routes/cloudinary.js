@@ -47,13 +47,6 @@ router.get("/api/avatarList", async (req, res) => {
     .then((result) => res.json({ status: "ok", results: result }));
 });
 
-//DELETE IMAGE
-// router.post("/api/deleteImage", async (req, res) => {
-//   cloudinary.uploader
-//     .destroy("zombie")
-//     .then((result) => res.json({ status: "ok", results: result }));
-// });
-
 router.get("/api/deleteImage", async (req, res) => {
   const image = req.query.deleteImage;
   cloudinary.uploader

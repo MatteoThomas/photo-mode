@@ -32,7 +32,6 @@ const App = () => {
     }
   }, []);
   
-
   //CONDITIONALLY RENDER NAV OR HEADER
   const renderHeader = header ? (
     <Nav />  

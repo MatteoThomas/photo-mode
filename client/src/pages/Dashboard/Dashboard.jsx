@@ -11,6 +11,7 @@ const Dashboard = () => {
   const [count , setCount] = useState("");
 
   useEffect(() => {
+    let isSubscribed = true;
     //GETS USER NAME FROM MONGODB
     const fetchName = async() => {
       const req = await fetch("http://localhost:8080/api/login", {
@@ -28,7 +29,7 @@ const Dashboard = () => {
       }
     }
     
-    let isSubscribed = true;
+  
     const fetchGallery = async() => {
       //SENDS userName AS A SEARCH PARAMETER TO CLOUDINARY
       const req = await fetch(`http://localhost:8080/api/usergallery?folderData=${userName}`, {
@@ -48,19 +49,19 @@ const Dashboard = () => {
           title: resource.public_id.split(/(?:\/|\.)+/)[1],
           image: resource.secure_url,
           name: resource.public_id,
-     
       };
     });
+    
     if (isSubscribed) {
         setUserGallery(images);
-        setCount(countData)}
+        setCount(countData)
     } else {
       alert(data.error);
     }
-  }
+  }}
 
-  fetchGallery()
-  fetchName() 
+  fetchGallery();
+  fetchName();
   return() => isSubscribed = false
 },[userName]);
 

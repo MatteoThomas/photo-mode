@@ -41,12 +41,10 @@ const Jumbotron = styled.div`
     font-family: "Raleway", sans-serif;
     font-size: 0.25em;
     letter-spacing: 0.1em;
-    /* border: 1px red solid; */
   }
 `;
 
 const Title = styled.div`
-  /* background-color: aliceblue; */
   text-align: center;
   font-size: clamp(5rem, 6vw, 17rem);
   font-family: "Kaushan Script", cursive;
@@ -54,6 +52,4 @@ const Title = styled.div`
   line-height: 2rem;
   width: 100vw;
   margin: 5rem 0 0 0;
-  /* padding: 2rem 0 0 0; */
-  /* border: 1px rgb(235, 149, 149) solid; */
 `;

@@ -3,14 +3,7 @@ import styled from "styled-components";
 import { motion } from 'framer-motion/dist/framer-motion';
 import LoginForm from "./LoginForm";
 
-
-// const variants = {
-//   open: { opacity: 1, x: 0 },
-//   closed: { opacity: 0, x: "-100%" },
-// }
-
 const Login = () => {
-
 
   return (
     <motion.nav>

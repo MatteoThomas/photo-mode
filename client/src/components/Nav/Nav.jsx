@@ -27,7 +27,6 @@ export default Nav;
 const NavbarContainer = styled.nav`
   font-weight:500 ;
   display: flex;
-  /* justify-content: right; */
   color: aliceblue;
   display: flex;
   justify-content: space-between;
