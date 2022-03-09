@@ -2,29 +2,24 @@ import React, {useState} from "react";
 import styled from "styled-components";
 
 import deleteIcon  from "./icons/delete-icon.png"
-import editIcon  from "./icons/edit-icon.png";
-import commentIcon  from "./icons/comment-icon.png"
 
 import { motion } from 'framer-motion/dist/framer-motion'
 
-
 const UserGallery = ({ userGallery }) => {
-  const [ imgToDelete, setImgToDelete] = useState("");
+  const [imgToDelete, setImgToDelete] = useState("");
+  
   //VARIANT OBJECT FOR ANIMATION    
   const container = {
     hidden: { opacity: 0 },
     show: { opacity: 1 }
   }
 
-  function handleClick(e, images) {
-  console.log(images.name)
-  setImgToDelete(images.name)
-  deleteImage()
-}
-console.log(imgToDelete)
+  function handleClick( images ) {
+    setImgToDelete(images.name)
+    deleteImage()
+  }
 
   const DeleteEl = styled.img`
-    /* background-color: aqua; */
     margin:.5rem;
     width: 25px;
   ` 
@@ -35,7 +30,7 @@ console.log(imgToDelete)
     const data = await req.json();
     if (data.status === "ok") { 
       console.log(data)
-      
+      alert("Deleted")
     } else {
       alert(data.error);
     }
@@ -43,8 +38,9 @@ console.log(imgToDelete)
 
   function ImageCard() {
     return (
-      <>  
-        {userGallery.map((images, i) => (
+      <>      
+      {userGallery.map((images, i) => (
+          <CardContainer>  
             <motion.div 
               key={images.image}
               variants={container}
@@ -52,22 +48,26 @@ console.log(imgToDelete)
               animate="show"
               transition={{ delay: i * .03}}
             >
+              <CardHeader>
               <Name>{images.title}</Name>
+              <Icon>              
+                <DeleteEl
+                value={images.title}
+                onClick={(() => handleClick(images))}
+                src={deleteIcon}
+              />
+              </Icon>
+              </CardHeader>
               <Image 
                 src={images.image}
                 alt={images.desc}
                 value={images.name} 
+                loading="lazy"
                  />
-
-              <DeleteEl
-                value={images.title}
-                onClick={((e) => handleClick(e, images))}
-                src={deleteIcon}
-              />
-            
             </motion.div>
+            </CardContainer>
         ))}
-      </>   
+        </>
     )}
 
   //RENDERS THE USERS IMAGE UPLOADS IF userGallery.length IS GREATER THAN 0
@@ -85,28 +85,47 @@ const GalleryContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  width: clamp(350px, 95%, 1000px);
-  margin: 3rem auto;
+  width: clamp(350px, 90%, 1200px);
+`
+const CardContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1rem auto;
+  background-color: transparent;
+  transition: background-color .4s;
+
+  `
+const CardHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 0 0 0 .7rem;
+  background-color: #242424;
+  color: #f7f7f7;
+  opacity: 1;
+  transition: opacity .4s;
+  &:hover {
+    transition: opacity .4s;
+    opacity: 1;
+  }
 `
 
-const Icon = styled.img`
-  width: 20px;
-  margin: 1rem;
+const Icon = styled.div`
   filter: invert(.7);
   opacity: .5;
-&:hover {
+  transition: all 2s;
+  &:hover {
+    transition: all .4s;
     opacity: 1;
-}
+  }
 `
 
 const Image = styled.img`
-  width: 250px;
+  width: 220px;
 `
 
 const Name = styled.h2`
   font-size: 1rem;
   margin: 1rem 0;
   width: 150px;
-  color: aliceblue;
   word-break: break-all;
 `

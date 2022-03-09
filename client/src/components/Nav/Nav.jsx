@@ -2,14 +2,11 @@ import React from "react";
 import { Outlet, NavLink } from "react-router-dom";
 import styled from "styled-components";
 
-
 const Nav = () => {
 
   return (
     <div>
-      
       <NavbarContainer>
-
         <StyledNavLink className="nav-link" to="/Dashboard">
           Dashboard
         </StyledNavLink>
@@ -19,7 +16,6 @@ const Nav = () => {
         <StyledNavLink className="nav-link" to="/Account">
           Account
         </StyledNavLink>
-
       </NavbarContainer>
       <Outlet />
     </div>
@@ -29,20 +25,24 @@ const Nav = () => {
 export default Nav;
 
 const NavbarContainer = styled.nav`
-  color: aquamarine;
+  font-weight:500 ;
   display: flex;
-  justify-content: center;
+  /* justify-content: right; */
+  color: aliceblue;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 10vw 4rem;
 `
 
 const StyledNavLink = styled(NavLink)`
-  color: aquamarine;
+  color: #ffffff;
   &:active {
-    color: aliceblue;
+    color: #272727;
   }
   &:focus {
-    color: aliceblue;
+    color: #c0b2b2;
   }
   &:hover {
-    color: aliceblue;
+    color: #c0b2b2;
   }
 `

@@ -64,6 +64,7 @@ const Dashboard = () => {
   return() => isSubscribed = false
 },[userName]);
 
+//VARIANT OBJECT FOR ANIMATION  
 const container = {
   hidden: { opacity: 0 },
   show: { opacity: 1 }
@@ -75,8 +76,12 @@ const container = {
     variants={container}
     initial="hidden"
     animate="show"
-    transition={{ delay: .5}}
+    transition={{ delay: .3}}
   >
+    <Title>
+      <h1>Dashboard</h1>
+    </Title>
+    <StatsUpload>
     <StyledCol>
       <Stats 
         name={userName}
@@ -88,6 +93,7 @@ const container = {
           folderName={userName}
         />
     </StyledCol>
+    </StatsUpload>
     <StyledCol>
         <UserGallery
           userGallery={userGallery}
@@ -103,8 +109,22 @@ export default Dashboard;
 const DashboardContainer = styled(motion.div)`
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0 10vw;
+  color: aliceblue;
 `
 
+const Title = styled.div`
+  width: 100%;
+  border-bottom: 1px aliceblue solid;
+  margin: 0 0 2rem 0;
+`
+
+const StatsUpload = styled.div`
+  background-color:gray;
+  width:clamp(350px, 30%, 600px);
+  height:fit-content;
+`
 const StyledCol = styled.div`
   border: 0.5px rgb(97, 97, 97) solid;
   border-radius: 10px;

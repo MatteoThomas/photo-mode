@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import styled from "styled-components"
-import {motion} from 'framer-motion/dist/framer-motion'
+import { motion } from 'framer-motion/dist/framer-motion'
 
 const Gallery = () => {
   const [gallery, setGallery] = useState([]);
@@ -56,7 +56,7 @@ const Gallery = () => {
         variants={container}
         initial="hidden"
         animate="show"
-        transition={{ delay: i * .05}}
+        transition={{ delay: i * .02}}
         >
         <ImageContainer>
           <Image src={img.image} alt={img.desc}/>
@@ -75,8 +75,6 @@ const StyledContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  width: clamp(350px,90%, 1200px);
-  margin: 3rem 0 0 0;
 `
 
 const Image = styled.img`

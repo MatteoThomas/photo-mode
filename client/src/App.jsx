@@ -1,20 +1,25 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import jwt from "jsonwebtoken";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
+import { AnimatePresence } from 'framer-motion/dist/framer-motion'
+import styled from "styled-components";
+
+import ImageIndex from "./components/ImageIndex/ImageIndex";
+
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import Explore from "./pages/Explore/Explore";
+import SingleImage from "./pages/Explore/SingleImage";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Nav from "./components/Nav/Nav";
 import Hero from "./components/Hero/Hero";
 import Account from "./pages/Account/Account";
-import ImageIndex from "./components/ImageIndex/ImageIndex";
-
-import "./App.css";
 
 const App = () => {
   const [header, setHeader] = useState(false);
+  const location = useLocation();
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -26,12 +31,11 @@ const App = () => {
       }
     }
   }, []);
+  
 
   //CONDITIONALLY RENDER NAV OR HEADER
   const renderHeader = header ? (
-    <div>
-      <Nav />
-    </div>
+    <Nav />  
   ) : (
     <>
       <Hero />
@@ -40,22 +44,25 @@ const App = () => {
   );
 
   return (
-    <>
+    <PageContainer>
       {renderHeader}
-      <div className="container">
-        <div>
-          <Routes className="routes">
+      <AnimatePresence exitBeforeEnter initial={false}>          
+        <Routes location={location} key={location.pathname}>
             <Route path="/login" exact element={<Login />} />
             <Route path="/register" exact element={<Register />} />
             <Route path="/explore" exact element={<Explore />} />
+            <Route exact path="/image/:id" component={SingleImage} />
             <Route path="/dashboard" exact element={<Dashboard />} />
             <Route path="/account" exact element={<Account />} />
             <Route path="*" element={<Login />} />
           </Routes>
-        </div>
-      </div>
-    </>
+        </AnimatePresence>
+    </PageContainer>
   );
 };
 
 export default App;
+
+const PageContainer = styled.div`
+
+`

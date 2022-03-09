@@ -12,11 +12,11 @@ const AvatarUpload = ( props ) => {
     setAvatarPrev("");
 
     const data = new FormData();
-    data.append("file", avatar);
-    data.append("tags", "avatar" )
-    data.append("folder", folderName)
-    data.append("upload_preset", "gallery");
-    data.append("cloud_name", "proj3");
+      data.append("file", avatar);
+      data.append("tags", "avatar" )
+      data.append("folder", folderName)
+      data.append("upload_preset", "gallery");
+      data.append("cloud_name", "proj3");
   
     fetch("https://api.cloudinary.com/v1_1/proj3/image/upload", {
       method: "post",
@@ -55,9 +55,9 @@ const AvatarUpload = ( props ) => {
             onChange={(e) => avatarPreview(e)}
           />
         </Input>
-        {previewUrl}
         {uploadButton}
       </StyledRow>
+        {previewUrl}
     </UploadContainer>
   );
 };
@@ -68,6 +68,7 @@ const UploadContainer = styled.div`
   font-size: 1rem;
   color: aliceblue;
   display: flex;
+  flex-direction: column;
   justify-content: flex-start;
   width: 100%;
 `
@@ -82,14 +83,16 @@ const StyledRow = styled.div`
 `
 
 const UploadButton = styled.button`
-  background-color: aquamarine;
-  color: black;
   border: 1px transparent solid;
   border-radius: 4px;
-  border: 1px transparent solid;
+  transition: 0.4s;
+  height: 42px;
+  margin: 2rem 0 0 0;
   &:hover {
+    transition: all .4s;
+    color: aliceblue;
     background-color: transparent;
-    border: 1px aquamarine solid;
+    border: 1px grey solid;
   }
 `
 const Input = styled.div`

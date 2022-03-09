@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-
 function RenderForm()  {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -68,9 +67,13 @@ function RenderForm()  {
         <br />
       </div>
       <ButtonsWrapper>
-        <StyledButton className="Btn" type="submit" value="Register">
-          Register
+        <StyledButton 
+        className="Btn" 
+        type="submit" 
+        value="Register"  
+        > Register
         </StyledButton>
+    
         <Link to="/Login">
           <StyledButtonLink className="Btn">Login</StyledButtonLink>
         </Link>
@@ -82,23 +85,24 @@ function RenderForm()  {
 
 export default RenderForm
 
-  const ButtonsWrapper = styled.div`
+const ButtonsWrapper = styled.div`
   display: flex;
 `;
 
 const StyledButton = styled.button`
-  background-color: aquamarine;
+  background-color: #d3d3d3;
   color: black;
   margin: 1rem 2rem 0 0;
   width: fit-content;
   border: 1px transparent solid;
   border-radius: 4px;
   transition: all .4s;
+
   &:hover {
     transition: all .4s;
     color: aliceblue;
     background-color: transparent;
-    border: 1px aquamarine solid;
+    border: 1px grey solid;
   }
 `;
 
@@ -114,7 +118,7 @@ const StyledButtonLink = styled.button`
     transition: all .4s;
     color: black;
     border: 1px transparent solid;
-    background-color: rgb(127, 255, 212);
+    background-color: rgb(196, 196, 196);
   }
 `;
 

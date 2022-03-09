@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import AvatarUpload from "./AvatarUpload";
-
 import { motion } from 'framer-motion/dist/framer-motion'
 
 const Account = () => {
@@ -119,56 +118,58 @@ const Account = () => {
     }
 
   //VARIABLE THAT CHECK CONDITION OF showAvatarGallery THEN RENDERS AvatarUpload COMPONENT or DIV
-  const userAvatar = avatar.length > 0  ? 
-    <><AvatarImg src={avatar} alt="avatar" onClick={() => handleAvatarClick()} />
-      <div>Click to change</div> </> 
+  const userAvatar = avatar.length > 0  ? <>
+    <AvatarImg src={avatar} alt="avatar" onClick={() => handleAvatarClick()} />
+    <div>Click to change</div> </> 
     : <div onClick={() => handleAvatarClick()}>No avatar selected, click here to add</div> 
 
   const avatarUpload = showAvatarGallery && <AvatarUpload folderName={userName}/> 
-console.log(userName)
+  
+  //VARIANT OBJECT FOR ANIMATION  
   const container = {
     hidden: { opacity: 0 },
     show: { opacity: 1 }
   }
-
 
   return (
     <StyledContainer
       variants={container}
       initial="hidden"
       animate="show"
-      transition={{ delay: .5}}
+      transition={{ delay: .3}}
     >
-
+      <Title>
+        <h1>Account</h1>
+      </Title>
+      <NameBioWrapper>
       <StyledCol >
         <h1>{userName}</h1>
-          <form onSubmit={updateBio}>
-            {bioInput}
-            <StyledButton 
-              className="Btn" 
-              type="submit" 
-              onClick={() => handleBioClick()}>
-                {buttonText}
-            </StyledButton>  
-            <Bio>{bio}</Bio>
-          </form>
-      </StyledCol>
-
+        </StyledCol>
       <StyledCol >
-        <AvatarContainer>
-          {userAvatar}
-          {avatarUpload}
-        </AvatarContainer>
-      </StyledCol >
-
+        <form onSubmit={updateBio}>
+          {bioInput}
+          <StyledButton 
+            className="Btn" 
+            type="submit" 
+            onClick={() => handleBioClick()}>
+              {buttonText}
+          </StyledButton>  
+          <Bio>{bio}</Bio>
+        </form>
+      </StyledCol>
       <StyledCol >
         <StyledButton 
-          className="Btn" 
           type="button" 
           onClick={logOut}>
             Logout
         </StyledButton>
       </StyledCol >
+      </NameBioWrapper>
+
+        <AvatarContainer>
+          {userAvatar}
+          {avatarUpload}
+        </AvatarContainer>
 
     </StyledContainer>
   );
@@ -181,29 +182,43 @@ const StyledContainer = styled(motion.div)`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin: 0 10vw;
+  & h1 {
+    width: 100%;
+  }
+`
+const Title = styled.div`
+  width: 100%;
+  border-bottom: 1px aliceblue solid;
+  margin: 0 0 2rem 0;
+`
+
+const NameBioWrapper = styled.div`
+  background-color:gray;
+  width:clamp(350px, 30%, 600px);
+  height:fit-content;
 `
 
 const StyledButton = styled.button`
-  background-color: aquamarine;
-  color: black;
   border: 1px transparent solid;
   border-radius: 4px;
-  margin: 1rem 0 0 0;
-  transition: all .4s;
+  transition: 0.4s;
+  height: 42px;
   &:hover {
     transition: all .4s;
     color: aliceblue;
     background-color: transparent;
-    border: 1px aquamarine solid;
+    border: 1px grey solid;
   }
 `
 
 const StyledCol = styled.div`
-  border-radius: 10px;
-  margin: 0.5rem auto;
-  padding: 0.5rem;
   word-wrap: break-word;
   width: 300px;
+  border: 0.5px rgb(97, 97, 97) solid;
+  border-radius: 10px;
+  margin: 0.5rem;
+  padding: 0.5rem;
 `
 
 const Bio = styled.div`
@@ -217,13 +232,13 @@ const Input = styled.input`
 `
 
 const AvatarImg = styled.img`
-  width: 100%;
+  width: clamp(200px, 100%, 350px);
 `
 
 const AvatarContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  margin: 0 auto;
+  margin: 0rem auto 1rem;
 `
 

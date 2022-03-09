@@ -66,10 +66,10 @@ export default LoginForm
 
 const ButtonsWrapper = styled.div`
   display: flex;
-`;
+`
 
 const StyledButton = styled.button`
-  background-color: aquamarine;
+  background-color: #e7e7e7;
   color: black;
   border: 1px transparent solid;
   margin: 1rem 2rem 0 0;
@@ -79,11 +79,11 @@ const StyledButton = styled.button`
   transition: all 0.4s;
   &:hover {
     transition: all 0.4s;
-    color: aliceblue;
+    color: #ffffff;
     background-color: transparent;
-    border: 1px aquamarine solid;
+    border: 1px grey solid;
   }
-`;
+`
 
 const StyledButtonLink = styled.button`
   background-color: transparent;
@@ -98,9 +98,9 @@ const StyledButtonLink = styled.button`
     transition: all 0.4s;
     color: black;
     border: 1px transparent solid;
-    background-color: aquamarine;
+    background-color: #ebebeb;
   }
-`;
+`
 
 const Input = styled.input`
   border-radius: 4px;
@@ -108,4 +108,4 @@ const Input = styled.input`
   width: clamp(300px, 95%, 600px);
   margin: 0.3rem 0 2rem 0;
   padding: 0 0 0 0.5rem;
-`;
+`

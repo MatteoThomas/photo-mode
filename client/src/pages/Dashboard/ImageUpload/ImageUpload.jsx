@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import "./file-input-button.css";
 
+
 const ImageUpload = ( props ) => {
   const [image, setImage] = useState([]);
   const [imagePrev, setImagePrev] = useState("");
@@ -50,8 +51,13 @@ const uploadButton = imagePrev && <UploadButton onClick={uploadImage}>Upload</Up
     <UploadContainer>
       <StyledRow>
         <h2>Upload</h2>
-        <ChooseButton><input type="file" accept="image/png, image/jpeg, image/svg, image/gif" onChange={(e) => imagePreview(e)}/></ChooseButton>
-      {uploadButton}
+        <ChooseButton>
+          <input 
+          type="file" 
+          accept="image/png, image/jpeg, image/svg, image/gif" 
+          onChange={(e) => imagePreview(e)}/>
+        </ChooseButton>
+          {uploadButton}
       </StyledRow>
       {previewUrl}
     </UploadContainer>
@@ -61,24 +67,27 @@ const uploadButton = imagePrev && <UploadButton onClick={uploadImage}>Upload</Up
 export default ImageUpload;
 
 const UploadContainer = styled.div`
-  display: grid;
   font-size: 1rem;
   color: aliceblue;
 `
 const ChooseButton = styled.div`
-  margin: 0 0 0 1rem;
+  margin: 0 1rem 0 1rem;
+  width:100px;
 `
 const UploadButton = styled.button`
-  background-color: aquamarine;
-  color: black;
+  background-color: #363636;
+  color:  #363636;
   border: 1px transparent solid;
   border-radius: 4px;
   border: 1px transparent solid;
   transition: all .4s;
+  background-color: #b7eb7d;
+  /* margin: 1rem 0; */
+  height: 42px;
     &:hover {
     transition: all .4s;
     background-color: transparent;
-    border: 1px aquamarine solid;
+    border: 1px #b7eb7d solid;
     color: aliceblue;
     }
 `
@@ -89,5 +98,5 @@ const Image = styled.img`
 const StyledRow = styled.div`
   display: flex;
   justify-content: left;
-  width: 100%;
+  /* background-color:blue; */
 `
