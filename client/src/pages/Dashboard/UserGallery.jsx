@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import styled from "styled-components";
 
 import deleteIcon  from "./icons/delete-icon.png"
-import deleteIconRED  from "./icons/delete-iconRED.png"
+
 
 import { motion } from 'framer-motion/dist/framer-motion'
 
