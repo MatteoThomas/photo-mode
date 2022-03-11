@@ -1,7 +1,7 @@
 /* CHOSE FILE BUTTON */
 input[type="file"]::file-selector-button {
-  background-color: rgb(196, 198, 199);
-  color: black;
+  background-color: rgb(173, 173, 173);
+  color: rgb(255, 255, 255);
   border: 1px transparent solid;
   border-radius: 4px;
   transition: 0.4s;
@@ -11,7 +11,7 @@ input[type="file"]::file-selector-button {
 input[type="file"]::file-selector-button:hover {
   background-color: transparent;
   border: 1px rgb(196, 198, 199) solid;
-  color: aliceblue;
+  color: rgb(196, 198, 199);
   transition: 0.4s;
 }
 

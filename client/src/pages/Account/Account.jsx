@@ -123,12 +123,17 @@ async function updateBio(event) {
     }
 
   //VARIABLE THAT CHECK CONDITION OF showAvatarGallery THEN RENDERS AvatarUpload COMPONENT or DIV
-  const userAvatar = avatar.length > 0  ? <>
-    <AvatarImg src={avatar} alt="avatar" onClick={() => handleAvatarClick()} />
-    <div>Click to change</div> </> 
-    : <div onClick={() => handleAvatarClick()}>No avatar selected, click here to add</div> 
+  const userAvatar = avatar.length > 0  ? 
+    <>
+      <AvatarImg src={avatar} alt="avatar" onClick={() => handleAvatarClick()} />
+    <div>Click to change</div> 
+    </> 
+    : <div onClick={() => handleAvatarClick()}>
+        No avatar selected, click here to add
+      </div> 
 
-  const avatarUpload = showAvatarGallery && <AvatarUpload folderName={userName}/> 
+  const avatarUpload = showAvatarGallery && 
+    <AvatarUpload folderName={userName}/> 
   
   //VARIANT OBJECT FOR ANIMATION  
   const container = {
@@ -169,10 +174,14 @@ async function updateBio(event) {
             Logout
         </StyledButton>
       </StyledCol >
+
       </NameBioWrapper>
 
-        <AvatarContainer>
+      <StyledCol >
+
           {userAvatar}
+          </StyledCol >
+        <AvatarContainer>
           {avatarUpload}
         </AvatarContainer>
 
@@ -194,14 +203,16 @@ const StyledContainer = styled(motion.div)`
 `
 const Title = styled.div`
   width: 100%;
+  text-align: right;
   border-bottom: 1px aliceblue solid;
   margin: 0 0 2rem 0;
 `
 
 const NameBioWrapper = styled.div`
   background-color:gray;
-  width:clamp(350px, 30%, 600px);
+  width: clamp(350px, 30%, 600px);
   height:fit-content;
+  margin-bottom: 2rem;
 `
 
 const StyledButton = styled.button`
@@ -213,7 +224,7 @@ const StyledButton = styled.button`
     transition: all .4s;
     color: aliceblue;
     background-color: transparent;
-    border: 1px grey solid;
+    border: 1px rgb(99,99,99) solid;
   }
 `
 
@@ -233,17 +244,15 @@ const Bio = styled.div`
 `
 
 const Input = styled.input`
-  width: 100%;
+  /* width: 100%; */
 `
 
 const AvatarImg = styled.img`
-  width: clamp(200px, 100%, 350px);
+width:300px;
 `
 
 const AvatarContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  margin: 0rem auto 1rem;
+
+
 `
 

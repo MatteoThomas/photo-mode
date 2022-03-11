@@ -41,9 +41,16 @@ const AvatarUpload = ( props ) => {
   };
 
   //RENDERS IMAGE PREVIEW IF ONE EXISTS
-  const previewUrl =  avatarPrev.avatarPreviewUrl && <Image src={avatarPrev.avatarPreviewUrl} alt="avatar preview"/> 
+  const previewUrl =  avatarPrev.avatarPreviewUrl && 
+    <Image 
+      src={avatarPrev.avatarPreviewUrl} 
+      alt="avatar preview"
+    /> 
   //RENDERS UPLOAD BUTTON IF imagePrev EXISTS
-  const uploadButton = avatarPrev && <UploadButton onClick={uploadAvatar}>Upload</UploadButton>
+  const uploadButton = avatarPrev && 
+    <UploadButton onClick={uploadAvatar}>
+        Upload
+    </UploadButton>
 
   return (
     <UploadContainer>
@@ -57,7 +64,9 @@ const AvatarUpload = ( props ) => {
         </Input>
         {uploadButton}
       </StyledRow>
+      <StyledRow>
         {previewUrl}
+        </StyledRow>
     </UploadContainer>
   );
 };

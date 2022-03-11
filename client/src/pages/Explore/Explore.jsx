@@ -48,6 +48,7 @@ const GalleryContainer = styled(motion.div)`
 
 const Title = styled.div`
   width: 100%;
+  text-align:center ;
   border-bottom: 1px aliceblue solid;
   margin: 0 0 2rem 0;
 `
