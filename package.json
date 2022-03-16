@@ -20,7 +20,7 @@
   "bugs": {
     "url": "https://github.com/MatteoThomas/photomode/issues"
   },
-  "homepage": "/client/build/index.html",
+  "homepage": "https://photo-mode.herokuapp.com/",
   "dependencies": {
     "concurrently": "^7.0.0",
     "nodemon": "^2.0.15"
