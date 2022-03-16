@@ -2,7 +2,7 @@
   "name": "photomode",
   "version": "1.0.0",
   "description": "server\r     npm run dev\r client\r     npm start",
-  "main": "server/index.js",
+  "main": "index.js",
   "scripts": {
     "build": "cd client && npm run build",
     "install-client": "cd client && npm install",
@@ -20,7 +20,7 @@
   "bugs": {
     "url": "https://github.com/MatteoThomas/photomode/issues"
   },
-  "homepage": "https://photo-mode.herokuapp.com/",
+  "homepage": "/client/build/index.html",
   "dependencies": {
     "concurrently": "^7.0.0",
     "nodemon": "^2.0.15"
