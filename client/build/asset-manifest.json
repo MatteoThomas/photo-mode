@@ -1,31 +1,31 @@
 {
   "files": {
-    "main.css": "/static/css/main.acff3bc6.chunk.css",
-    "main.js": "/static/js/main.7104b83c.chunk.js",
-    "main.js.map": "/static/js/main.7104b83c.chunk.js.map",
+    "main.css": "/static/css/main.58595e06.chunk.css",
+    "main.js": "/static/js/main.2acce2e6.chunk.js",
+    "main.js.map": "/static/js/main.2acce2e6.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.09b85ec0.js",
     "runtime-main.js.map": "/static/js/runtime-main.09b85ec0.js.map",
-    "static/js/2.fa085e8f.chunk.js": "/static/js/2.fa085e8f.chunk.js",
-    "static/js/2.fa085e8f.chunk.js.map": "/static/js/2.fa085e8f.chunk.js.map",
+    "static/js/2.62eca998.chunk.js": "/static/js/2.62eca998.chunk.js",
+    "static/js/2.62eca998.chunk.js.map": "/static/js/2.62eca998.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.1dbd432db1030a55cfb2f35ef2e10f94.js": "/precache-manifest.1dbd432db1030a55cfb2f35ef2e10f94.js",
+    "precache-manifest.4c47ef3e568e9429c6ad86baf60e8cb3.js": "/precache-manifest.4c47ef3e568e9429c6ad86baf60e8cb3.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/main.acff3bc6.chunk.css.map": "/static/css/main.acff3bc6.chunk.css.map",
-    "static/js/2.fa085e8f.chunk.js.LICENSE.txt": "/static/js/2.fa085e8f.chunk.js.LICENSE.txt",
-    "static/media/apartment.jpg": "/static/media/apartment.321a6833.jpg",
-    "static/media/crowd.jpg": "/static/media/crowd.4c12cc37.jpg",
-    "static/media/delete-icon.png": "/static/media/delete-icon.77b2de1c.png",
-    "static/media/donkey.jpg": "/static/media/donkey.c0adb882.jpg",
-    "static/media/field.jpg": "/static/media/field.e6237a89.jpg",
-    "static/media/graves.jpg": "/static/media/graves.ed47c4f2.jpg",
-    "static/media/street.jpg": "/static/media/street.4a65c505.jpg",
-    "static/media/temple.jpg": "/static/media/temple.19eebd76.jpg",
-    "static/media/trainplatform.jpg": "/static/media/trainplatform.37c6666a.jpg"
+    "static/css/main.58595e06.chunk.css.map": "/static/css/main.58595e06.chunk.css.map",
+    "static/js/2.62eca998.chunk.js.LICENSE.txt": "/static/js/2.62eca998.chunk.js.LICENSE.txt",
+    "static/media/apartment.jpg": "/static/media/apartment.686cf438.jpg",
+    "static/media/crowd.jpg": "/static/media/crowd.1270f74d.jpg",
+    "static/media/delete-icon.png": "/static/media/delete-icon.14681645.png",
+    "static/media/donkey.jpg": "/static/media/donkey.aae053f9.jpg",
+    "static/media/field.jpg": "/static/media/field.a9fa088a.jpg",
+    "static/media/graves.jpg": "/static/media/graves.aa38b585.jpg",
+    "static/media/street.jpg": "/static/media/street.d2b00c53.jpg",
+    "static/media/temple.jpg": "/static/media/temple.bf83bd6b.jpg",
+    "static/media/trainplatform.jpg": "/static/media/trainplatform.e67b4208.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.09b85ec0.js",
-    "static/js/2.fa085e8f.chunk.js",
-    "static/css/main.acff3bc6.chunk.css",
-    "static/js/main.7104b83c.chunk.js"
+    "static/js/2.62eca998.chunk.js",
+    "static/css/main.58595e06.chunk.css",
+    "static/js/main.2acce2e6.chunk.js"
   ]
 }
