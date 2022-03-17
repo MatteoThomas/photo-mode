@@ -13,12 +13,12 @@ const PORT = process.env.PORT || 3001;
 
 dotenv.config();
 
-app.use("/", userRoutes);
+app.use("/api", userRoutes);
 app.use("/api/register", userRoutes);
 app.use("/api/login", userRoutes);
 
-app.use("/", imageRoutes);
-app.use("/gallery", imageRoutes);
+app.use("/api/", imageRoutes);
+app.use("/api/gallery", imageRoutes);
 
 app.use(bodyParser.json());
 app.use(cors());
