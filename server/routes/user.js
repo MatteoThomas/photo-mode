@@ -14,7 +14,13 @@ dotenv.config();
 router.use(bodyParser.json());
 router.use(cors());
 router.use(express.json());
-mongoose.connect(process.env.URI);
+mongoose
+  .connect(process.env.URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("MongoDB has been connected"))
+  .catch((err) => console.log(err));
 
 router.get("/", function (req, res) {
   res.json({ success: true });

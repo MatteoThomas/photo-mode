@@ -4,7 +4,7 @@ const imageRoutes = require("./routes/cloudinary");
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const mongoose = require("mongoose");
+
 const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
 
@@ -18,25 +18,19 @@ app.use("/", imageRoutes);
 app.use("/gallery", imageRoutes);
 
 app.use(bodyParser.json());
-app.use(cors({ origin: "https://photo-mode.herokuapp.com/" }));
+app.use(cors());
 app.use(express.json());
 
-mongoose
-  .connect(process.env.URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("MongoDB has been connected"))
-  .catch((err) => console.log(err));
+const PORT = process.env.PORT || 8080;
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/client/build")));
 
-  app.get("*", function (req, res) {
+  app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "/client/build", "index.html"));
   });
 }
 
-app.listen(process.env.PORT || 8080, () => {
-  console.log(`Server started`);
+app.listen(PORT, () => {
+  console.log(`Server started on port ${PORT}`);
 });
