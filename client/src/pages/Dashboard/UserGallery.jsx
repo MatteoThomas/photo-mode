@@ -26,7 +26,7 @@ const UserGallery = ({ userGallery }) => {
   ` 
 
   async function deleteImage() {
-    const req = await fetch(`http://localhost:8080/api/deleteImage?deleteImage=${imgToDelete}`, {
+    const req = await fetch(`http://localhost:3001/api/deleteImage?deleteImage=${imgToDelete}`, {
     });
     const data = await req.json();
     //REMOVES USER NAME FROM IMAGE NAME

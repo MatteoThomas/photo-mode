@@ -1,26 +1,18 @@
 var express = require("express");
-var router = express.Router();
+const router = express.Router();
 const cors = require("cors");
-const mongoose = require("mongoose");
+
 const dotenv = require("dotenv");
 const User = require("../models/user.model");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const bodyParser = require("body-parser");
-const path = require("path");
 
 dotenv.config();
 
 router.use(bodyParser.json());
 router.use(cors());
 router.use(express.json());
-mongoose
-  .connect(process.env.URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("MongoDB has been connected"))
-  .catch((err) => console.log(err));
 
 router.get("/", function (req, res) {
   res.json({ success: true });

@@ -1,12 +1,15 @@
-const userRoutes = require("./routes/user");
-const imageRoutes = require("./routes/cloudinary");
-
+const path = require("path");
 const express = require("express");
 const app = express();
 const cors = require("cors");
 
 const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
+
+const userRoutes = require("./routes/user");
+const imageRoutes = require("./routes/cloudinary");
+
+const PORT = process.env.PORT || 3001;
 
 dotenv.config();
 
@@ -20,8 +23,6 @@ app.use("/gallery", imageRoutes);
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.json());
-
-const PORT = process.env.PORT || 8080;
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/client/build")));

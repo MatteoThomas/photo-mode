@@ -16,7 +16,7 @@ const Account = () => {
     let isSubscribed = true;
 //GETS USER NAME FROM MONGODB
   const fetchName = async() => {
-    const req = await fetch("http://localhost:8080/api/login", {
+    const req = await fetch("http://localhost:3001/api/login", {
       headers: {
         "x-access-token": localStorage.getItem("token"),
       },
@@ -32,7 +32,7 @@ const Account = () => {
   //FETCH USER AVATAR FROM CLOUDINARY
   const fetchAvatar = async() => {
     //SENDS userName AS A SEARCH PARAMETER
-    const req = await fetch(`http://localhost:8080/api/avatar?folderData=${userName}`)
+    const req = await fetch(`http://localhost:3001/api/avatar?folderData=${userName}`)
     const data = await req.json();
     (data.status === "ok" && data.results.total_count) ?
     setAvatar(data.results.resources[0].secure_url)
@@ -41,7 +41,7 @@ const Account = () => {
   }
 
   const populateBio = async() =>  {
-    const req = await fetch("http://localhost:8080/api/bio", {
+    const req = await fetch("http://localhost:3001/api/bio", {
       headers: {
         "x-access-token": localStorage.getItem("token"),
       },
@@ -66,7 +66,7 @@ const Account = () => {
 
 async function updateBio(event) {
   event.preventDefault();
-  const req = await fetch("http://localhost:8080/api/bio", {
+  const req = await fetch("http://localhost:3001/api/bio", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

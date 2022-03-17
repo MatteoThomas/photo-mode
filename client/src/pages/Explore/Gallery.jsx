@@ -13,7 +13,7 @@ const Gallery = () => {
 useEffect(() => {
 
     async function populateUserGallery() {
-      const req = await fetch("http://localhost:8080/api/gallery");
+      const req = await fetch("http://localhost:3001/api/gallery");
       const data = await req.json();
       
       if (data.status === "ok") {
