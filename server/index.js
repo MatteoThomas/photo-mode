@@ -18,10 +18,8 @@ app.use("/", imageRoutes);
 app.use("/gallery", imageRoutes);
 
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({ origin: "https://photo-mode.herokuapp.com/" }));
 app.use(express.json());
-
-const PORT = process.env.PORT || 8080;
 
 mongoose
   .connect(process.env.URI, {
@@ -39,6 +37,6 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-app.listen(PORT, () => {
-  console.log(`Server started on port ${PORT}`);
+app.listen(process.env.PORT || 8080, () => {
+  console.log(`Server started`);
 });
