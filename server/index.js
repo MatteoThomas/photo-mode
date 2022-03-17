@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 3001;
 dotenv.config();
 
 // app.use("/api", userRoutes);
-app.use("/api/user", userRoutes);
+app.use("/user", userRoutes);
 
 // app.use("/api/", imageRoutes);
 app.use("/api/cloudinary", imageRoutes);
