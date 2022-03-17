@@ -14,8 +14,8 @@ const PORT = process.env.PORT || 3001;
 dotenv.config();
 
 app.use("/", userRoutes);
-app.use("/register", userRoutes);
-app.use("/login", userRoutes);
+app.use("/api/register", userRoutes);
+app.use("/api/login", userRoutes);
 
 app.use("/", imageRoutes);
 app.use("/gallery", imageRoutes);
