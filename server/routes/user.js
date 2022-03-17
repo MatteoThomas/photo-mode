@@ -14,9 +14,9 @@ router.use(bodyParser.json());
 router.use(cors());
 router.use(express.json());
 
-router.get("/", function (req, res) {
-  res.json({ success: true });
-});
+// router.get("/", function (req, res) {
+//   res.json({ success: true });
+// });
 
 // USER DATA //////////////////////////////////////////////////////////////////////////
 router.post("/api/register", async (req, res) => {

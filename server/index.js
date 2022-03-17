@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3001;
 
 dotenv.config();
 
-app.use("/api", userRoutes);
+// app.use("/api", userRoutes);
 app.use("/api/register", userRoutes);
 app.use("/api/login", userRoutes);
 
