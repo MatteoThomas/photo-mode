@@ -10,7 +10,7 @@ const Gallery = () => {
 
 
 
-  useEffect(() => {
+useEffect(() => {
 
     async function populateUserGallery() {
       const req = await fetch("http://localhost:8080/api/gallery");

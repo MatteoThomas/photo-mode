@@ -2,6 +2,15 @@ var express = require("express");
 require("dotenv").config();
 var router = express.Router();
 const cloudinary = require("cloudinary").v2;
+const mongoose = require("mongoose");
+
+mongoose
+  .connect(process.env.URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("MongoDB has been connected"))
+  .catch((err) => console.log(err));
 
 //IMAGES /////////////////////////////////////////////////////////////////////
 cloudinary.config({
@@ -10,14 +19,6 @@ cloudinary.config({
   api_secret: process.env.CLOUD_SECRET,
   secure: true,
 });
-
-// //GET ALL IMAGES APPLY THUMBNAIL TRANSFORMATION
-// router.get("/api/gallery", async (req, res) => {
-//   cloudinary.api
-
-//     .resources({ max_results: 100, type: "upload" })
-//     .then((result) => res.json({ status: "ok", results: result }));
-// });
 
 //GET ALL IMAGES FROM ALL FOLDERS EXCEPT IMAGES WITH avatar AS A TAG
 router.get("/api/gallery", async (req, res) => {

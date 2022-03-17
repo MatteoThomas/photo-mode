@@ -6,7 +6,8 @@ function RenderForm()  {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
+    const [isLoaded, setIsLoaded] = useState(false);
+    
     async function registerUser(event) {
       event.preventDefault();
   
