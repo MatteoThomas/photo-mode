@@ -98,7 +98,7 @@ const StyledButton = styled.button`
   border: 1px transparent solid;
   border-radius: 4px;
   transition: all .4s;
-
+  height: 42px;
   &:hover {
     transition: all .4s;
     color: aliceblue;
@@ -115,6 +115,7 @@ const StyledButtonLink = styled.button`
   border: 1px grey solid;
   border-radius: 4px;
   transition: all .4s;
+  height: 42px;
   &:hover {
     transition: all .4s;
     color: black;

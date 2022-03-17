@@ -6,14 +6,12 @@ import { motion } from 'framer-motion/dist/framer-motion'
 
 const Gallery = () => {
   const [gallery, setGallery] = useState([]);
+
   //GET IMAGES ON RENDER
-
-
-
-useEffect(() => {
+  useEffect(() => {
 
     async function populateUserGallery() {
-      const req = await fetch("http://localhost:3001/api/gallery");
+      const req = await fetch("http://localhost:8080/api/cloudinary/gallery");
       const data = await req.json();
       
       if (data.status === "ok") {

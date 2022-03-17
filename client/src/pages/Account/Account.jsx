@@ -16,7 +16,7 @@ const Account = () => {
     let isSubscribed = true;
 //GETS USER NAME FROM MONGODB
   const fetchName = async() => {
-    const req = await fetch("http://localhost:3001/api/login", {
+    const req = await fetch("http://localhost:8080/api/user/login", {
       headers: {
         "x-access-token": localStorage.getItem("token"),
       },
@@ -32,7 +32,7 @@ const Account = () => {
   //FETCH USER AVATAR FROM CLOUDINARY
   const fetchAvatar = async() => {
     //SENDS userName AS A SEARCH PARAMETER
-    const req = await fetch(`http://localhost:3001/api/avatar?folderData=${userName}`)
+    const req = await fetch(`http://localhost:8080/api/cloudinary/avatar?folderData=${userName}`)
     const data = await req.json();
     (data.status === "ok" && data.results.total_count) ?
     setAvatar(data.results.resources[0].secure_url)
@@ -41,7 +41,7 @@ const Account = () => {
   }
 
   const populateBio = async() =>  {
-    const req = await fetch("http://localhost:3001/api/bio", {
+    const req = await fetch("http://localhost:8080/api/user/bio", {
       headers: {
         "x-access-token": localStorage.getItem("token"),
       },
@@ -66,7 +66,7 @@ const Account = () => {
 
 async function updateBio(event) {
   event.preventDefault();
-  const req = await fetch("http://localhost:3001/api/bio", {
+  const req = await fetch("http://localhost:8080/api/user/bio", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -122,7 +122,7 @@ async function updateBio(event) {
       }
     }
 
-  //VARIABLE THAT CHECK CONDITION OF showAvatarGallery THEN RENDERS AvatarUpload COMPONENT or DIV
+  //VARIABLE THAT CHECKS CONDITION OF showAvatarGallery THEN RENDERS AvatarUpload COMPONENT or DIV
   const userAvatar = avatar.length > 0  ? 
     <>
       <AvatarImg src={avatar} alt="avatar" onClick={() => handleAvatarClick()} />
@@ -152,10 +152,12 @@ async function updateBio(event) {
         <h1>Account</h1>
       </Title>
       <NameBioWrapper>
+
       <StyledCol >
         <h1>{userName}</h1>
-        </StyledCol>
-      <StyledCol >
+      </StyledCol>
+
+      <StyledCol>
         <form onSubmit={updateBio}>
           {bioInput}
           <StyledButton 
@@ -167,24 +169,24 @@ async function updateBio(event) {
           <Bio>{bio}</Bio>
         </form>
       </StyledCol>
+
       <StyledCol >
         <StyledButton 
           type="button" 
           onClick={logOut}>
             Logout
         </StyledButton>
-      </StyledCol >
+      </StyledCol>
 
       </NameBioWrapper>
 
       <StyledCol >
+        {userAvatar}
+      </StyledCol>
 
-          {userAvatar}
-          </StyledCol >
-        <AvatarContainer>
-          {avatarUpload}
-        </AvatarContainer>
-
+      <AvatarContainer>
+        {avatarUpload}
+      </AvatarContainer>
     </StyledContainer>
   );
 };
@@ -195,7 +197,7 @@ const StyledContainer = styled(motion.div)`
   color: aliceblue;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: left;
   margin: 0 10vw;
   & h1 {
     width: 100%;
@@ -233,7 +235,7 @@ const StyledCol = styled.div`
   width: 300px;
   border: 0.5px rgb(97, 97, 97) solid;
   border-radius: 10px;
-  margin: 0.5rem;
+  margin: 0.5rem .5rem .5rem 1rem;
   padding: 0.5rem;
 `
 
@@ -248,7 +250,7 @@ const Input = styled.input`
 `
 
 const AvatarImg = styled.img`
-width:300px;
+  width:300px;
 `
 
 const AvatarContainer = styled.div`

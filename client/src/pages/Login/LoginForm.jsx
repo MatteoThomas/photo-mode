@@ -8,7 +8,7 @@ function LoginForm() {
   
     async function loginUser(event) {
       event.preventDefault();
-      const response = await fetch("/user/login", {
+      const response = await fetch("http://localhost:8080/api/user/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -78,6 +78,7 @@ const StyledButton = styled.button`
   border: 1px transparent solid;
   border-radius: 4px;
   transition: all 0.4s;
+  height: 42px;
   &:hover {
     transition: all 0.4s;
     color: #ffffff;
@@ -95,6 +96,7 @@ const StyledButtonLink = styled.button`
   border: 1px grey solid;
   border-radius: 4px;
   transition: all 0.4s;
+  height: 42px;
   &:hover {
     transition: all 0.4s;
     color: black;

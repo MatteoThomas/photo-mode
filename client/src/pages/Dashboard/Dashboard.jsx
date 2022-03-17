@@ -14,7 +14,7 @@ const Dashboard = () => {
     let isSubscribed = true;
     //GETS USER NAME FROM MONGODB
     const fetchName = async() => {
-      const req = await fetch("http://localhost:3001/api/login", {
+      const req = await fetch("http://localhost:8080/api/user/login", {
         headers: {
           "x-access-token": localStorage.getItem("token"),
         },
@@ -32,7 +32,7 @@ const Dashboard = () => {
   
     const fetchGallery = async() => {
       //SENDS userName AS A SEARCH PARAMETER TO CLOUDINARY
-      const req = await fetch(`http://localhost:3001/api/usergallery?folderData=${userName}`, {
+      const req = await fetch(`http://localhost:8080/api/cloudinary/usergallery?folderData=${userName}`, {
       });
       const data = await req.json();
       if (data.status === "ok") {
