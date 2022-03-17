@@ -14,12 +14,12 @@ router.use(bodyParser.json());
 router.use(cors());
 router.use(express.json());
 
-// router.get("/", function (req, res) {
-//   res.json({ success: true });
-// });
+router.get("/", function (req, res) {
+  res.json({ success: true });
+});
 
 // USER DATA //////////////////////////////////////////////////////////////////////////
-router.post("/api/register", async (req, res) => {
+router.post("/register", async (req, res) => {
   console.log(req.body);
   try {
     //BCRYPT HASHING PASSWORD BEFORE GETTING STORED IN DATABASE
@@ -35,7 +35,7 @@ router.post("/api/register", async (req, res) => {
   }
 });
 
-router.post("/api/login", async (req, res) => {
+router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({
       email: req.body.email,
@@ -66,7 +66,7 @@ router.post("/api/login", async (req, res) => {
   }
 });
 
-router.get("/api/login", async (req, res) => {
+router.get("/login", async (req, res) => {
   const token = req.headers["x-access-token"];
   try {
     const decoded = jwt.verify(token, process.env.SECRET);
@@ -80,7 +80,7 @@ router.get("/api/login", async (req, res) => {
 });
 
 //GETS USER BIO
-router.get("/api/bio", async (req, res) => {
+router.get("/bio", async (req, res) => {
   const token = req.headers["x-access-token"];
 
   try {
@@ -95,7 +95,7 @@ router.get("/api/bio", async (req, res) => {
 });
 
 //POSTS USER BIO
-router.post("/api/bio", async (req, res) => {
+router.post("/bio", async (req, res) => {
   const token = req.headers["x-access-token"];
 
   try {
@@ -110,7 +110,7 @@ router.post("/api/bio", async (req, res) => {
 });
 
 //GETS USER AVATAR URL FROM MONGODB - THE URL IS A CLOUDINARY FILE
-router.get("/api/avatarUrl", async (req, res) => {
+router.get("/avatarUrl", async (req, res) => {
   const token = req.headers["x-access-token"];
   try {
     const decoded = jwt.verify(token, process.env.SECRET);

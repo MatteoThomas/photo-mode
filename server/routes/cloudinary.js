@@ -21,7 +21,7 @@ cloudinary.config({
 });
 
 //GET ALL IMAGES FROM ALL FOLDERS EXCEPT IMAGES WITH avatar AS A TAG
-router.get("/api/gallery", async (req, res) => {
+router.get("/gallery", async (req, res) => {
   cloudinary.search
     //WILL NOT DELIVER IMAGES WITH avatar TAG
     .expression("-avatar")
@@ -30,7 +30,7 @@ router.get("/api/gallery", async (req, res) => {
 });
 
 //GET ALL USER IMAGES FROM USER FOLDER
-router.get("/api/usergallery", async (req, res) => {
+router.get("/usergallery", async (req, res) => {
   const folderSearch = req.query.folderData;
   cloudinary.search
     //GETS ALL IMAGES EXCEPT avatar
@@ -40,7 +40,7 @@ router.get("/api/usergallery", async (req, res) => {
 });
 
 //GET USER AVATAR
-router.get("/api/avatar", async (req, res) => {
+router.get("/avatar", async (req, res) => {
   const folderSearch = req.query.folderData;
   cloudinary.search
     .expression(`folder:${folderSearch} AND avatar`)
@@ -49,7 +49,7 @@ router.get("/api/avatar", async (req, res) => {
 });
 
 // DESTROY IMAGE
-router.get("/api/deleteImage", async (req, res) => {
+router.get("/deleteImage", async (req, res) => {
   const image = req.query.deleteImage;
   cloudinary.uploader
     .destroy(image)
