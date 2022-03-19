@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { StyledButton } from "../../components/Button/Button.style";
 
 function RenderForm()  {
     const [name, setName] = useState("");
@@ -68,15 +69,19 @@ function RenderForm()  {
         <br />
       </div>
       <ButtonsWrapper>
-        <StyledButton 
-        className="Btn" 
-        type="submit" 
-        value="Register"  
-        > Register
+        <StyledButton
+          buttonLabel="Register"
+          className="Btn" 
+          type="submit" 
+          value="Register"  
+        > 
         </StyledButton>
     
         <Link to="/Login">
-          <StyledButtonLink className="Btn">Login</StyledButtonLink>
+          <StyledButton 
+            buttonLabel="Login"
+          >
+          </StyledButton>
         </Link>
       </ButtonsWrapper>
     </form>
@@ -90,39 +95,7 @@ const ButtonsWrapper = styled.div`
   display: flex;
 `;
 
-const StyledButton = styled.button`
-  background-color: #d3d3d3;
-  color: black;
-  margin: 1rem 2rem 0 0;
-  width: fit-content;
-  border: 1px transparent solid;
-  border-radius: 4px;
-  transition: all .4s;
-  height: 42px;
-  &:hover {
-    transition: all .4s;
-    color: aliceblue;
-    background-color: transparent;
-    border: 1px grey solid;
-  }
-`;
 
-const StyledButtonLink = styled.button`
-  background-color: transparent;
-  color: aliceblue;
-  margin: 1rem 0 0 0;
-  width: fit-content;
-  border: 1px grey solid;
-  border-radius: 4px;
-  transition: all .4s;
-  height: 42px;
-  &:hover {
-    transition: all .4s;
-    color: black;
-    border: 1px transparent solid;
-    background-color: rgb(196, 196, 196);
-  }
-`;
 
 const Input = styled.input`
   border-radius: 4px;

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import AvatarUpload from "./AvatarUpload";
 import { motion } from 'framer-motion/dist/framer-motion'
+import { StyledButton } from "../../components/Button/Button.style"
 
 const Account = () => {
   const [avatar, setAvatar] = useState([]);
@@ -160,23 +161,33 @@ async function updateBio(event) {
       <StyledCol>
         <form onSubmit={updateBio}>
           {bioInput}
+
           <StyledButton 
+            buttonLabel="Edit Bio"
             className="Btn" 
             type="submit" 
             onClick={() => handleBioClick()}>
               {buttonText}
           </StyledButton>  
+
           <Bio>{bio}</Bio>
         </form>
       </StyledCol>
 
+      <StyledCol>
+
+
       <StyledCol >
+
         <StyledButton 
+          buttonLabel="Logout"
           type="button" 
           onClick={logOut}>
             Logout
         </StyledButton>
-      </StyledCol>
+
+        
+      </StyledCol >
 
       </NameBioWrapper>
 
@@ -217,18 +228,21 @@ const NameBioWrapper = styled.div`
   margin-bottom: 2rem;
 `
 
-const StyledButton = styled.button`
-  border: 1px transparent solid;
-  border-radius: 4px;
-  transition: 0.4s;
-  height: 42px;
-  &:hover {
-    transition: all .4s;
-    color: aliceblue;
-    background-color: transparent;
-    border: 1px rgb(99,99,99) solid;
-  }
-`
+
+// const StyledButton = styled.button`
+//   border: 1px transparent solid;
+//   border-radius: 4px;
+//   transition: 0.4s;
+//   height: 42px;
+//   &:hover {
+//     transition: all .4s;
+//     color: aliceblue;
+//     background-color: transparent;
+//     border: 1px grey solid;
+//   }
+// `
+
+
 
 const StyledCol = styled.div`
   word-wrap: break-word;

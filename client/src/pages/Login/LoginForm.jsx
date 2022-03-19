@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { StyledButton } from "../../components/Button/Button.style";
 
 function LoginForm() {
     const [email, setEmail] = useState("");
@@ -52,11 +53,11 @@ function LoginForm() {
             />
             <br />
             <ButtonsWrapper>
-                <StyledButton className="Btn" type="submit" value="Login">
+                <StyledButton buttonLabel="Login" className="Btn" type="submit" value="Login">
                     Login
                 </StyledButton>
                 <Link className="link" to="/Register">
-                    <StyledButtonLink className="Btn">Register</StyledButtonLink>
+                    <StyledButton buttonLabel="Register">Register</StyledButton>
                 </Link>
             </ButtonsWrapper>
         </form>
@@ -69,41 +70,45 @@ const ButtonsWrapper = styled.div`
   display: flex;
 `
 
-const StyledButton = styled.button`
-  background-color: #e7e7e7;
-  color: black;
-  border: 1px transparent solid;
-  margin: 1rem 2rem 0 0;
-  width: fit-content;
-  border: 1px transparent solid;
-  border-radius: 4px;
-  transition: all 0.4s;
-  height: 42px;
-  &:hover {
-    transition: all 0.4s;
-    color: #ffffff;
-    background-color: transparent;
-    border: 1px grey solid;
-  }
+
+// const StyledButton = styled.button`
+//   background-color: #e7e7e7;
+//   color: black;
+//   border: 1px transparent solid;
+//   margin: 1rem 2rem 0 0;
+//   width: fit-content;
+//   border: 1px transparent solid;
+//   border-radius: 4px;
+//   transition: all 0.4s;
+//   &:hover {
+//     transition: all 0.4s;
+//     color: #ffffff;
+//     background-color: transparent;
+//     border: 1px grey solid;
+//   }
+// `
+
+// const StyledButtonLink = styled.button`
+//   background-color: transparent;
+//   color: aliceblue;
+//   border: 1px transparent solid;
+//   margin: 1rem 0 0 0;
+//   width: fit-content;
+//   border: 1px grey solid;
+//   border-radius: 4px;
+//   transition: all 0.4s;
+//   &:hover {
+//     transition: all 0.4s;
+//     color: black;
+//     border: 1px transparent solid;
+//     background-color: #ebebeb;
+//   }
+// `
+
+
 `
 
-const StyledButtonLink = styled.button`
-  background-color: transparent;
-  color: aliceblue;
-  border: 1px transparent solid;
-  margin: 1rem 0 0 0;
-  width: fit-content;
-  border: 1px grey solid;
-  border-radius: 4px;
-  transition: all 0.4s;
-  height: 42px;
-  &:hover {
-    transition: all 0.4s;
-    color: black;
-    border: 1px transparent solid;
-    background-color: #ebebeb;
-  }
-`
+
 
 const Input = styled.input`
   border-radius: 4px;
