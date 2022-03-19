@@ -17,7 +17,7 @@ const Account = () => {
     let isSubscribed = true;
 //GETS USER NAME FROM MONGODB
   const fetchName = async() => {
-    const req = await fetch("http://localhost:8080/api/login", {
+    const req = await fetch("http://localhost:8080/api/user/login", {
       headers: {
         "x-access-token": localStorage.getItem("token"),
       },
@@ -33,7 +33,7 @@ const Account = () => {
   //FETCH USER AVATAR FROM CLOUDINARY
   const fetchAvatar = async() => {
     //SENDS userName AS A SEARCH PARAMETER
-    const req = await fetch(`http://localhost:8080/api/avatar?folderData=${userName}`)
+    const req = await fetch(`http://localhost:8080/api/cloudinary/avatar?folderData=${userName}`)
     const data = await req.json();
     (data.status === "ok" && data.results.total_count) ?
     setAvatar(data.results.resources[0].secure_url)
@@ -42,7 +42,7 @@ const Account = () => {
   }
 
   const populateBio = async() =>  {
-    const req = await fetch("http://localhost:8080/api/bio", {
+    const req = await fetch("http://localhost:8080/api/user/bio", {
       headers: {
         "x-access-token": localStorage.getItem("token"),
       },
@@ -67,7 +67,7 @@ const Account = () => {
 
 async function updateBio(event) {
   event.preventDefault();
-  const req = await fetch("http://localhost:8080/api/bio", {
+  const req = await fetch("http://localhost:8080/api/user/bio", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -123,13 +123,18 @@ async function updateBio(event) {
       }
     }
 
-  //VARIABLE THAT CHECK CONDITION OF showAvatarGallery THEN RENDERS AvatarUpload COMPONENT or DIV
-  const userAvatar = avatar.length > 0  ? <>
-    <AvatarImg src={avatar} alt="avatar" onClick={() => handleAvatarClick()} />
-    <div>Click to change</div> </> 
-    : <div onClick={() => handleAvatarClick()}>No avatar selected, click here to add</div> 
+  //VARIABLE THAT CHECKS CONDITION OF showAvatarGallery THEN RENDERS AvatarUpload COMPONENT or DIV
+  const userAvatar = avatar.length > 0  ? 
+    <>
+      <AvatarImg src={avatar} alt="avatar" onClick={() => handleAvatarClick()} />
+    <div>Click to change</div> 
+    </> 
+    : <div onClick={() => handleAvatarClick()}>
+        No avatar selected, click here to add
+      </div> 
 
-  const avatarUpload = showAvatarGallery && <AvatarUpload folderName={userName}/> 
+  const avatarUpload = showAvatarGallery && 
+    <AvatarUpload folderName={userName}/> 
   
   //VARIANT OBJECT FOR ANIMATION  
   const container = {
@@ -148,10 +153,12 @@ async function updateBio(event) {
         <h1>Account</h1>
       </Title>
       <NameBioWrapper>
+
       <StyledCol >
         <h1>{userName}</h1>
-        </StyledCol>
-      <StyledCol >
+      </StyledCol>
+
+      <StyledCol>
         <form onSubmit={updateBio}>
           {bioInput}
 
@@ -166,7 +173,11 @@ async function updateBio(event) {
           <Bio>{bio}</Bio>
         </form>
       </StyledCol>
+
       <StyledCol>
+
+
+      <StyledCol >
 
         <StyledButton 
           buttonLabel="Logout"
@@ -174,15 +185,19 @@ async function updateBio(event) {
           onClick={logOut}>
             Logout
         </StyledButton>
+
         
       </StyledCol >
+
       </NameBioWrapper>
 
-        <AvatarContainer>
-          {userAvatar}
-          {avatarUpload}
-        </AvatarContainer>
+      <StyledCol >
+        {userAvatar}
+      </StyledCol>
 
+      <AvatarContainer>
+        {avatarUpload}
+      </AvatarContainer>
     </StyledContainer>
   );
 };
@@ -193,7 +208,7 @@ const StyledContainer = styled(motion.div)`
   color: aliceblue;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: left;
   margin: 0 10vw;
   & h1 {
     width: 100%;
@@ -201,15 +216,18 @@ const StyledContainer = styled(motion.div)`
 `
 const Title = styled.div`
   width: 100%;
+  text-align: right;
   border-bottom: 1px aliceblue solid;
   margin: 0 0 2rem 0;
 `
 
 const NameBioWrapper = styled.div`
   background-color:gray;
-  width:clamp(350px, 30%, 600px);
+  width: clamp(350px, 30%, 600px);
   height:fit-content;
+  margin-bottom: 2rem;
 `
+
 
 // const StyledButton = styled.button`
 //   border: 1px transparent solid;
@@ -224,12 +242,14 @@ const NameBioWrapper = styled.div`
 //   }
 // `
 
+
+
 const StyledCol = styled.div`
   word-wrap: break-word;
   width: 300px;
   border: 0.5px rgb(97, 97, 97) solid;
   border-radius: 10px;
-  margin: 0.5rem;
+  margin: 0.5rem .5rem .5rem 1rem;
   padding: 0.5rem;
 `
 
@@ -240,17 +260,15 @@ const Bio = styled.div`
 `
 
 const Input = styled.input`
-  width: 100%;
+  /* width: 100%; */
 `
 
 const AvatarImg = styled.img`
-  width: clamp(200px, 100%, 350px);
+  width:300px;
 `
 
 const AvatarContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  margin: 0rem auto 1rem;
+
+
 `
 

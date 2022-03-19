@@ -10,7 +10,6 @@ import ImageIndex from "./components/ImageIndex/ImageIndex";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import Explore from "./pages/Explore/Explore";
-import SingleImage from "./pages/Explore/SingleImage";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Nav from "./components/Nav/Nav";
 import Hero from "./components/Hero/Hero";
@@ -50,7 +49,6 @@ const App = () => {
             <Route path="/login" exact element={<Login />} />
             <Route path="/register" exact element={<Register />} />
             <Route path="/explore" exact element={<Explore />} />
-            <Route exact path="/image/:id" component={SingleImage} />
             <Route path="/dashboard" exact element={<Dashboard />} />
             <Route path="/account" exact element={<Account />} />
             <Route path="*" element={<Login />} />

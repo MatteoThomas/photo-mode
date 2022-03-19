@@ -3,41 +3,40 @@ import { useState, useEffect } from "react";
 import styled from "styled-components"
 import { motion } from 'framer-motion/dist/framer-motion'
 
+
 const Gallery = () => {
   const [gallery, setGallery] = useState([]);
+
   //GET IMAGES ON RENDER
   useEffect(() => {
+
     async function populateUserGallery() {
-      const req = await fetch("http://localhost:8080/api/gallery");
+      const req = await fetch("http://localhost:8080/api/cloudinary/gallery");
       const data = await req.json();
       
       if (data.status === "ok") {
-        const count = data.results.total_count;
-        const resources = data.results.resources;
+        let resources = data.results.resources
+        console.log(resources)
         const images = resources.map((resource) => {
-          return {
-            id: resource.asset_id,
-            // title: resource.display_name,
-            image: resource.secure_url,
-            name: resource.public_id,
-            folder: resource.folder,
-            //REMOVES THE NON MM/DD/YY CHARACTERS
-            date: resource.uploaded_at.split("T")[0],
-            count: count,
-          };
-        });
-      //RANDOMIZES images ORDER
-      images.sort(() => Math.random() - 0.5)
-      setGallery(images);
-        return <div></div>;
+                return {
+                  id: resource.asset_id,
+                  image: resource.secure_url,
+                  name: resource.public_id,
+                  folder: resource.public_id,
+                };
+      })
+              images.sort(() => Math.random() - 0.5)
+              setGallery(images);
+                return <div></div>;
 
-      } else {
-        alert(data.error);
-      }
-    }
-    populateUserGallery();
-  }, []);
-  
+              } else {
+                alert(data.error);
+              }
+            }
+
+            populateUserGallery();
+          }, []);
+
   const container = {
     hidden: { 
       opacity: 0
@@ -59,7 +58,9 @@ const Gallery = () => {
         transition={{ delay: i * .02}}
         >
         <ImageContainer>
+
           <Image src={img.image} alt={img.desc}/>
+
           <ImageInfo>
         <div>{img.folder}</div> <div> {img.date}</div>
         </ImageInfo>

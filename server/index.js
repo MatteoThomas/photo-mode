@@ -1,35 +1,43 @@
-const userRoutes = require("./routes/user");
-const imageRoutes = require("./routes/cloudinary");
-
 const express = require("express");
+const path = require("path");
 const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
+const userRoutes = require("./routes/user");
+const imageRoutes = require("./routes/cloudinary");
 
 dotenv.config();
 
-app.use("/", userRoutes);
-app.use("/register", userRoutes);
-app.use("/login", userRoutes);
-
-app.use("/", imageRoutes);
-app.use("/gallery", imageRoutes);
-
-app.use(bodyParser.json());
-app.use(cors());
-app.use(express.json());
-
-const PORT = process.env.PORT || 8080;
-
+// const MONGO_URL = "https://photo-mode.herokuapp.com/";
+const MONGO_URL = process.env.URI;
 mongoose
-  .connect(process.env.URI, {
+  .connect(MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log("MongoDB has been connected"))
-  .catch((err) => console.log(err));
+  .then(() => console.log("Photomode DB access"))
+  .catch((err) => {
+    console.log(err);
+  });
+
+// console.log(process.env.NODE_ENV);
+app.use(
+  cors({
+    // DEVELOPMENT
+    // origin: "http://localhost:8080",
+    // PRODUCTION
+    origin: "https://photo-mode.herokuapp.com/",
+  })
+);
+
+app.use(bodyParser.json());
+app.use(express.json());
+// app.use("/api", userRoutes);
+app.use("/api/user", userRoutes);
+// app.use("/api/", imageRoutes);
+app.use("/api/cloudinary", imageRoutes);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/client/build")));
@@ -38,6 +46,7 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve(__dirname, "/client/build", "index.html"));
   });
 }
+const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);

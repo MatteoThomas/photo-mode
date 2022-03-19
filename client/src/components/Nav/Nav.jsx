@@ -7,15 +7,28 @@ const Nav = () => {
   return (
     <div>
       <NavbarContainer>
-        <StyledNavLink className="nav-link" to="/Dashboard">
+        <NavLink to="/Dashboard"  
+       style={({ isActive }) => ({
+        color: isActive ? 'transparent' : 'aliceblue',
+      })}
+
+        >
           Dashboard
-        </StyledNavLink>
-        <StyledNavLink className="nav-link" to="/Explore">
+        </NavLink>
+        <NavLink to="/Explore"
+             style={({ isActive }) => ({
+              color: isActive ? 'transparent' : 'aliceblue',
+            })}
+            >
           Explore
-        </StyledNavLink>
-        <StyledNavLink className="nav-link" to="/Account">
+        </NavLink>
+        <NavLink to="/Account"
+             style={({ isActive }) => ({
+              color: isActive ? 'transparent' : 'aliceblue',
+            })}
+            >
           Account
-        </StyledNavLink>
+        </NavLink>
       </NavbarContainer>
       <Outlet />
     </div>
@@ -30,11 +43,7 @@ const NavbarContainer = styled.nav`
   color: aliceblue;
   display: flex;
   justify-content: space-between;
-  margin: 0 10vw 4rem;
-`
-
-const StyledNavLink = styled(NavLink)`
-  color: #ffffff;
+  margin: 1rem 10vw 4rem;
   &:active {
     color: #272727;
   }
@@ -45,3 +54,16 @@ const StyledNavLink = styled(NavLink)`
     color: #c0b2b2;
   }
 `
+
+// const StyledNavLink = styled(NavLink)`
+//   color: #ffffff;
+//   &:active {
+//     color: #272727;
+//   }
+//   &:focus {
+//     color: #c0b2b2;
+//   }
+//   &:hover {
+//     color: #c0b2b2;
+//   }
+// `

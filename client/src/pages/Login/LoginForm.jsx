@@ -9,7 +9,7 @@ function LoginForm() {
   
     async function loginUser(event) {
       event.preventDefault();
-      const response = await fetch("http://localhost:8080/api/login", {
+      const response = await fetch("https://photo-mode.herokuapp.com/api/user/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -70,6 +70,7 @@ const ButtonsWrapper = styled.div`
   display: flex;
 `
 
+
 // const StyledButton = styled.button`
 //   background-color: #e7e7e7;
 //   color: black;
@@ -103,6 +104,11 @@ const ButtonsWrapper = styled.div`
 //     background-color: #ebebeb;
 //   }
 // `
+
+
+`
+
+
 
 const Input = styled.input`
   border-radius: 4px;
