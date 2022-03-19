@@ -1,26 +1,28 @@
-const path = require("path");
 const express = require("express");
+const path = require("path");
 const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
-
 const userRoutes = require("./routes/user");
 const imageRoutes = require("./routes/cloudinary");
 
 dotenv.config();
-app.use(bodyParser.json());
 
+// const MONGO_URL = "https://photo-mode.herokuapp.com/";
 const MONGO_URL = process.env.MONGO_URL;
-
 mongoose
-  .connect(MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(MONGO_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("Photomode DB access"))
   .catch((err) => {
     console.log(err);
   });
 
+// console.log(process.env.NODE_ENV);
 app.use(
   cors({
     // DEVELOPMENT
@@ -30,6 +32,7 @@ app.use(
   })
 );
 
+app.use(bodyParser.json());
 app.use(express.json());
 // app.use("/api", userRoutes);
 app.use("/api/user", userRoutes);
@@ -43,7 +46,6 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve(__dirname, "/client/build", "index.html"));
   });
 }
-
 const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () => {

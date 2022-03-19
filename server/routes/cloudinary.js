@@ -2,15 +2,6 @@ var express = require("express");
 require("dotenv").config();
 var router = express.Router();
 const cloudinary = require("cloudinary").v2;
-const mongoose = require("mongoose");
-
-mongoose
-  .connect(process.env.URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("MongoDB has been connected"))
-  .catch((err) => console.log(err));
 
 //IMAGES /////////////////////////////////////////////////////////////////////
 cloudinary.config({

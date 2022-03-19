@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "homepage": "https://photo-mode.herokuapp.com",
   "scripts": {
     "build": "cd .. && cd client && npm run build",
     "install-client": "cd client && npm install",
