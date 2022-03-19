@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import "./file-input-button.css";
-
+import { StyledButton } from "../../../components/Button/Button.style";
 
 const ImageUpload = ( props ) => {
   const [image, setImage] = useState([]);
@@ -51,12 +51,17 @@ const uploadButton = imagePrev && <UploadButton onClick={uploadImage}>Upload</Up
     <UploadContainer>
       <StyledRow>
         <h2>Upload</h2>
-        <ChooseButton>
+        <ChooseButton
+          buttonLabel="Choose File"
+        
+        >
           <input 
           type="file" 
           accept="image/png, image/jpeg, image/svg, image/gif" 
-          onChange={(e) => imagePreview(e)}/>
+          onChange={(e) => imagePreview(e)}
+          />
         </ChooseButton>
+        
           {uploadButton}
       </StyledRow>
       {previewUrl}
@@ -82,7 +87,7 @@ const UploadButton = styled.button`
   border: 1px transparent solid;
   transition: all .4s;
   background-color: #b7eb7d;
-  /* margin: 1rem 0; */
+
   height: 42px;
     &:hover {
     transition: all .4s;
@@ -98,5 +103,6 @@ const Image = styled.img`
 const StyledRow = styled.div`
   display: flex;
   justify-content: left;
+  align-items: center ;
   /* background-color:blue; */
 `

@@ -4,6 +4,7 @@ import Stats from "./Stats";
 import ImageUpload from "./ImageUpload/ImageUpload";
 import UserGallery from "./UserGallery"
 import { motion } from 'framer-motion/dist/framer-motion'
+import { StyledDashboard } from "./Dashboard.style";
 
 const Dashboard = () => {
   const [userName, setUserName] = useState("");
