@@ -11,7 +11,7 @@ const imageRoutes = require("./routes/cloudinary");
 dotenv.config();
 
 // const MONGO_URL = "https://photo-mode.herokuapp.com/";
-const MONGO_URL = process.env.MONGO_URL;
+const MONGO_URL = process.env.URI;
 mongoose
   .connect(MONGO_URL, {
     useNewUrlParser: true,
