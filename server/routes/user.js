@@ -1,22 +1,22 @@
-var express = require("express");
+const express = require("express");
 const router = express.Router();
-const cors = require("cors");
+// const cors = require("cors");
 
 const dotenv = require("dotenv");
 const User = require("../models/user.model");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const bodyParser = require("body-parser");
+// const bodyParser = require("body-parser");
 
 dotenv.config();
 
-router.use(bodyParser.json());
-router.use(cors());
-router.use(express.json());
+// router.use(bodyParser.json());
+// router.use(cors());
+// router.use(express.json());
 
-router.get("/", function (req, res) {
-  res.json({ success: true });
-});
+// router.get("/", function (req, res) {
+//   res.json({ success: true });
+// });
 
 // USER DATA //////////////////////////////////////////////////////////////////////////
 router.post("/register", async (req, res) => {
