@@ -1,6 +1,5 @@
 import React from "react";
-import styled from "styled-components"
-
+import { StatsContainer, RowLeft } from "./Stats.style";
 
 const Stats = ( props ) => {
   //DESTRUCTURE PROPS
@@ -19,12 +18,3 @@ const Stats = ( props ) => {
 
 export default Stats
   
-const StatsContainer = styled.div`
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  color:aliceblue;
-`
-
-const RowLeft = styled.div`
-`

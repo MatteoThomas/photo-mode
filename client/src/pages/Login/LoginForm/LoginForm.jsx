@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { StyledButton } from "../../components/Button/Button.style";
+import { StyledButton } from "../../../components/Button/Button.style";
+import { ButtonsWrapper, Input } from "./LoginForm.style";
 
 function LoginForm() {
     const [email, setEmail] = useState("");
@@ -9,7 +9,7 @@ function LoginForm() {
   
     async function loginUser(event) {
       event.preventDefault();
-      const response = await fetch("https://photo-mode.herokuapp.com/api/user/login", {
+      const response = await fetch("http://localhost:8080/api/user/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -53,7 +53,7 @@ function LoginForm() {
             />
             <br />
             <ButtonsWrapper>
-                <StyledButton buttonLabel="Login" className="Btn" type="submit" value="Login">
+                <StyledButton buttonLabel="Login" type="submit" value="Login">
                     Login
                 </StyledButton>
                 <Link className="link" to="/Register">
@@ -65,55 +65,3 @@ function LoginForm() {
     }
 
 export default LoginForm
-
-const ButtonsWrapper = styled.div`
-  display: flex;
-`
-
-
-// const StyledButton = styled.button`
-//   background-color: #e7e7e7;
-//   color: black;
-//   border: 1px transparent solid;
-//   margin: 1rem 2rem 0 0;
-//   width: fit-content;
-//   border: 1px transparent solid;
-//   border-radius: 4px;
-//   transition: all 0.4s;
-//   &:hover {
-//     transition: all 0.4s;
-//     color: #ffffff;
-//     background-color: transparent;
-//     border: 1px grey solid;
-//   }
-// `
-
-// const StyledButtonLink = styled.button`
-//   background-color: transparent;
-//   color: aliceblue;
-//   border: 1px transparent solid;
-//   margin: 1rem 0 0 0;
-//   width: fit-content;
-//   border: 1px grey solid;
-//   border-radius: 4px;
-//   transition: all 0.4s;
-//   &:hover {
-//     transition: all 0.4s;
-//     color: black;
-//     border: 1px transparent solid;
-//     background-color: #ebebeb;
-//   }
-// `
-
-
-`
-
-
-
-const Input = styled.input`
-  border-radius: 4px;
-  border: none;
-  width: clamp(300px, 95%, 600px);
-  margin: 0.3rem 0 2rem 0;
-  padding: 0 0 0 0.5rem;
-`

@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { StyledButton } from "../../components/Button/Button.style";
+import { StyledButton } from "../../../components/Button/Button.style";
+import { ButtonsWrapper, Input } from "./RegisterForm.style"
 
 function RenderForm()  {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [isLoaded, setIsLoaded] = useState(false);
     
     async function registerUser(event) {
       event.preventDefault();
@@ -90,17 +89,3 @@ function RenderForm()  {
 };
 
 export default RenderForm
-
-const ButtonsWrapper = styled.div`
-  display: flex;
-`;
-
-
-
-const Input = styled.input`
-  border-radius: 4px;
-  border: none;
-  width: clamp(300px, 95%, 600px);
-  margin: 0.3rem 0 2rem 0;
-  padding: 0 0 0 0.5rem;
-`;

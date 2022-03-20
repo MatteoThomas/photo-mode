@@ -1,9 +1,7 @@
-import React from "react";
-import styled from "styled-components";
-import Gallery from "./Gallery";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
+import Gallery from "./Gallery/Gallery";
 import jwt from "jsonwebtoken";
-import { motion } from 'framer-motion/dist/framer-motion'
+import { GalleryContainer, Title } from "./Explore.style";
 
 const Explore = () => {
   useEffect(() => {
@@ -40,15 +38,3 @@ const Explore = () => {
 };
 
 export default Explore;
-
-const GalleryContainer = styled(motion.div)`
-  color: aliceblue;
-  margin: 0 10vw;
-`
-
-const Title = styled.div`
-  width: 100%;
-  text-align:center ;
-  border-bottom: 1px aliceblue solid;
-  margin: 0 0 2rem 0;
-`

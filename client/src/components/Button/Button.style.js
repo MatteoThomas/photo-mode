@@ -21,5 +21,5 @@ export const StyledButton = styled(Button)`
 
 export const ButtonLabel = styled.label`
   font-size: 1rem;
-  color: antiquewhite;
+  color: aliceblue;
 `;

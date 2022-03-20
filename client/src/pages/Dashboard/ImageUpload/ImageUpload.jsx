@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import "./file-input-button.css";
-import { StyledButton } from "../../../components/Button/Button.style";
+import { UploadContainer, ChooseButton, UploadButton, Image, StyledRow } from "./ImageUpload.style";
 
 const ImageUpload = ( props ) => {
   const [image, setImage] = useState([]);
@@ -70,42 +69,3 @@ const uploadButton = imagePrev && <UploadButton onClick={uploadImage}>Upload</Up
 };
 
 export default ImageUpload;
-
-const UploadContainer = styled.div`
-  font-size: 1rem;
-  color: aliceblue;
-`
-const ChooseButton = styled.div`
-  margin: 0 1rem 0 1rem;
-  width:100px;
-`
-const UploadButton = styled.button`
-  background-color: #eb1717;
-  color: rgb(136, 136, 136);
-  border: 1px transparent solid;
-  border-radius: 4px;
-  border: 1px transparent solid;
-  transition: all .4s;
-  background-color: #b7eb7d;
-
-  height: 42px;
-    &:hover {
-      transition: all .4s;
-      background-color: transparent;
-      border: 1px #b7eb7d solid;
-  
-      color: #b7eb7d;
-    }
-`
-
-const Image = styled.img`
-  margin: 1rem auto 0;
-  width: 300px;
-`
-
-const StyledRow = styled.div`
-  display: flex;
-  justify-content: left;
-  align-items: center ;
-  /* background-color:blue; */
-`

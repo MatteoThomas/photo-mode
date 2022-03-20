@@ -1,18 +1,20 @@
-import React from "react";
-import { useEffect, useState } from "react";
+
+import React, { useEffect, useState } from "react";
 import jwt from "jsonwebtoken";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from 'framer-motion/dist/framer-motion'
 import styled from "styled-components";
+import { GlobalStyles } from "./GlobalStyles.style.jsx"
 
-import ImageIndex from "./components/ImageIndex/ImageIndex";
+import ImageIndex from "./components/ImageIndex/ImageIndexComponent";
+
+import Hero from "./components/Hero/Hero";
+import Nav from "./components/Nav/Nav";
 
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import Explore from "./pages/Explore/Explore";
 import Dashboard from "./pages/Dashboard/Dashboard";
-import Nav from "./components/Nav/Nav";
-import Hero from "./components/Hero/Hero";
 import Account from "./pages/Account/Account";
 
 const App = () => {
@@ -43,6 +45,7 @@ const App = () => {
 
   return (
     <PageContainer>
+      <GlobalStyles />
       {renderHeader}
       <AnimatePresence exitBeforeEnter initial={false}>          
         <Routes location={location} key={location.pathname}>

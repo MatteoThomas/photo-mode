@@ -10,7 +10,6 @@ const imageRoutes = require("./routes/cloudinary");
 
 dotenv.config();
 
-// const MONGO_URL = "https://photo-mode.herokuapp.com/";
 const MONGO_URL = process.env.URI;
 mongoose
   .connect(MONGO_URL, {
@@ -25,10 +24,10 @@ mongoose
 // console.log(process.env.NODE_ENV);
 app.use(
   cors({
-    // DEVELOPMENT
-    // origin: "http://localhost:8080",
+    // DEVELOPMENT //NEEDS TO MATCH FRONT END
+    origin: "http://localhost:3000",
     // PRODUCTION
-    origin: "https://photo-mode.herokuapp.com/",
+    // origin: "https://photo-mode.herokuapp.com/",
   })
 );
 

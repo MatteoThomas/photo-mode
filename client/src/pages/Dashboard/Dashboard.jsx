@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import Stats from "./Stats";
+import Stats from "./Stats/Stats";
 import ImageUpload from "./ImageUpload/ImageUpload";
-import UserGallery from "./UserGallery"
-import { motion } from 'framer-motion/dist/framer-motion'
-import { StyledDashboard } from "./Dashboard.style";
+import UserGallery from "./UserGallery/UserGallery"
+import { StyledContainer } from "../../components/Container/Container.style";
+import { Title, StatsUpload, StyledCol } from "./Dashboard.style";
 
 const Dashboard = () => {
   const [userName, setUserName] = useState("");
@@ -30,7 +29,6 @@ const Dashboard = () => {
       }
     }
     
-  
     const fetchGallery = async() => {
       //SENDS userName AS A SEARCH PARAMETER TO CLOUDINARY
       const req = await fetch(`http://localhost:8080/api/cloudinary/usergallery?folderData=${userName}`, {
@@ -74,7 +72,7 @@ const container = {
 
   return (
 
-  <DashboardContainer     
+  <StyledContainer     
     variants={container}
     initial="hidden"
     animate="show"
@@ -101,35 +99,9 @@ const container = {
           userGallery={userGallery}
         />
     </StyledCol>
-  </DashboardContainer>
+  </StyledContainer>
 
      );
 };
 
 export default Dashboard;
-
-const DashboardContainer = styled(motion.div)`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin: 0 10vw;
-  color: aliceblue;
-`
-
-const Title = styled.div`
-  width: 100%;
-  border-bottom: 1px aliceblue solid;
-  margin: 0 0 2rem 0;
-`
-
-const StatsUpload = styled.div`
-  background-color:gray;
-  width:clamp(350px, 30%, 600px);
-  height:fit-content;
-`
-const StyledCol = styled.div`
-  border: 0.5px rgb(97, 97, 97) solid;
-  border-radius: 10px;
-  margin: 0.5rem;
-  padding: 0.5rem;
-`
