@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../../slices/auth";
+
 import { StyledButton } from "../../../components/Button/Button.style";
 import { NameBioWrapper, StyledCol, Bio, Input } from "./NameAndBio.style";
 

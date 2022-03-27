@@ -1,59 +1,88 @@
-import React, { useState } from "react";
+import React, { useState, useEffect  } from "react";
+import {  Navigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { StyledButton } from "../../../components/Button/Button.style";
-import { ButtonsWrapper, Input } from "./LoginForm.style";
+import axios from "axios"
+import { useSelector, useDispatch } from 'react-redux';
+// import {  userSelector, clearState } from '../../../redux/userSlice';
+import { loginUser } from "../../../redux/userSlice"
+import { login } from "../../../slices/auth";
+import { clearMessage } from "../../../slices/message";
 
-function LoginForm() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+import { StyledButton } from "../../../components/Button/Button.style";
+import { StyledInput, StyledInputWrapper } from "../../../components/Input/Input.style";
+import { ButtonsWrapper } from "./LoginForm.style";
+
+function LoginForm(props) {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   
-    async function loginUser(event) {
-      event.preventDefault();
-      const response = await fetch("http://localhost:8080/api/user/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
+  const { isLoggedIn } = useSelector((state) => state.auth);
+  const { message } = useSelector((state) => state.message);
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    dispatch(clearMessage());
+  }, [dispatch]);
+  
+  const initialValues = {
+    username: "",
+    password: "",
+  };
+
+  // console.log(username, password)
+
+  const handleLogin = () => {
+    setLoading(true);
+    dispatch(login({ username, password }))
+      .unwrap()
+      .then(() => {
+        props.history.push("/account");
+        window.location.reload();
+      })
+      .catch(() => {
+        setLoading(false);
       });
-  
-      const data = await response.json();
-  
-      if (data.user == null) {
-        alert("Check your name and password");
-      } else {
-        localStorage.setItem("token", data.user);
-        window.location.href = "/dashboard";
-      }
-    }
-  
+  };
+  if (isLoggedIn) {
+    return <Navigate to="/explore" />;
+  }
+
+
     return (
-        <form onSubmit={loginUser}>
-            <label>Email</label>
+        <form onSubmit={handleLogin}>
+            <label>Username</label>
             <br />
-            <Input
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+            <StyledInputWrapper
+            >
+            <StyledInput
+            
+            inputLabel="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                name="username"
                 type="text"
                 required
-                placeholder="Email"
-            />
+                placeholder="Username"
+            ></StyledInput></StyledInputWrapper>
             <br/>
             <label>Password</label>
             <br />
-            <Input
+            <StyledInputWrapper>
+            <StyledInput
                 value={password}
+                name="password"
                 type="password"
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 placeholder="Email"
-            />
+            ></StyledInput></StyledInputWrapper>
             <br />
             <ButtonsWrapper>
-                <StyledButton buttonLabel="Login" type="submit" value="Login">
+                <StyledButton 
+                  buttonLabel="Login" 
+                  type="submit" 
+                  value="Login">
                     Login
                 </StyledButton>
                 <Link className="link" to="/Register">

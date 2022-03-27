@@ -14,16 +14,18 @@ const Dashboard = () => {
     let isSubscribed = true;
     //GETS USER NAME FROM MONGODB
     const fetchName = async() => {
-      const req = await fetch("http://localhost:8080/api/user/login", {
+      const req = await fetch("http://localhost:8080/api/auth/signin", {
+
+        method: "POST",
         headers: {
           "x-access-token": localStorage.getItem("token"),
         },
       });
       const data = await req.json();
+      // console.log(data)
       if (data.status === "ok") {
         //SETS userName
         setUserName(data.name);
-
       } else {
         alert(data.error);
       }

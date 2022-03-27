@@ -1,7 +1,7 @@
 
-import React, { useEffect, useState, useCallback  } from "react";
+import React, { useEffect, useState } from "react";
 import jwt from "jsonwebtoken";
-import { useDispatch, useSelector } from "react-redux";
+
 import { Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from 'framer-motion/dist/framer-motion'
 import styled from "styled-components";
@@ -21,13 +21,8 @@ import Account from "./pages/Account/Account";
 const App = () => {
   const [header, setHeader] = useState(false);
   const location = useLocation();
-  const { user: currentUser } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
-  
-  const logOut = useCallback(() => {
-    dispatch(logout());
-  }, [dispatch]);
 
+  
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {

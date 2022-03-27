@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios"
+
 
 import { ButtonsWrapper } from "./RegisterForm.style"
 
 import { StyledInput } from "../../../components/Input/Input.style"
 import { StyledButton } from "../../../components/Button/Button.style";
+
 
 
 
