@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { setMessage } from "./message";
+
 import AuthService from "../services/auth.service";
 
 const user = JSON.parse(localStorage.getItem("user"));
@@ -77,5 +78,4 @@ const authSlice = createSlice({
 });
 
 const { reducer } = authSlice;
-
 export default reducer;

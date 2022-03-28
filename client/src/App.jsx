@@ -18,16 +18,13 @@ import Explore from "./pages/Explore/Explore";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Account from "./pages/Account/Account";
 
+import { logout } from "./slices/auth";
+
 const App = () => {
   const [header, setHeader] = useState(false);
   const location = useLocation();
-  const { user: currentUser } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
-  
-  const logOut = useCallback(() => {
-    dispatch(logout());
-  }, [dispatch]);
 
+ 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {

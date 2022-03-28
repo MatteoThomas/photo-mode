@@ -1,10 +1,10 @@
 import React, { useState, useEffect  } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 import {  Navigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import axios from "axios"
-import { useSelector, useDispatch } from 'react-redux';
 // import {  userSelector, clearState } from '../../../redux/userSlice';
-import { loginUser } from "../../../redux/userSlice"
+// import { loginUser } from "../../../redux/userSlice"
+
 import { login } from "../../../slices/auth";
 import { clearMessage } from "../../../slices/message";
 
@@ -15,42 +15,41 @@ import { ButtonsWrapper } from "./LoginForm.style";
 function LoginForm(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
   const [loading, setLoading] = useState(false);
-  
   const { isLoggedIn } = useSelector((state) => state.auth);
   const { message } = useSelector((state) => state.message);
   const dispatch = useDispatch();
   
   useEffect(() => {
     dispatch(clearMessage());
+    // console.log("useEffect")
   }, [dispatch]);
   
-  const initialValues = {
-    username: "",
-    password: "",
-  };
-
-  // console.log(username, password)
-
   const handleLogin = () => {
     setLoading(true);
+    console.log(loading)
     dispatch(login({ username, password }))
       .unwrap()
       .then(() => {
-        props.history.push("/account");
+        console.log("dispatch")
+        props.history.push("/dashboard");
         window.location.reload();
+
       })
       .catch(() => {
         setLoading(false);
       });
   };
+
   if (isLoggedIn) {
-    return <Navigate to="/explore" />;
+    return <Navigate to="/dashboard" />;
   }
 
-
     return (
-        <form onSubmit={handleLogin}>
+        <form 
+        
+        onSubmit={handleLogin}>
             <label>Username</label>
             <br />
             <StyledInputWrapper

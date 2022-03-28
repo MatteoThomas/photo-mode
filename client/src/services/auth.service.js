@@ -11,12 +11,22 @@ const register = (username, email, password) => {
 };
 
 const login = (username, password) => {
+  const headers = {
+    "Access-Control-Allow-Headers":
+      "x-access-token, Origin, Content-Type: application/json, Accept",
+  };
+  console.log(username, password);
   return axios
-    .post(API_URL + "signin", {
-      username,
-      password,
-    })
+    .post(
+      API_URL + "signin",
+      {
+        username,
+        password,
+      },
+      { headers }
+    )
     .then((response) => {
+      console.log("response");
       if (response.data.accessToken) {
         localStorage.setItem("user", JSON.stringify(response.data));
       }

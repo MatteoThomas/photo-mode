@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import axios from "axios"
+
+import { register } from "../../../slices/auth";
+import { clearMessage } from "../../../slices/message";
 
 import { ButtonsWrapper } from "./RegisterForm.style"
 
@@ -13,29 +16,29 @@ function RenderForm()  {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    
-    async function registerUser(event) {
-      event.preventDefault();
-  
-      const response = await fetch("http://localhost:8080/api/auth/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username,
-          email,
-          password,
-        }),
-      });
-      const data = await response.json();
-        console.log(data)
-      if (data.status !== null) {
-        window.location.href = "/login";
-      }
-    }
+    const [successful, setSuccessful] = useState(false);
+    const { message } = useSelector((state) => state.message);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+      dispatch(clearMessage());
+    }, [dispatch]);
+
+    const handleRegister = () => {
+      setSuccessful(false);
+      console.log(username)
+      dispatch(register({ username, email, password }))
+        .unwrap()
+        .then(() => {
+          setSuccessful(true);
+        })
+        .catch(() => {
+          setSuccessful(false);
+        });
+    };
+
     return (
-    <form onSubmit={registerUser}>
+    <form onSubmit={handleRegister}>
 
       <div className="input-container">
         <label>Name</label>

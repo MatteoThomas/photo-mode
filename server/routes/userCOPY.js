@@ -20,7 +20,7 @@ router.get("/", function (req, res) {
 
 // USER DATA //////////////////////////////////////////////////////////////////////////
 router.post("/register", async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   try {
     //BCRYPT HASHING PASSWORD BEFORE GETTING STORED IN DATABASE
     const newPassword = await bcrypt.hash(req.body.password, 10);
@@ -35,13 +35,13 @@ router.post("/register", async (req, res) => {
   }
 });
 
-router.post("/api/auth/signin", async (req, res) => {
+router.post("/api/auth/login", async (req, res) => {
   try {
     const user = await User.findOne({
       email: req.body.email,
     });
 
-    console.log("response", data);
+    // console.log("response", data);
     if (!user) {
       return { status: "error", error: "Invalid login" };
     }
