@@ -17,7 +17,6 @@ const login = (username, password) => {
       password,
     })
     .then((response) => {
-      console.log("response");
       if (response.data.accessToken) {
         localStorage.setItem("user", JSON.stringify(response.data));
       }
@@ -25,9 +24,21 @@ const login = (username, password) => {
     });
 };
 
+const editBio = (bio) => {
+  return axios
+    .post(API_URL + "editBio", {
+      bio,
+    })
+    .then((response) => {
+      return response.data;
+    });
+};
+
 const authService = {
   register,
   login,
+  editBio,
+  // getUserName,
 };
 
 export default authService;

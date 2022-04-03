@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { editBio } from "../../../slices/auth";
 
 import { StyledButton } from "../../../components/Button/Button.style";
 import { NameBioWrapper, StyledCol, Bio, Input } from "./NameAndBio.style";
@@ -9,103 +10,61 @@ const NameAndBio = () => {
   const [bio, setBio] = useState("");
   const [tempBio, setTempBio] = useState("");
   const [showBioInput, setShowBioInput] = useState(false);
-  const [buttonText, setButtonText] = useState("Edit Bio");
-  const [userName, setUserName] = useState("");
 
   const [loading, setLoading] = useState(false);
+
+  //GETTING DATA FROM REDUX STORE
+  const bioData = useSelector((state) => state.auth.user.bio);
+  const nameData = useSelector((state) => state.auth.user.username);
+
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    let isSubscribed = true;
-    const fetchName = async () => {
-      const localName = await JSON.parse(window.localStorage.getItem("user"));
-      if (localName !== null) {
-        setUserName(localName.username);
-        // await console.log(userName)
-      } else {
-        alert("userName not set");
-      }
-    };
-
-    if (isSubscribed) {
-      fetchName();
-    } else {
-      alert("Error");
-    }
-    return () => (isSubscribed = false);
-  }, [userName]);
 
   async function updateBio(event) {
     event.preventDefault(event);
-    const req = await fetch("http://localhost:8080/api/auth/bio", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-access-token": localStorage.getItem("token"),
-      },
-      body: JSON.stringify({
-        bio: tempBio,
-      }),
-    });
-
-    const data = await req.json();
-    if (data.status === "ok") {
-      setBio(tempBio);
-      setTempBio("");
-    } else {
-      alert(data.error);
-    }
+    dispatch(editBio(tempBio));
   }
+  // const req = await fetch("http://localhost:8080/api/auth/bio", {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //     "x-access-token": localStorage.getItem("token"),
+  //   },
+  //   body: JSON.stringify({
+  //     bio: tempBio,
+  //   }),
+  // });
+
+  //   const data = await req.json();
+  //   if (data.status === "ok") {
+  //     setBio(tempBio);
+  //     setTempBio("");
+  //   } else {
+  //     alert(data.error);
+  //   }
+  // }
 
   const logOut = () => {
     localStorage.removeItem("user");
     window.location.href = "/login";
   };
 
-  //CHECKS IF showBio STATE IS FALSE
-  //FALSE SETS showBio TO TRUE AND buttonText STATE to "Update Bio"
-  //TRUE SETS showBio TO FALSE AND buttonText STATE to "Edit Bio"
-  const handleBioClick = (event) => {
-    event.preventDefault();
-    if (!showBioInput) {
-      setShowBioInput(true);
-      setButtonText("Update Bio");
-    } else {
-      setShowBioInput(false);
-      setButtonText("Edit Bio");
-    }
-  };
-
-  //RENDERS BIO INPUT FIELD WHEN BUTTON CLICKED AND showBio STATE IS SET TO TRUE
-  //INITIAL STATE IS FALSE SO BIO INPUT FIELD IS HIDDEN
-  const bioInput = showBioInput && (
-    <Input
-      maxLength="80"
-      type="text"
-      placeholder=" Bio"
-      onChange={(e) => setTempBio(e.target.value)}
-    />
-  );
-
   return (
     <NameBioWrapper>
       <StyledCol>
-        <h1>{userName}</h1>
+        <h1>{nameData}</h1>
       </StyledCol>
 
       <StyledCol>
-        <form onSubmit={handleBioClick}>
-          {bioInput}
-          <StyledButton
-            buttonLabel="Edit Bio"
-            className="Btn"
-            type="submit"
-            // onClick={handleBioClick}
-          >
-            {buttonText}
-          </StyledButton>
+        <form onSubmit={updateBio}>
+          <Input
+            maxLength="80"
+            type="text"
+            placeholder=" Edit Bio"
+            onChange={(e) => setTempBio(e.target.value)}
+          />
+          <StyledButton buttonLabel="Submit" className="Btn" type="submit" />
 
-          <Bio>{bio}</Bio>
+          <Bio>{bioData}</Bio>
         </form>
       </StyledCol>
 
