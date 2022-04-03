@@ -1,19 +1,34 @@
 
 import React, { useState, useEffect } from "react";
 import { StyledContainer, GalleryMotion, Image, ImageContainer, ImageInfo } from "./Gallery.style";
+import { useDispatch } from "react-redux";
+import { getExploreGallery } from "../../../slices/cloudinary";
 
 const Gallery = () => {
+  const [userName, setUserName] = useState("");
   const [gallery, setGallery] = useState([]);
-
-  //GET IMAGES ON RENDER
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch(); 
+   //GET IMAGES ON RENDER
   useEffect(() => {
 
-    async function populateUserGallery() {
-      const req = await fetch("http://localhost:8080/api/cloudinary/gallery");
-      const data = await req.json();
-      
-      if (data.status === "ok") {
-        let resources = data.results.resources
+    const fetchName = async() => {
+      const localName = await JSON.parse(window.localStorage.getItem('user'));
+       if (localName !== null) {
+        //SETS userName
+        setUserName(localName.username);
+        await console.log(userName)
+      } else {
+        alert("userName not set");
+      }}
+
+   const exploreGallery = async() => {
+    setLoading(true);
+    dispatch(getExploreGallery({ userName }))
+    .unwrap()
+    .then(function(response)  {
+
+        let resources = response.results.resources
         console.log(resources)
         const images = resources.map((resource) => {
                 return {
@@ -27,13 +42,13 @@ const Gallery = () => {
               setGallery(images);
                 return <div></div>;
 
-              } else {
-                alert(data.error);
-              }
-            }
-
-            populateUserGallery();
+              })
+     }
+     
+            fetchName();
+            exploreGallery();
           }, []);
+
 
   const container = {
     hidden: { 

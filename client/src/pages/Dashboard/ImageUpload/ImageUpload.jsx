@@ -52,7 +52,6 @@ const uploadButton = imagePrev && <UploadButton onClick={uploadImage}>Upload</Up
         <h2>Upload</h2>
         <ChooseButton
           buttonLabel="Choose File"
-        
         >
           <input 
           type="file" 

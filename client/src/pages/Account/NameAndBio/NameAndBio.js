@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../../slices/auth";
 
 import { StyledButton } from "../../../components/Button/Button.style";
 import { NameBioWrapper, StyledCol, Bio, Input } from "./NameAndBio.style";
@@ -13,40 +12,22 @@ const NameAndBio = () => {
   const [buttonText, setButtonText] = useState("Edit Bio");
   const [userName, setUserName] = useState("");
 
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     let isSubscribed = true;
-
-    // GETS USER NAME FROM MONGODB
     const fetchName = async () => {
-      const req = await fetch("http://localhost:8080/api/user/login", {
-        headers: {
-          "x-access-token": localStorage.getItem("token"),
-        },
-      });
-      const data = await req.json();
-      if (data.status === "ok") {
-        //SETS userName
-        setUserName(data.name);
+      const localName = await JSON.parse(window.localStorage.getItem("user"));
+      if (localName !== null) {
+        setUserName(localName.username);
+        // await console.log(userName)
       } else {
-        alert(data.error);
+        alert("userName not set");
       }
     };
 
-    const populateBio = async () => {
-      const req = await fetch("http://localhost:8080/api/user/bio", {
-        headers: {
-          "x-access-token": localStorage.getItem("token"),
-        },
-      });
-      const data = await req.json();
-      if (data.status === "ok") {
-        setBio(data.bio);
-      } else {
-        alert(data.error);
-      }
-    };
     if (isSubscribed) {
-      populateBio();
       fetchName();
     } else {
       alert("Error");
@@ -55,8 +36,8 @@ const NameAndBio = () => {
   }, [userName]);
 
   async function updateBio(event) {
-    event.preventDefault();
-    const req = await fetch("http://localhost:8080/api/user/bio", {
+    event.preventDefault(event);
+    const req = await fetch("http://localhost:8080/api/auth/bio", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -75,16 +56,17 @@ const NameAndBio = () => {
       alert(data.error);
     }
   }
+
   const logOut = () => {
-    localStorage.removeItem("token");
-    console.log("it worked logout btn");
+    localStorage.removeItem("user");
     window.location.href = "/login";
   };
 
   //CHECKS IF showBio STATE IS FALSE
   //FALSE SETS showBio TO TRUE AND buttonText STATE to "Update Bio"
   //TRUE SETS showBio TO FALSE AND buttonText STATE to "Edit Bio"
-  function handleBioClick() {
+  const handleBioClick = (event) => {
+    event.preventDefault();
     if (!showBioInput) {
       setShowBioInput(true);
       setButtonText("Update Bio");
@@ -92,7 +74,8 @@ const NameAndBio = () => {
       setShowBioInput(false);
       setButtonText("Edit Bio");
     }
-  }
+  };
+
   //RENDERS BIO INPUT FIELD WHEN BUTTON CLICKED AND showBio STATE IS SET TO TRUE
   //INITIAL STATE IS FALSE SO BIO INPUT FIELD IS HIDDEN
   const bioInput = showBioInput && (
@@ -111,14 +94,13 @@ const NameAndBio = () => {
       </StyledCol>
 
       <StyledCol>
-        <form onSubmit={updateBio}>
+        <form onSubmit={handleBioClick}>
           {bioInput}
-
           <StyledButton
             buttonLabel="Edit Bio"
             className="Btn"
             type="submit"
-            onClick={() => handleBioClick()}
+            // onClick={handleBioClick}
           >
             {buttonText}
           </StyledButton>

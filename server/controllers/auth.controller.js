@@ -3,8 +3,8 @@ const db = require("../models");
 const User = db.user;
 const Role = db.role;
 
-var jwt = require("jsonwebtoken");
-var bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 
 exports.signup = (req, res) => {
   const user = new User({
@@ -66,27 +66,31 @@ exports.signin = (req, res) => {
   })
     .populate("roles", "-__v")
     .exec((err, user) => {
-      console.log("exec");
       if (err) {
         res.status(500).send({ message: err });
         return;
       }
+
       if (!user) {
         return res.status(404).send({ message: "User Not found." });
       }
+
       var passwordIsValid = bcrypt.compareSync(
         req.body.password,
         user.password
       );
+
       if (!passwordIsValid) {
         return res.status(401).send({
           accessToken: null,
           message: "Invalid Password!",
         });
       }
+
       var token = jwt.sign({ id: user.id }, config.secret, {
         expiresIn: 86400, // 24 hours
       });
+
       var authorities = [];
       for (let i = 0; i < user.roles.length; i++) {
         authorities.push("ROLE_" + user.roles[i].name.toUpperCase());
@@ -94,6 +98,7 @@ exports.signin = (req, res) => {
       //WORKING
       console.log("Username - " + user.username);
       console.log("Email - " + user.email);
+      // console.log(bio);
       console.log("Roles - " + authorities);
       console.log("Token - " + token);
 

@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import deleteIcon  from "../../../components/icons/delete-icon.png"
 import { GalleryContainer, CardContainer, CardHeader, Icon, Tooltiptext, Image, Name, DeleteEl, CardMotion } from "./UserGallery.style";
 
-const UserGallery = ({ userGallery }) => {
+const UserGallery = ({ userGalleryResponse }) => {
   const [imgToDelete, setImgToDelete] = useState("");
 
   //VARIANT OBJECT FOR ANIMATION    
@@ -33,7 +33,7 @@ const UserGallery = ({ userGallery }) => {
    
     return (
       <>      
-      {userGallery.map((images, i) => (
+      {userGalleryResponse.map((images, i) => (
           <CardContainer
           key={images.image}
           >  
@@ -71,13 +71,10 @@ const UserGallery = ({ userGallery }) => {
         </>
     )}
 
-  //RENDERS THE USERS IMAGE UPLOADS IF userGallery.length IS GREATER THAN 0
-  // const galleryContainer = userGallery.length > 0 && <ImageCard />
-
   return (
     <GalleryContainer>
       {/* {galleryContainer} */}
-      {userGallery.length > 0 && <ImageCard />}
+      {userGalleryResponse !==  0 && <ImageCard />}
     </GalleryContainer>
 )}
 

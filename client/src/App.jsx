@@ -18,34 +18,20 @@ import Explore from "./pages/Explore/Explore";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Account from "./pages/Account/Account";
 
-import { logout } from "./slices/auth";
 
 const App = () => {
-  const [header, setHeader] = useState(false);
   const location = useLocation();
+  const { user: currentUser } = useSelector((state) => state.auth);
 
- 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      const user = jwt.decode(token);
-      if (!user) {
-        setHeader(false);
-      } else if (user) {
-        setHeader(true);
-      }
-    }
-  }, []);
-  
   //CONDITIONALLY RENDER NAV OR HEADER
-  const renderHeader = header ? (
+  const renderHeader = currentUser ? 
     <Nav />  
-  ) : (
+   : 
     <>
       <Hero />
       <ImageIndex />
     </>
-  );
+  ;
 
   return (
     <PageContainer>

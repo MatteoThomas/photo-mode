@@ -4,7 +4,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const app = express();
 const bodyParser = require("body-parser");
-
+const cloudinary = require("./routes/cloudinary");
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(bodyParser.json());
@@ -43,7 +43,7 @@ db.mongoose
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to PHOTOMODE" });
 });
-
+app.use("/api/cloudinary", cloudinary);
 require("./routes/auth.routes")(app);
 require("./routes/user.routes")(app);
 

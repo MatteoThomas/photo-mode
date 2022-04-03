@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 
 import AvatarUpload from "./Avatar/AvatarUpload";
 import NameAndBio from "./NameAndBio/NameAndBio";
-
-import { StyledContainer, Title, AvatarImg, AvatarContainer, Tooltiptext } from "./Account.style";
+import {  Title, AvatarImg, AvatarContainer, Tooltiptext } from "./Account.style";
+import { StyledContainer } from "../../components/Container/Container.style";
 
 const Account = () => {
   const [avatar, setAvatar] = useState([]);
@@ -38,7 +38,7 @@ const Account = () => {
       console.log("No avatar selected");
     }
     if  (isSubscribed) {
-      fetchName();
+      // fetchName();
       fetchAvatar();
 } else {
   alert("Error");
@@ -67,19 +67,11 @@ const Account = () => {
   const avatarUpload = showAvatarGallery && 
     <AvatarUpload folderName={userName}/> 
   
-  //VARIANT OBJECT FOR ANIMATION  
-  const container = {
-    hidden: { opacity: 0 },
-    show: { opacity: 1 }
-  }
+
 
   return (
-    <StyledContainer
-      variants={container}
-      initial="hidden"
-      animate="show"
-      transition={{ delay: .3}}
-    >
+    <StyledContainer>
+ 
       <Title>
         <h1>Account</h1>
       </Title>

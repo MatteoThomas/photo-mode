@@ -5,14 +5,16 @@ export const GalleryContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: left;
-  margin: 2rem 0;
+  margin: 0rem 0;
   gap: 1rem;
 `;
+
 export const CardContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   background-color: transparent;
   transition: background-color 0.4s;
+  /* margin: 1rem; */
 `;
 
 export const CardMotion = styled(motion.div)``;

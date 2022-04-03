@@ -2,8 +2,8 @@ import React from "react";
 import { Outlet, NavLink } from "react-router-dom";
 import { NavbarContainer } from "./Nav.style";
 
-const Nav = () => {
 
+const Nav = () => {
   return (
     <div>
       <NavbarContainer>

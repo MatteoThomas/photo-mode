@@ -1,16 +1,5 @@
 import styled from "styled-components";
-import { motion } from "framer-motion/dist/framer-motion";
 
-export const StyledContainer = styled(motion.div)`
-  color: aliceblue;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin: 0 10vw;
-  & h1 {
-    width: 100%;
-  }
-`;
 export const Title = styled.div`
   width: 100%;
   text-align: right;

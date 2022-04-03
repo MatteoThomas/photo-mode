@@ -11,20 +11,11 @@ const register = (username, email, password) => {
 };
 
 const login = (username, password) => {
-  const headers = {
-    "Access-Control-Allow-Headers":
-      "x-access-token, Origin, Content-Type: application/json, Accept",
-  };
-  console.log(username, password);
   return axios
-    .post(
-      API_URL + "signin",
-      {
-        username,
-        password,
-      },
-      { headers }
-    )
+    .post(API_URL + "signin", {
+      username,
+      password,
+    })
     .then((response) => {
       console.log("response");
       if (response.data.accessToken) {
@@ -34,14 +25,9 @@ const login = (username, password) => {
     });
 };
 
-const logout = () => {
-  localStorage.removeItem("user");
-};
-
 const authService = {
   register,
   login,
-  logout,
 };
 
 export default authService;

@@ -12,10 +12,9 @@ import { StyledButton } from "../../../components/Button/Button.style";
 import { StyledInput, StyledInputWrapper } from "../../../components/Input/Input.style";
 import { ButtonsWrapper } from "./LoginForm.style";
 
-function LoginForm(props) {
+function LoginForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
   const [loading, setLoading] = useState(false);
   const { isLoggedIn } = useSelector((state) => state.auth);
   const { message } = useSelector((state) => state.message);
@@ -23,19 +22,16 @@ function LoginForm(props) {
   
   useEffect(() => {
     dispatch(clearMessage());
-    // console.log("useEffect")
   }, [dispatch]);
   
-  const handleLogin = () => {
+  const handleLogin = (e) => {
+    e.preventDefault()
     setLoading(true);
-    console.log(loading)
     dispatch(login({ username, password }))
       .unwrap()
       .then(() => {
-        console.log("dispatch")
-        props.history.push("/dashboard");
+        window.history.push("/dashboard");
         window.location.reload();
-
       })
       .catch(() => {
         setLoading(false);
@@ -52,8 +48,7 @@ function LoginForm(props) {
         onSubmit={handleLogin}>
             <label>Username</label>
             <br />
-            <StyledInputWrapper
-            >
+            <StyledInputWrapper>
             <StyledInput
             
             inputLabel="Username"

@@ -23,9 +23,19 @@ router.get("/gallery", async (req, res) => {
 //GET ALL USER IMAGES FROM USER FOLDER
 router.get("/usergallery", async (req, res) => {
   const folderSearch = req.query.folderData;
+  console.log(folderSearch);
   cloudinary.search
     //GETS ALL IMAGES EXCEPT avatar
     .expression(`folder:${folderSearch} AND -avatar`)
+    .execute()
+    .then((result) => res.json({ status: "ok", results: result }));
+});
+
+//LANDING IMAGES
+router.get("/landing", async (req, res) => {
+  cloudinary.search
+    //GETS ALL IMAGES IN LandingPage FOLDER
+    .expression("folder: LandingPage")
     .execute()
     .then((result) => res.json({ status: "ok", results: result }));
 });

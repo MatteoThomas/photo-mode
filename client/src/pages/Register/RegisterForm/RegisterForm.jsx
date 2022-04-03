@@ -24,7 +24,8 @@ function RenderForm()  {
       dispatch(clearMessage());
     }, [dispatch]);
 
-    const handleRegister = () => {
+    const handleRegister = (event) => {
+      event.preventDefault();
       setSuccessful(false);
       console.log(username)
       dispatch(register({ username, email, password }))
