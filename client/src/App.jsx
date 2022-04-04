@@ -1,7 +1,6 @@
 
-import React, { useEffect, useState, useCallback  } from "react";
-import jwt from "jsonwebtoken";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from 'framer-motion/dist/framer-motion'
 import styled from "styled-components";
@@ -37,7 +36,7 @@ const App = () => {
     <PageContainer>
       <GlobalStyles />
       {renderHeader}
-      <AnimatePresence exitBeforeEnter initial={false}>          
+      <AnimatePresence exitBeforeEnter initial={true}>          
           <Routes location={location} key={location.pathname}>
             <Route path="/login" exact element={<Login />} />
             <Route path="/register" exact element={<Register />} />

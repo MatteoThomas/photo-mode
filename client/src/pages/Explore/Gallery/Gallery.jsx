@@ -3,12 +3,27 @@ import React, { useState, useEffect } from "react";
 import { StyledContainer, GalleryMotion, Image, ImageContainer, ImageInfo } from "./Gallery.style";
 import { useDispatch } from "react-redux";
 import { getExploreGallery } from "../../../slices/cloudinary";
+import { motion } from 'framer-motion/dist/framer-motion'
+
+const variants = {
+  open: { scale: 3},
+  closed: {  scale: 1 },
+}
+
+const container = {
+  hidden: { 
+    opacity: 0
+   },
+  show: { 
+    opacity: 1
+}}
 
 const Gallery = () => {
   const [userName, setUserName] = useState("");
   const [gallery, setGallery] = useState([]);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch(); 
+  const [isOpen, setIsOpen] = useState(false)
    //GET IMAGES ON RENDER
   useEffect(() => {
 
@@ -49,21 +64,16 @@ const Gallery = () => {
             exploreGallery();
           }, []);
 
-
-  const container = {
-    hidden: { 
-      opacity: 0
-     },
-    show: { 
-      opacity: 1
-  }}
-
+const handleClick = (i) => {
+  setIsOpen(isOpen => !isOpen)
+}
   return (
 
     <StyledContainer>
 
       {gallery.map((img, i) => (
         <GalleryMotion
+
         key={img.name}
         variants={container}
         initial="hidden"
@@ -71,8 +81,11 @@ const Gallery = () => {
         transition={{ delay: i * .04}}
         >
         <ImageContainer>
-
-          <Image src={img.image} alt={img.desc}/>
+     
+          <Image 
+        
+          src={img.image} 
+          alt={img.desc}/>
 
           <ImageInfo>
         <div>{img.folder}</div> <div> {img.date}</div>

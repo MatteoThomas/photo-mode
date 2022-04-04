@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react"
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Stats from "./Stats/Stats";
 import ImageUpload from "./ImageUpload/ImageUpload";
 import UserGallery from "./UserGallery/UserGallery"
 import { StyledContainer } from "../../components/Container/Container.style";
 import { Title, StatsUpload, StyledCol } from "./Dashboard.style";
 import { getUserGallery } from "../../slices/cloudinary";
-
+import AnimatedPage from "../../animation/AnimatedPage";
 
 const Dashboard = () => {
   const [userName, setUserName] = useState("");
@@ -64,7 +64,7 @@ const Dashboard = () => {
 
 
   return (
-
+<AnimatedPage>
   <StyledContainer     
   >
     <Title>
@@ -89,7 +89,7 @@ const Dashboard = () => {
         />
     </StyledCol>
   </StyledContainer>
-
+  </AnimatedPage>
      );
 };
 

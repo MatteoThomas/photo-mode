@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-
 import AvatarUpload from "./Avatar/AvatarUpload";
 import NameAndBio from "./NameAndBio/NameAndBio";
 import {  Title, AvatarImg, AvatarContainer, Tooltiptext } from "./Account.style";
 import { StyledContainer } from "../../components/Container/Container.style";
+import AnimatedPage from "../../animation/AnimatedPage"
 
 const Account = () => {
   const [avatar, setAvatar] = useState([]);
@@ -70,6 +70,7 @@ const Account = () => {
 
 
   return (
+    <AnimatedPage>
     <StyledContainer>
  
       <Title>
@@ -88,6 +89,7 @@ const Account = () => {
         
       </AvatarContainer>
     </StyledContainer>
+    </AnimatedPage>
   );
 };
 

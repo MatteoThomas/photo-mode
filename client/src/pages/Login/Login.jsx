@@ -1,17 +1,19 @@
 import React from "react";
 import LoginForm from "./LoginForm/LoginForm";
 import { StyledContainer, LoginHeading, LoginMotion } from "./Login.style";
+import AnimatedPage from "../../animation/AnimatedPage";
 
 const Login = () => {
 
   return (
-    <LoginMotion>
+    <AnimatedPage>
+
       <StyledContainer>
         <LoginHeading >Log In</LoginHeading>
         <LoginForm/>
       </StyledContainer>
-    </LoginMotion>
 
+    </AnimatedPage>
   )}
 
 export default Login;
