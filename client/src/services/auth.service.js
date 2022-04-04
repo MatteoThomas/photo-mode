@@ -24,12 +24,15 @@ const login = (username, password) => {
     });
 };
 
-const editBio = (bio) => {
+const editBio = (bio, nameData, emailData) => {
   return axios
     .post(API_URL + "editBio", {
-      bio,
+      bio: bio,
+      username: nameData,
+      email: emailData,
     })
     .then((response) => {
+      console.log(response.data);
       return response.data;
     });
 };

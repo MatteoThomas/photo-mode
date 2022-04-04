@@ -90,23 +90,6 @@ export const getLandingGallery = createAsyncThunk(
   }
 );
 
-const getLandingGallerySlice = createSlice({
-  name: "getLandingGallery",
-  initialState,
-  reducers: {
-    setLandingGallery: (state, action) => {
-      return { getLandingGallery: action.payload };
-    },
-  },
-});
-
-export const selectLandingGallery = createSelector(
-  (state) => ({
-    landingGallery: state.landingGallery,
-  }),
-  (state) => state
-);
-
 // const { reducer, actions } = getUserGallerySlice;
 const { reducer, actions } = getExploreGallerySlice;
 export const { setUserGallery, setExploreGallery, setLandingGallery } = actions;

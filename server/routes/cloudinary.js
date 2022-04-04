@@ -21,7 +21,7 @@ router.get("/gallery", async (req, res) => {
 });
 
 //GET ALL USER IMAGES FROM USER FOLDER
-router.get("/usergallery", async (req, res) => {
+router.get("/usergallery", (req, res) => {
   const folderSearch = req.query.folderData;
   console.log(folderSearch);
   cloudinary.search

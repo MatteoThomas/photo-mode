@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { setMessage } from "./message";
-
+import { setBio } from "./bioSlice";
 import AuthService from "../services/auth.service";
 
 const user = JSON.parse(localStorage.getItem("user"));
@@ -31,45 +31,6 @@ export const login = createAsyncThunk(
     try {
       const data = await AuthService.login(username, password);
       return { user: data };
-    } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
-      thunkAPI.dispatch(setMessage(message));
-      return thunkAPI.rejectWithValue();
-    }
-  }
-);
-
-export const getUserName = createAsyncThunk(
-  "auth/getUserName",
-  async ({ username, password }, thunkAPI) => {
-    try {
-      const data = await AuthService.getUserName(username, password);
-      return { user: data };
-    } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
-      thunkAPI.dispatch(setMessage(message));
-      return thunkAPI.rejectWithValue();
-    }
-  }
-);
-
-export const editBio = createAsyncThunk(
-  "auth/editBio",
-  async ({ username, email, password }, thunkAPI) => {
-    try {
-      const response = await AuthService.editBio(username, email, password);
-      thunkAPI.dispatch(setMessage(response.data.message));
-      return response.data;
     } catch (error) {
       const message =
         (error.response &&

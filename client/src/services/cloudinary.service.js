@@ -12,19 +12,9 @@ const getExploreGallery = async () => {
   return await axios.get(CLOUDINARY_URL + "gallery", {});
 };
 
-const getLandingGallery = async () => {
-  return await axios.get(CLOUDINARY_URL + "landing", {});
-};
-
-const getBio = async () => {
-  return await axios.get(CLOUDINARY_URL + "bio", {});
-};
-
 const cloudinaryService = {
   getUserGallery,
   getExploreGallery,
-  getLandingGallery,
-  getBio,
 };
 
 export default cloudinaryService;

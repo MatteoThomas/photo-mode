@@ -1,18 +1,46 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { setMessage } from "./message";
+import { createSelector } from "@reduxjs/toolkit";
+import AuthService from "../services/auth.service";
 
-const initialState = "";
+const initialState = {};
 
-export const bioSlice = createSlice({
+export const editBio = createAsyncThunk(
+  "auth/editBio",
+  async ({ bio, nameData, emailData }, thunkAPI) => {
+    try {
+      const response = await AuthService.editBio(bio, nameData, emailData);
+      thunkAPI.dispatch(setMessage(response.data.message));
+      // console.log(response);
+      return response.data;
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      thunkAPI.dispatch(setMessage(message));
+      return thunkAPI.rejectWithValue();
+    }
+  }
+);
+
+const bioSlice = createSlice({
   name: "bio",
   initialState,
   reducers: {
-    getBio: (state) => {
-      state.bio = bio;
+    setEditBio: (state, action) => {
+      return { editBio: action.payload };
     },
+    // clearMessage: () => {
+    //   return { message: "" };
+    // },
   },
 });
 
-// Action creators are generated for each case reducer function
-export const { getBio } = bioSlice.actions;
+const { reducer, actions } = bioSlice;
 
-export default bioSlice.reducer;
+export const { setEditBio } = actions;
+
+export default reducer;
