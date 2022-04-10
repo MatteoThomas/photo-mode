@@ -27,11 +27,11 @@ const backVariants = {
 const SingleImage = ({ images }) => {
 
   const gallery = useSelector(store => store.items);
-console.log(gallery)
+  console.log(gallery)
   return (
   
   <motion.div className="single" initial="exit" animate="enter" exit="exit">
-    console.log(match)
+
     <motion.img
       variants={imageVariants}
       src={images}

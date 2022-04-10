@@ -1,18 +1,19 @@
 import React from "react";
-import { StatsContainer, RowLeft } from "./Stats.style";
+import { RowLeft } from "./Stats.style";
+import { InfoContainer } from "../../../components/Container/Container.style";
 
 const Stats = ( props ) => {
   //DESTRUCTURE PROPS
   const { count = ""} =  props
 
   return (
-    <StatsContainer>
+    <InfoContainer>
         <RowLeft>
           Uploads: {count} <br/>
           Comments: - <br/>
           Likes: - <br/>
         </RowLeft>
-    </StatsContainer>
+    </InfoContainer>
     );
 }
 

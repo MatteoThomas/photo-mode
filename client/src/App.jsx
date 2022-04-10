@@ -5,7 +5,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from 'framer-motion/dist/framer-motion'
 
 import { GlobalStyles } from "./GlobalStyles.style.jsx"
-import { StyledContainer }from "./components/Container/Container.style"
+import { StyledAppContainer }from "./components/Container/Container.style"
 import ImageIndex from "./components/ImageIndex/ImageIndexComponent";
 
 import Login from "./pages/Login/Login";
@@ -26,12 +26,12 @@ const App = () => {
    : 
     <>
       <Hero />
-      <ImageIndex />
+      {/* <ImageIndex /> */}
     </>
   ;
 
   return (
-    <StyledContainer>
+    <StyledAppContainer>
       <GlobalStyles />
       {renderHeader}
       <AnimatePresence exitBeforeEnter initial={true}>          
@@ -45,7 +45,7 @@ const App = () => {
             <Route path="*" element={<Login />} />
           </Routes>
         </AnimatePresence>
-    </StyledContainer>
+    </StyledAppContainer>
   );
 };
 
