@@ -7,19 +7,12 @@ import { StyledButton } from "../../../components/Button/Button.style";
 import { NameBioWrapper, StyledCol, Bio, Input } from "./NameAndBio.style";
 
 const NameAndBio = () => {
-  // const [bio, setBio] = useState("");
-  // const [loading, setLoading] = useState(false);
-  // const [nameData, setNameData] = useState("");
-  // const [emailData, setEmailData] = useState("");
   const [bio, setBio] = useState("");
   const [newBio, setNewBio] = useState("");
 
   const nameData = useSelector((state) => state.auth.user.username);
-  // setNameData(username);
   const emailData = useSelector((state) => state.auth.user.email);
-  // setEmailData(email);
   const bioData = useSelector((state) => state.auth.user.bio);
-  // setBioData(bio);
   const dispatch = useDispatch();
 
   async function updateBio(event) {

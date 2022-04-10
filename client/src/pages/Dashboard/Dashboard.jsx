@@ -11,7 +11,7 @@ import AnimatedPage from "../../animation/AnimatedPage";
 const Dashboard = () => {
   const [userName, setUserName] = useState("");
   const [userGalleryResponse, setUserGalleryResponse] = useState([]);
-  // const [count , setCount] = useState("");
+  const [count , setCount] = useState("");
   const [loading, setLoading] = useState(false)
   const dispatch = useDispatch();
 
@@ -30,13 +30,14 @@ const Dashboard = () => {
     const fetchGallery = async() => {
       //SENDS userName AS A SEARCH PARAMETER TO CLOUDINARY
         setLoading(true);
+       
         dispatch(getUserGallery({ userName }))
           .unwrap()
           .then(function(response)  {
             // setUserGalleryResponse(response.results.resources)
             const resources = response.results.resources;
             const images = resources.map((resource) => {
-          
+             
               return {
                 id: resource.asset_id,
                 //REMOVES THE FOLDER PREFIX AND THE FILE EXTENSION THEN RETURNS THE FILENAME
@@ -44,24 +45,26 @@ const Dashboard = () => {
                 title: resource.public_id.split(/(?:\/|\.)+/)[1],
                 image: resource.secure_url,
                 name: resource.public_id,
+                count: resource.length,
             };
           });
           setUserGalleryResponse(images)
-          // console.log(images)
-            // props.history.push("/dashboard");
-            // window.location.reload();
-          })
-          .catch(() => {
-            setLoading(false);
-          });
-      };
-          fetchName();
-          fetchGallery();
-          setLoading(false);
-    },[userName]);
-
+          setCount(images.length)
+          // props.history.push("/dashboard");
+          // window.location.reload();
     
-
+        })
+        .catch(() => {
+          setLoading(false);
+        });
+      };
+      fetchName();
+      fetchGallery();
+      setLoading(false);
+    },[userName]);
+    
+    console.log(count)
+    
 
   return (
 <AnimatedPage>
@@ -74,7 +77,7 @@ const Dashboard = () => {
     <StyledCol>
       <Stats 
         name={userName}
-        // count={count}
+        count={count}
       />
     </StyledCol>
     <StyledCol>

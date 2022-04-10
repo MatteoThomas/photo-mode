@@ -1,30 +1,29 @@
 
 import React, { useState, useEffect } from "react";
 import { StyledContainer, GalleryMotion, Image, ImageContainer, ImageInfo } from "./Gallery.style";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getExploreGallery } from "../../../slices/cloudinary";
-import { motion } from 'framer-motion/dist/framer-motion'
-
-const variants = {
-  open: { scale: 3},
-  closed: {  scale: 1 },
-}
-
-const container = {
-  hidden: { 
-    opacity: 0
-   },
-  show: { 
-    opacity: 1
-}}
+// import { motion } from 'framer-motion/dist/framer-motion'
+import { Link } from "react-router-dom";
+import  ImageModal  from "./ImageModal";
 
 const Gallery = () => {
   const [userName, setUserName] = useState("");
   const [gallery, setGallery] = useState([]);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch(); 
-  const [isOpen, setIsOpen] = useState(false)
-   //GET IMAGES ON RENDER
+
+  const [showModal, setShowModal] = useState(false);
+  const [singleImage, setSingleImage] = useState("")
+  
+  const openModal = (e) => {
+
+    setShowModal(prev => !prev);
+    setSingleImage(e.target.src)
+  };
+
+// console.log(showModal)
+  //GET IMAGES ON RENDER
   useEffect(() => {
 
     const fetchName = async() => {
@@ -44,54 +43,62 @@ const Gallery = () => {
     .then(function(response)  {
 
         let resources = response.results.resources
-        console.log(resources)
+        
+
         const images = resources.map((resource) => {
                 return {
-                  id: resource.asset_id,
-                  image: resource.secure_url,
+                  image: resource.url,
                   name: resource.public_id,
                   folder: resource.public_id,
+                  id: resource.asset_id,
                 };
       })
-              images.sort(() => Math.random() - 0.5)
-              setGallery(images);
-                return <div></div>;
 
+              // images.sort(() => Math.random() - 0.5)
+              setGallery(images);
+            
+                return <div></div>;
+                
               })
-     }
-     
+            }
+            setLoading(false);
             fetchName();
             exploreGallery();
-          }, []);
+          }, [userName]);
 
-const handleClick = (i) => {
-  setIsOpen(isOpen => !isOpen)
-}
-  return (
-
-    <StyledContainer>
-
+          return (
+            
+  <StyledContainer>
       {gallery.map((img, i) => (
+
         <GalleryMotion
-
-        key={img.name}
-        variants={container}
-        initial="hidden"
-        animate="show"
-        transition={{ delay: i * .04}}
+          key={img.name}
+          id={i} 
+          initial="hidden"
+          animate="show"
+          transition={{ delay: i * .04}}
         >
-        <ImageContainer>
-     
-          <Image 
-        
-          src={img.image} 
-          alt={img.desc}/>
-
+        <ImageContainer
+            // onClick={(e) => openModal(e)}
+      
+        >
+          {!showModal ? 
+          <Image
+            src={img.image} 
+            alt={img.desc}
+            onClick={(e) => openModal(e)}
+          /> 
+          
+  :
+          <ImageModal singleImage={singleImage} showModal={showModal} setShowModal={setShowModal} />    
+}
           <ImageInfo>
-        <div>{img.folder}</div> <div> {img.date}</div>
-        </ImageInfo>
+            <div>{img.folder}</div>
+          
+          </ImageInfo>
         </ImageContainer>
         </GalleryMotion>
+
       ))}
     </StyledContainer>
 )}

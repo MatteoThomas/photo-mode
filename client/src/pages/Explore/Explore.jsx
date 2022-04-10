@@ -1,15 +1,14 @@
 import React, { useEffect } from "react";
-import Gallery from "./Gallery/Gallery";
+import  Gallery  from "./Gallery/Gallery";
 import { Title } from "./Explore.style";
 import { StyledContainer } from "../../components/Container/Container.style";
-import AnimatedPage from "../../animation/AnimatedPage"
+import AnimatedPage from "../../animation/AnimatedPage";
 
 const Explore = () => {
 
   useEffect(() => {
 
   }, []);
-
 
   return (
     <AnimatedPage>

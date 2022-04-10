@@ -23,5 +23,6 @@ export const Bio = styled.div`
 `;
 
 export const Input = styled.input`
+  margin: 0 1rem 0 0;
   /* width: 100%; */
 `;
