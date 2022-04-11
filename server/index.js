@@ -5,6 +5,8 @@ const dotenv = require("dotenv");
 const app = express();
 const bodyParser = require("body-parser");
 const cloudinary = require("./routes/cloudinary");
+const auth = require("./routes/auth.routes");
+
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(bodyParser.json());
@@ -43,9 +45,14 @@ db.mongoose
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to PHOTOMODE" });
 });
+
 app.use("/api/cloudinary", cloudinary);
-require("./routes/auth.routes")(app);
+app.use("/api/auth", auth);
+
 require("./routes/user.routes")(app);
+
+// require("./routes/auth.routes")(app);
+// require("./routes/user.routes")(app);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/client/build")));

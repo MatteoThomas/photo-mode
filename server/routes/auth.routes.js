@@ -12,13 +12,13 @@ module.exports = function (app) {
     next();
   });
   app.post(
-    "/api/auth/signup",
+    "/signup",
     [
       verifySignUp.checkDuplicateUsernameOrEmail,
       verifySignUp.checkRolesExisted,
     ],
     controller.signup
   );
-  app.post("/api/auth/signin", controller.signin);
-  app.post("/api/auth/editBio", controller.editBio);
+  app.post("/signin", controller.signin);
+  app.post("/editBio", controller.editBio);
 };
