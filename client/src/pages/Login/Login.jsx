@@ -7,12 +7,10 @@ const Login = () => {
 
   return (
     <AnimatedPage>
-
       <StyledContainer>
         <LoginHeading >Log In</LoginHeading>
         <LoginForm/>
       </StyledContainer>
-
     </AnimatedPage>
   )}
 

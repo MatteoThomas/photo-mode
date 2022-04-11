@@ -6,7 +6,6 @@ import { AnimatePresence } from 'framer-motion/dist/framer-motion'
 
 import { GlobalStyles } from "./GlobalStyles.style.jsx"
 import { StyledAppContainer }from "./components/Container/Container.style"
-import ImageIndex from "./components/ImageIndex/ImageIndexComponent";
 
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
@@ -26,7 +25,6 @@ const App = () => {
    : 
     <>
       <Hero />
-      {/* <ImageIndex /> */}
     </>
   ;
 

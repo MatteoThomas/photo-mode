@@ -1,32 +1,29 @@
 import React, { useEffect, useState } from "react";
 import AvatarUpload from "./Avatar/AvatarUpload";
 import NameAndBio from "./NameAndBio/NameAndBio";
-import {  Title, AvatarImg, AvatarContainer, Tooltiptext } from "./Account.style";
+import {  Title, AvatarImg, Tooltiptext } from "./Account.style";
 import { StyledContainer } from "../../components/Container/Container.style";
 import AnimatedPage from "../../animation/AnimatedPage";
+import { AvatarContainer } from "../../components/Container/Container.style";
 
 const Account = () => {
   const [avatar, setAvatar] = useState([]);
   const [showAvatarGallery, setShowAvatarGallery] = useState(false)
   const [userName, setUserName] = useState("")
-
+  const [loading, setLoading] = useState(false);
+  
   useEffect(() => {
-    let isSubscribed = true;
+    
 
-    const fetchName = async () => {
-      const req = await fetch("http://localhost:8080/api/user/login", {
-        headers: {
-          "x-access-token": localStorage.getItem("token"),
-        },
-      });
-      const data = await req.json();
-      if (data.status === "ok") {
-        //SETS userName
-        setUserName(data.name);
+    const fetchName = async() => {
+      setLoading(true);
+      const localName = await JSON.parse(window.localStorage.getItem('user'));
+       if (localName !== null) {
+        setUserName(localName.username);
+        // await console.log(userName)
       } else {
-        alert(data.error);
-      }
-    };
+        alert("userName not set");
+      }}
 
     const fetchAvatar = async() => {
       //SENDS userName AS A SEARCH PARAMETER
@@ -37,13 +34,12 @@ const Account = () => {
       :
       console.log("No avatar selected");
     }
-    if  (isSubscribed) {
-      // fetchName();
+ 
+      fetchName();
       fetchAvatar();
-} else {
-  alert("Error");
-}
-  return() => isSubscribed = false
+      setLoading(false);
+
+  return
 }, [userName]);
 
   function handleAvatarClick() {
@@ -67,8 +63,6 @@ const Account = () => {
   const avatarUpload = showAvatarGallery && 
     <AvatarUpload folderName={userName}/> 
   
-
-
   return (
     <AnimatedPage>
     <StyledContainer>
@@ -76,18 +70,18 @@ const Account = () => {
       <Title>
         <h1>Account</h1>
       </Title>
+      {!loading ? 
+      <>
       <NameAndBio/>
-
       <AvatarContainer>
-
         <Tooltiptext className="tooltip-text">
             Click to Change
         </Tooltiptext>
-
         {userAvatar}
         {avatarUpload}
-        
       </AvatarContainer>
+        </>
+        : <h1>Loading...</h1>}
     </StyledContainer>
     </AnimatedPage>
   );

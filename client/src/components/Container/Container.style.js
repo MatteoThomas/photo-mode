@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const StyledContainer = styled.div`
   display: flex;
-  /* flex-direction: column; */
   flex-wrap: wrap;
   gap: 1rem;
   justify-content: center;
@@ -23,10 +22,18 @@ export const StyledAppContainer = styled.div`
 `;
 
 export const InfoContainer = styled.div`
+  background-color: gray;
+  width: clamp(350px, 100%, 1000px);
+  height: fit-content;
+  margin: 0 0 1rem 0;
+  padding: 0.5rem;
+`;
+
+export const AvatarContainer = styled.div`
   display: flex;
-  justify-content: left;
-  width: 100%;
-  align-items: center;
-  color: aliceblue;
-  padding: 0.7rem 0 0 0.7rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  border: 0.5px rgb(97, 97, 97) solid;
+  border-radius: 10px;
+  padding: 0.5rem;
 `;

@@ -4,8 +4,7 @@ import { motion } from "framer-motion/dist/framer-motion";
 export const GalleryContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: left;
-  margin: 0rem 0;
+  justify-content: center;
   gap: 1rem;
 `;
 

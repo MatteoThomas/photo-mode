@@ -1,9 +1,6 @@
 import React, { useState, useEffect  } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import {  Navigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-// import {  userSelector, clearState } from '../../../redux/userSlice';
-// import { loginUser } from "../../../redux/userSlice"
 
 import { login } from "../../../slices/auth";
 import { clearMessage } from "../../../slices/message";
@@ -35,14 +32,16 @@ function LoginForm() {
       })
       .catch(() => {
         setLoading(false);
+        console.log(message)
       });
   };
 
   if (isLoggedIn) {
-    return <Navigate to="/dashboard" />;
+    window.location.href = "/dashboard"
   }
 
     return (
+      <>      {!loading ? 
         <form 
         
         onSubmit={handleLogin}>
@@ -84,6 +83,9 @@ function LoginForm() {
                 </Link>
             </ButtonsWrapper>
         </form>
+        : <h1>Loading</h1>}
+        </>
+
     );
     }
 

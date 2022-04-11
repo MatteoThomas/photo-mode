@@ -4,9 +4,10 @@ import Stats from "./Stats/Stats";
 import ImageUpload from "./ImageUpload/ImageUpload";
 import UserGallery from "./UserGallery/UserGallery"
 import { StyledContainer } from "../../components/Container/Container.style";
-import { Title, StatsUpload, StyledCol } from "./Dashboard.style";
+import { Title, StyledCol } from "./Dashboard.style";
 import { getUserGallery } from "../../slices/cloudinary";
 import AnimatedPage from "../../animation/AnimatedPage";
+import { InfoContainer } from "../../components/Container/Container.style";
 
 const Dashboard = () => {
   const [userName, setUserName] = useState("");
@@ -17,20 +18,19 @@ const Dashboard = () => {
 
 
   useEffect(() => {
-
+    
     const fetchName = async() => {
+      
+      setLoading(true);
       const localName = await JSON.parse(window.localStorage.getItem('user'));
        if (localName !== null) {
         setUserName(localName.username);
-        // await console.log(userName)
       } else {
         alert("userName not set");
       }}
 
     const fetchGallery = async() => {
       //SENDS userName AS A SEARCH PARAMETER TO CLOUDINARY
-        setLoading(true);
-       
         dispatch(getUserGallery({ userName }))
           .unwrap()
           .then(function(response)  {
@@ -50,9 +50,8 @@ const Dashboard = () => {
           });
           setUserGalleryResponse(images)
           setCount(images.length)
-          // props.history.push("/dashboard");
-          // window.location.reload();
-    
+          setLoading(false);
+          
         })
         .catch(() => {
           setLoading(false);
@@ -60,10 +59,8 @@ const Dashboard = () => {
       };
       fetchName();
       fetchGallery();
-      setLoading(false);
-    },[userName]);
+    },[userName, dispatch]);
     
-    console.log(count)
     
 
   return (
@@ -73,7 +70,9 @@ const Dashboard = () => {
     <Title>
       <h1>Dashboard</h1>
     </Title>
-    <StatsUpload>
+    {!loading ? 
+    <>
+    <InfoContainer>
     <StyledCol>
       <Stats 
         name={userName}
@@ -85,12 +84,14 @@ const Dashboard = () => {
           folderName={userName}
         />
     </StyledCol>
-    </StatsUpload>
+    </InfoContainer>
     <StyledCol>
         <UserGallery
           userGalleryResponse={userGalleryResponse}
         />
     </StyledCol>
+    </>
+    : <h1>Loading...</h1>}
   </StyledContainer>
   </AnimatedPage>
      );

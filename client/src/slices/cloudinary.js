@@ -70,28 +70,8 @@ export const selectExploreGallery = createSelector(
   (state) => state
 );
 
-export const getLandingGallery = createAsyncThunk(
-  "cloudinary/getLandingGallery",
-  async ({}, thunkAPI) => {
-    try {
-      const response = await CloudinaryService.getLandingGallery();
-      thunkAPI.dispatch(setMessage(response.data.message));
-      return response.data;
-    } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
-      thunkAPI.dispatch(setMessage(message));
-      return thunkAPI.rejectWithValue();
-    }
-  }
-);
-
 // const { reducer, actions } = getUserGallerySlice;
 const { reducer, actions } = getExploreGallerySlice;
-export const { setUserGallery, setExploreGallery, setLandingGallery } = actions;
+export const { setUserGallery, setExploreGallery } = actions;
 
 export default reducer;

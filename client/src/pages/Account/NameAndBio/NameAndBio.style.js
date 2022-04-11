@@ -24,5 +24,27 @@ export const Bio = styled.div`
 
 export const Input = styled.input`
   margin: 0 1rem 0 0;
-  /* width: 100%; */
+`;
+
+export const StyledSubmitButton = styled.button`
+  border: 1px transparent solid;
+  border-radius: 2px;
+  transition: 0.4s;
+  height: 32px;
+  margin: 0 1rem 0 0;
+  &:hover {
+    transition: all 0.4s;
+    color: aliceblue;
+    background-color: grey;
+  }
+
+  &:active {
+    border: 1px black solid;
+    background-color: black;
+  }
+`;
+
+export const ButtonLabel = styled.label`
+  font-size: 1rem;
+  color: aliceblue;
 `;

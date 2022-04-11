@@ -5,12 +5,13 @@ export const StyledContainer = styled.div`
   z-index: 1;
   display: flex;
   flex-direction: column;
+  align-items: center;
   border-radius: 4px;
   padding: 1rem;
   width: clamp(300px, 95%, 700px);
   height: 50%;
   color: aliceblue;
-  margin: 5rem auto;
+  margin: 0 auto;
 `;
 
 export const LoginMotion = styled(motion.div)``;

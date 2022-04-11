@@ -3,12 +3,12 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { editBio } from "../../../slices/bioSlice";
 
-import { StyledButton } from "../../../components/Button/Button.style";
+import { StyledSubmitButton } from "./NameAndBio.style";
 import { NameBioWrapper, StyledCol, Bio, Input } from "./NameAndBio.style";
 
 const NameAndBio = () => {
   const [bio, setBio] = useState("");
-  const [newBio, setNewBio] = useState("");
+  const [newBio, setNewBio] = useState(null);
 
   const nameData = useSelector((state) => state.auth.user.username);
   const emailData = useSelector((state) => state.auth.user.email);
@@ -40,16 +40,21 @@ const NameAndBio = () => {
             placeholder=" Edit Bio"
             onChange={(e) => setBio(e.target.value)}
           />
-          <StyledButton buttonLabel="Submit" className="Btn" type="submit" />
-
+          {bio ? (
+            <StyledSubmitButton
+              buttonLabel="Submit"
+              className="Btn"
+              type="submit"
+            />
+          ) : null}
           <Bio>{newBio ? newBio : bioData}</Bio>
         </form>
       </StyledCol>
 
       <StyledCol>
-        <StyledButton buttonLabel="Logout" type="button" onClick={logOut}>
+        <StyledSubmitButton buttonLabel="Logout" type="button" onClick={logOut}>
           Logout
-        </StyledButton>
+        </StyledSubmitButton>
       </StyledCol>
     </NameBioWrapper>
   );

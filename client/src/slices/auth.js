@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { setMessage } from "./message";
-import { setBio } from "./bioSlice";
 import AuthService from "../services/auth.service";
 
 const user = JSON.parse(localStorage.getItem("user"));

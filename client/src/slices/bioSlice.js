@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { setMessage } from "./message";
-import { createSelector } from "@reduxjs/toolkit";
+
 import AuthService from "../services/auth.service";
 
 const initialState = {};

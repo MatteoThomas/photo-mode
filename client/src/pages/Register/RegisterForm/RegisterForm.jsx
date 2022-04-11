@@ -16,7 +16,7 @@ function RenderForm()  {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [successful, setSuccessful] = useState(false);
+
     const { message } = useSelector((state) => state.message);
     const dispatch = useDispatch();
 
@@ -26,19 +26,22 @@ function RenderForm()  {
 
     const handleRegister = (event) => {
       event.preventDefault();
-      setSuccessful(false);
+
       console.log(username)
       dispatch(register({ username, email, password }))
         .unwrap()
         .then(() => {
-          setSuccessful(true);
+
+          window.location.href = "/login"
         })
         .catch(() => {
-          setSuccessful(false);
+ 
+          console.log(message)
         });
     };
 
     return (
+  
     <form onSubmit={handleRegister}>
 
       <div className="input-container">
@@ -94,6 +97,7 @@ function RenderForm()  {
         </Link>
       </ButtonsWrapper>
     </form>
+
 
     )
 };
