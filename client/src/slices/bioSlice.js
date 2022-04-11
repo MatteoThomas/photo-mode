@@ -3,8 +3,6 @@ import { setMessage } from "./message";
 
 import AuthService from "../services/auth.service";
 
-const initialState = {};
-
 export const editBio = createAsyncThunk(
   "auth/editBio",
   async ({ bio, nameData, emailData }, thunkAPI) => {
@@ -25,6 +23,8 @@ export const editBio = createAsyncThunk(
     }
   }
 );
+
+const initialState = {};
 
 const bioSlice = createSlice({
   name: "bio",
