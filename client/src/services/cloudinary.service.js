@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const CLOUDINARY_URL = "http://localhost:8080/api/cloudinary/";
+const CLOUDINARY_URL = "/api/cloudinary/";
+// const CLOUDINARY_URL = "http://localhost:8080/api/cloudinary/";
 
 const getUserGallery = async (userName) => {
   return await axios.get(CLOUDINARY_URL + "usergallery", {
