@@ -10,7 +10,9 @@
     "heroku-postbuild": "npm run install-client && npm run build",
     "server": "nodemon index.js",
     "develop": "npm run server",
-    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix client\""
+    "start:original": "if-env NODE_ENV=production && npm run start:prod || npm run develop",
+    "start:prod": "node server.js",
+    "start:dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix client\""
   },
   "proxy": "http://localhost:3000",
   "author": "",
