@@ -7,6 +7,13 @@ const bodyParser = require("body-parser");
 const cloudinary = require("./routes/cloudinary");
 const auth = require("./routes/auth.routes");
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "/client/build")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "/client/build", "index.html"));
+  });
+}
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(bodyParser.json());
@@ -53,14 +60,6 @@ require("./routes/user.routes")(app);
 
 // require("./routes/auth.routes")(app);
 // require("./routes/user.routes")(app);
-
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "/client/build")));
-
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "/client/build", "index.html"));
-  });
-}
 
 const PORT = process.env.PORT || 8080;
 
