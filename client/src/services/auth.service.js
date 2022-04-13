@@ -1,10 +1,10 @@
 import axios from "axios";
 
-// const API_URL = "https://photo-mode.herokuapp.com/api/auth/";
-const API_URL = "http://localhost:8080/api/auth/";
+// const API_URL = "http://localhost:8080/api/auth/";
+const API_URL = "https://photo-mode.herokuapp.com/api/auth/";
 
 const register = (username, email, password) => {
-  return axios.post("https://photo-mode.herokuapp.com/api/auth/signup", {
+  return axios.post("signup", {
     username,
     email,
     password,
@@ -42,7 +42,6 @@ const authService = {
   register,
   login,
   editBio,
-  // getUserName,
 };
 
 export default authService;
