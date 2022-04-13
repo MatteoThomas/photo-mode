@@ -1,10 +1,10 @@
-import axios from "axios";
+import { request } from "./requestMethods";
 
-const API_URL = "https://photo-mode.herokuapp.com/api/auth/";
+// const API_URL = "https://photo-mode.herokuapp.com/api/auth/";
 // const API_URL = "http://localhost:8080/api/auth/";
 
 const register = (username, email, password) => {
-  return axios.post(API_URL + "signup", {
+  return request.post("/auth/signup", {
     username,
     email,
     password,
@@ -12,8 +12,8 @@ const register = (username, email, password) => {
 };
 
 const login = (username, password) => {
-  return axios
-    .post(API_URL + "signin", {
+  return request
+    .post("/auth/signin", {
       username,
       password,
     })
@@ -26,8 +26,8 @@ const login = (username, password) => {
 };
 
 const editBio = (bio, nameData, emailData) => {
-  return axios
-    .post(API_URL + "editBio", {
+  return request
+    .post("/auth/editBio", {
       bio: bio,
       username: nameData,
       email: emailData,
