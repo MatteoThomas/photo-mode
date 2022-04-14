@@ -30,6 +30,7 @@ window.env = {
   "LANG": "en_US.UTF-8",
   "npm_package_name": "client",
   "XPC_FLAGS": "0x0",
+  "npm_package_engines_node": "16.13.2",
   "npm_config_node_gyp": "/usr/local/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js",
   "XPC_SERVICE_NAME": "0",
   "npm_package_version": "0.1.0",
