@@ -6,6 +6,8 @@ const app = express();
 const bodyParser = require("body-parser");
 const cloudinary = require("./routes/cloudinary");
 
+const PORT = process.env.PORT || 8080;
+
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/client/build")));
 
@@ -55,8 +57,6 @@ app.use("/api/cloudinary", cloudinary);
 // app.use("/api/auth", auth);
 require("./routes/user.routes")(app);
 require("./routes/auth.routes")(app);
-
-const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
