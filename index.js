@@ -35,12 +35,12 @@ app.use(express.json());
 dotenv.config();
 app.use(express.urlencoded({ extended: true }));
 
-const MONGO_URL = process.env.URL;
+const MONGOLAB_URI = process.env.URI;
 const db = require("./models");
 const Role = db.role;
 
 db.mongoose
-  .connect(MONGO_URL, {
+  .connect(MONGOLAB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
