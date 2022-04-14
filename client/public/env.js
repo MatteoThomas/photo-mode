@@ -8,7 +8,7 @@ window.env = {
   "npm_config_metrics_registry": "https://registry.npmjs.org/",
   "npm_config_global_prefix": "/usr/local",
   "TERM_PROGRAM_VERSION": "443",
-  "TERM_SESSION_ID": "C88AED1B-3AC4-445C-97B9-E71336E78CB1",
+  "TERM_SESSION_ID": "707B553D-ACD3-49C1-93F0-F878C10000FD",
   "COLOR": "1",
   "npm_config_noproxy": "",
   "npm_config_local_prefix": "/Users/matthewelliott/Coding/photomode/client",
