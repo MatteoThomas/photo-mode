@@ -108,24 +108,9 @@ exports.signin = (req, res) => {
 };
 
 exports.editBio = (req, res) => {
-  console.log(req.body.bio);
   User.updateOne(
     { email: req.body.email },
     { $set: { bio: req.body.bio } }
   ).then();
-  return res.json({ status: "ok" });
+  return res.json({ status: "ok", bio: req.body.bio });
 };
-
-// router.post("/bio", async (req, res) => {
-//   const token = req.headers["x-access-token"];
-
-//   try {
-//     const decoded = jwt.verify(token, process.env.SECRET);
-//     const email = decoded.email;
-//     await User.updateOne({ email: email }, { $set: { bio: req.body.bio } });
-
-//     return res.json({ status: "ok" });
-//   } catch (error) {
-//     res.json({ status: "error", error: "invalid token" });
-//   }
-// });

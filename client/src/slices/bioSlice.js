@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { setMessage } from "./message";
-
 import AuthService from "../services/auth.service";
 
 export const editBio = createAsyncThunk(
@@ -9,8 +8,8 @@ export const editBio = createAsyncThunk(
     try {
       const response = await AuthService.editBio(bio, nameData, emailData);
       thunkAPI.dispatch(setMessage(response.data.message));
-      // console.log(response);
-      return response.data;
+      console.log(response.data);
+      return { bio: response.data };
     } catch (error) {
       const message =
         (error.response &&
@@ -24,7 +23,7 @@ export const editBio = createAsyncThunk(
   }
 );
 
-const initialState = {};
+const initialState = "";
 
 const bioSlice = createSlice({
   name: "bio",
@@ -33,9 +32,9 @@ const bioSlice = createSlice({
     setEditBio: (state, action) => {
       return { editBio: action.payload };
     },
-    // clearMessage: () => {
-    //   return { message: "" };
-    // },
+    clearMessage: () => {
+      return { message: "" };
+    },
   },
 });
 

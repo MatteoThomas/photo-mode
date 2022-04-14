@@ -4,7 +4,7 @@ import axios from "axios";
 const API_URL = "https://photo-mode.herokuapp.com/api/auth/";
 
 const register = (username, email, password) => {
-  return axios.post("signup", {
+  return axios.post(API_URL + "signup", {
     username,
     email,
     password,
@@ -33,8 +33,8 @@ const editBio = (bio, nameData, emailData) => {
       email: emailData,
     })
     .then((response) => {
-      console.log(response.data);
-      return response.data;
+      console.log(response.data.bio);
+      return response.data.bio;
     });
 };
 

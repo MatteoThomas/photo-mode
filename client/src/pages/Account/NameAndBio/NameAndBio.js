@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 import { editBio } from "../../../slices/bioSlice";
@@ -18,6 +18,7 @@ const NameAndBio = () => {
   async function updateBio(event) {
     event.preventDefault(event);
     setNewBio(bio);
+    localStorage.setItem("bio", bio);
     dispatch(editBio({ bio, nameData, emailData }));
   }
 
@@ -45,7 +46,9 @@ const NameAndBio = () => {
               buttonLabel="Submit"
               className="Btn"
               type="submit"
-            />
+            >
+              Submit
+            </StyledSubmitButton>
           ) : null}
           <Bio>{newBio ? newBio : bioData}</Bio>
         </form>
