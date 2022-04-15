@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 const app = express();
 const bodyParser = require("body-parser");
 const cloudinary = require("./routes/cloudinary");
-
+const auth = require("./routes/auth.routes");
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(bodyParser.json());
