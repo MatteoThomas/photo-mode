@@ -111,8 +111,3 @@ exports.editBio = (req, res) => {
   ).then();
   return res.json({ status: "ok", bio: req.body.bio });
 };
-
-exports.check = (req, res) => {
-  console.log("check ok").then();
-  return res.json({ status: "ok", message: "check" });
-};

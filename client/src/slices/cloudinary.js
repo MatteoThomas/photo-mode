@@ -11,7 +11,6 @@ export const getUserGallery = createAsyncThunk(
     try {
       const response = await CloudinaryService.getUserGallery(userName);
       thunkAPI.dispatch(setMessage(response.data.message));
-      // console.log(response);
       return response.data;
     } catch (error) {
       const message =

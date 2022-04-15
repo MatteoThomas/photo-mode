@@ -21,5 +21,4 @@ module.exports = function (app) {
   );
   app.post("/api/auth/signin", controller.signin);
   app.post("/api/auth/editBio", controller.editBio);
-  // app.get("api/auth/check", controller.check);
 };
