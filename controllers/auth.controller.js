@@ -65,8 +65,7 @@ exports.signin = (req, res) => {
     .populate("roles", "-__v")
     .exec((err, user) => {
       if (err) {
-        res.status(500).send({ message: err });
-        return;
+        return res.status(500).send({ message: err });
       }
 
       if (!user) {
@@ -114,7 +113,6 @@ exports.editBio = (req, res) => {
 };
 
 exports.check = (req, res) => {
-  return res.status(200).send({
-    message: "Check",
-  });
+  console.log("check ok").then();
+  return res.json({ status: "ok", message: "check" });
 };
