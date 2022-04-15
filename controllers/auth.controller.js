@@ -59,7 +59,6 @@ exports.signup = (req, res) => {
 };
 
 exports.signin = (req, res) => {
-  // console.log(req.body.password);
   User.findOne({
     username: req.body.username,
   })
@@ -112,4 +111,10 @@ exports.editBio = (req, res) => {
     { $set: { bio: req.body.bio } }
   ).then();
   return res.json({ status: "ok", bio: req.body.bio });
+};
+
+exports.check = (req, res) => {
+  return res.status(200).send({
+    message: "Check",
+  });
 };
