@@ -19,8 +19,6 @@ app.use(
   })
 );
 
-// app.use(cors(corsOptions));
-
 app.use(express.json());
 dotenv.config();
 app.use(express.urlencoded({ extended: true }));
@@ -44,7 +42,7 @@ db.mongoose
   });
 
 app.use("/api/cloudinary", cloudinary);
-// app.use("/api/auth", auth);
+app.use("/api/auth", auth);
 require("./routes/user.routes")(app);
 require("./routes/auth.routes")(app);
 
