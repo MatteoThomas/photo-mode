@@ -4,12 +4,12 @@ import axios from "axios";
 // const API_URL = "https://photo-mode.herokuapp.com/api/auth/";
 
 const API = axios.create({
-  baseURL: "https://photo-mode.herokuapp.com/api/auth/",
+  baseURL: "https://photo-mode.herokuapp.com/api/",
   // baseURL: "http://localhost:8080/api/auth/",
 });
 
 const register = (username, email, password) => {
-  return API.post("signup", {
+  return API.post("/auth/signup", {
     username,
     email,
     password,
@@ -17,7 +17,7 @@ const register = (username, email, password) => {
 };
 
 const login = (username, password) => {
-  return API.post("signin", {
+  return API.post("/auth/signin", {
     username,
     password,
   }).then((response) => {
@@ -29,7 +29,7 @@ const login = (username, password) => {
 };
 
 const editBio = (bio, nameData, emailData) => {
-  return API.post("editBio", {
+  return API.post("/auth/editBio", {
     username: nameData,
     email: emailData,
     bio: bio,
