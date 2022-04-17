@@ -1,7 +1,8 @@
 import axios from "axios";
 
 // const API_URL = "http://localhost:8080/api/auth/";
-// const baseURL = "https://photo-mode.herokuapp.com/api/auth/";
+// const API_URL = "https://photo-mode.herokuapp.com/api/auth/";
+
 const API = axios.create({
   baseURL: "https://photo-mode.herokuapp.com/api/auth/",
 });
