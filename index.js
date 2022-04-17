@@ -8,12 +8,12 @@ const cloudinary = require("./routes/cloudinary");
 const auth = require("./routes/auth.routes");
 
 dotenv.config();
-const uri = process.env.MONGODB_URI;
+const MONGODB_URI = process.env.MONGODB_URI;
 
 const db = require("./models");
 
 db.mongoose
-  .connect(uri, {
+  .connect(MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -52,8 +52,12 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-const PORT = process.env.PORT || 8080;
+// const PORT = process.env.PORT || 8080;
 
-app.listen(PORT, () => {
-  console.log(`Server started on port ${PORT}`);
+// app.listen(PORT, () => {
+//   console.log(`Server started on port ${PORT}`);
+// });
+
+app.listen(process.env.PORT || 8080, () => {
+  console.log("Server running");
 });
