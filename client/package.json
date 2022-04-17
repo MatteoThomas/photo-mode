@@ -21,8 +21,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-dotenv && react-scripts start",
-    "build": "react-dotenv && react-scripts build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "heroku-postbuild": "npm install && run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

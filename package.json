@@ -3,15 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "start": "node index.js",
-    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
-  },
-  "engines": {
-    "node": "16.13.2"
-  },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.1",
@@ -27,5 +18,14 @@
     "multer-gridfs-storage": "^5.0.2",
     "nodemon": "^2.0.15",
     "uuid": "^8.3.2"
-  }
+  },
+  "scripts": {
+    "start": "node index.js",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
+  },
+  "engines": {
+    "node": "16.13.2"
+  },
+  "author": "",
+  "license": "ISC"
 }

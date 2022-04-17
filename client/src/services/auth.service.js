@@ -30,9 +30,9 @@ const login = (username, password) => {
 
 const editBio = (bio, nameData, emailData) => {
   return API.post("editBio", {
-    bio: bio,
     username: nameData,
     email: emailData,
+    bio: bio,
   }).then((response) => {
     console.log(response.data.bio);
     return response.data.bio;
