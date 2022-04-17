@@ -29,9 +29,9 @@ db.mongoose
 app.use(
   cors({
     // DEVELOPMENT //NEEDS TO MATCH FRONT END
-    // origin: "http://localhost:3000",
+    origin: "http://localhost:3000",
     // PRODUCTION
-    origin: "https://photo-mode.herokuapp.com/",
+    // origin: "https://photo-mode.herokuapp.com/",
   })
 );
 
