@@ -7,7 +7,7 @@ const API = axios.create({
 });
 
 const register = (username, email, password) => {
-  return API.post(URL + "signup", {
+  return API.post("signup", {
     username,
     email,
     password,
@@ -15,7 +15,7 @@ const register = (username, email, password) => {
 };
 
 const login = (username, password) => {
-  return API.post(URL + "signin", {
+  return API.post("signin", {
     username,
     password,
   }).then((response) => {
@@ -27,7 +27,7 @@ const login = (username, password) => {
 };
 
 const editBio = (bio, nameData, emailData) => {
-  return API.post(URL + "editBio", {
+  return API.post("editBio", {
     bio: bio,
     username: nameData,
     email: emailData,
