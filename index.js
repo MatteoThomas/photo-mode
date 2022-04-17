@@ -5,7 +5,6 @@ const dotenv = require("dotenv");
 const app = express();
 const bodyParser = require("body-parser");
 const cloudinary = require("./routes/cloudinary");
-const auth = require("./routes/auth.routes");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -14,9 +13,9 @@ app.use(bodyParser.json());
 app.use(
   cors({
     // DEVELOPMENT //NEEDS TO MATCH FRONT END
-    origin: "http://localhost:3000",
+    // origin: "http://localhost:3000",
     // PRODUCTION
-    // origin: "https://photo-mode.herokuapp.com/",
+    origin: "https://photo-mode.herokuapp.com/",
   })
 );
 
@@ -24,12 +23,11 @@ app.use(express.json());
 dotenv.config();
 app.use(express.urlencoded({ extended: true }));
 
-const MONGODB_URI = process.env.URI;
+const uri = process.env.MONGODB_URI;
 const db = require("./models");
-const Role = db.role;
 
 db.mongoose
-  .connect(MONGODB_URI, {
+  .connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

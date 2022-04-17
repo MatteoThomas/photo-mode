@@ -11,14 +11,6 @@ cloudinary.config({
   secure: true,
 });
 
-router.get("/checking", async (req, res) => {
-  cloudinary.search
-    //WILL NOT DELIVER IMAGES WITH avatar TAG
-    .expression()
-    .execute()
-    .then((result) => res.json({ status: "ok", results: result }));
-});
-
 //GET ALL IMAGES FROM ALL FOLDERS EXCEPT IMAGES WITH avatar AS A TAG
 router.get("/gallery", async (req, res) => {
   cloudinary.search

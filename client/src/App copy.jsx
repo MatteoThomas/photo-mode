@@ -22,7 +22,6 @@ const App = () => {
   const [header, setHeader] = useState(false);
   const location = useLocation();
 
-  
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
