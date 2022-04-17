@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 const app = express();
 const bodyParser = require("body-parser");
 const cloudinary = require("./routes/cloudinary");
+const auth = require("./routes/auth.routes");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -13,9 +14,9 @@ app.use(bodyParser.json());
 app.use(
   cors({
     // DEVELOPMENT //NEEDS TO MATCH FRONT END
-    // origin: "http://localhost:3000",
+    origin: "http://localhost:3000",
     // PRODUCTION
-    origin: "https://photo-mode.herokuapp.com/",
+    // origin: "https://photo-mode.herokuapp.com/",
   })
 );
 
@@ -41,9 +42,7 @@ db.mongoose
   });
 
 app.use("/api/cloudinary", cloudinary);
-// app.use("/api/auth", auth);
-require("./routes/user.routes")(app);
-require("./routes/auth.routes")(app);
+app.use("/api/auth", auth);
 
 const PORT = process.env.PORT || 8080;
 
