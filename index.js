@@ -45,10 +45,12 @@ app.use("/api/cloudinary", cloudinary);
 app.use("/api/auth", auth);
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "/client/build")));
+  app.use(express.static(path.join(__dirname, "photomode/client/build")));
 
   app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "/client/build", "index.html"));
+    res.sendFile(
+      path.resolve(__dirname, "photomode/client/build", "index.html")
+    );
   });
 }
 
