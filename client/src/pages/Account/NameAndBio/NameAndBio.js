@@ -1,25 +1,46 @@
-import React, { useState } from "react";
-
-import { useSelector, useDispatch } from "react-redux";
-import { editBio } from "../../../slices/bioSlice";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 import { StyledSubmitButton } from "./NameAndBio.style";
 import { NameBioWrapper, StyledCol, Bio, Input } from "./NameAndBio.style";
 
-const NameAndBio = () => {
-  const [bio, setBio] = useState("");
-  const [newBio, setNewBio] = useState(null);
+const NameAndBio = (props) => {
+  const { nameProp, emailProp, bioProp } = props;
+  const [tempBio, setTempBio] = useState(null);
+  const [nameData, setNameData] = useState("");
+  const [emailData, setEmailData] = useState("");
+  const [bioData, setBioData] = useState("");
 
-  const nameData = useSelector((state) => state.auth.user.username);
-  const emailData = useSelector((state) => state.auth.user.email);
-  const bioData = useSelector((state) => state.auth.user.bio);
-  const dispatch = useDispatch();
+  useEffect(() => {
+    setNameData(nameProp);
+    setEmailData(emailProp);
+    setBioData(bioProp);
+    return () => {};
+  }, [nameProp, emailProp, bioProp]);
 
-  async function updateBio(event) {
-    event.preventDefault(event);
-    setNewBio(bio);
-    localStorage.setItem("bio", bio);
-    dispatch(editBio({ bio, nameData, emailData }));
+  function updateBio(e) {
+    e.preventDefault(e);
+    return axios
+      .post("https://photo-mode.herokuapp.com/api/auth/editBio", {
+        // .post("http://localhost:8080/api/auth/editBio", {
+        username: nameData,
+        email: emailData,
+        bio: tempBio,
+      })
+      .then((response) => {
+        editLocalUser();
+        setBioData(response.data.bio);
+        e.target.reset();
+        return response.data.bio;
+      });
+  }
+
+  //UPDATES THE LOCAL STORAGE OBJECT "user" WITH tempBio
+  function editLocalUser() {
+    const currentUserData = localStorage.getItem("user");
+    const json = JSON.parse(currentUserData);
+    json.bio = tempBio;
+    localStorage.setItem("user", JSON.stringify(json));
   }
 
   const logOut = () => {
@@ -39,9 +60,9 @@ const NameAndBio = () => {
             maxLength="80"
             type="text"
             placeholder=" Edit Bio"
-            onChange={(e) => setBio(e.target.value)}
+            onChange={(e) => setTempBio(e.target.value)}
           />
-          {bio ? (
+          {tempBio ? (
             <StyledSubmitButton
               buttonLabel="Submit"
               className="Btn"
@@ -50,7 +71,7 @@ const NameAndBio = () => {
               Submit
             </StyledSubmitButton>
           ) : null}
-          <Bio>{newBio ? newBio : bioData}</Bio>
+          <Bio>{tempBio ? tempBio : bioData}</Bio>
         </form>
       </StyledCol>
 

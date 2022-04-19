@@ -20,32 +20,29 @@ function RenderForm()  {
     const { message } = useSelector((state) => state.message);
     const dispatch = useDispatch();
 
-    async function registerUser(event) {
+    useEffect(() => {
+      dispatch(clearMessage());
+    }, [dispatch]);
+
+    const handleRegister = (event) => {
       event.preventDefault();
-  
-      const response = await fetch("https://photo-mode.herokuapp.com/api/auth/signup", {
-        // const response = await fetch("http://localhost:8080/api/auth/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username,
-          email,
-          password,
-        }),
-      });
-      
-      const data = await response.json();
-  
-      if (data.status === "ok") {
-        window.location.href = "/login";
-      }
-    }
+
+      console.log(username)
+      dispatch(register({ username, email, password }))
+        .unwrap()
+        .then(() => {
+
+          window.location.href = "/login"
+        })
+        .catch(() => {
+ 
+          console.log(message)
+        });
+    };
 
     return (
   
-    <form onSubmit={registerUser}>
+    <form onSubmit={handleRegister}>
 
       <div className="input-container">
         <label>Name</label>

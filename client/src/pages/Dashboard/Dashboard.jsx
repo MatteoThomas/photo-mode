@@ -1,27 +1,21 @@
-import React, { useEffect, useState } from "react"
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from "react";
 import Stats from "./Stats/Stats";
 import ImageUpload from "./ImageUpload/ImageUpload";
 import UserGallery from "./UserGallery/UserGallery"
 import { StyledContainer } from "../../components/Container/Container.style";
-import { Title, StyledCol } from "./Dashboard.style";
-import { getUserGallery } from "../../slices/cloudinary";
-import AnimatedPage from "../../animation/AnimatedPage";
-import { InfoContainer } from "../../components/Container/Container.style";
+import { Title, StatsUpload, StyledCol } from "./Dashboard.style";
 
 const Dashboard = () => {
   const [userName, setUserName] = useState("");
-  const [userGalleryResponse, setUserGalleryResponse] = useState([]);
+  const [userGallery, setUserGallery] = useState([]);
   const [count , setCount] = useState("");
-  const [loading, setLoading] = useState(false)
-  const dispatch = useDispatch();
-
 
   useEffect(() => {
-    
-    const fetchName = async() => {
-      
-      setLoading(true);
+    let isSubscribed = true;
+    //GETS USER NAME FROM MONGODB
+
+    const getName = async() => {
+
       const localName = await JSON.parse(window.localStorage.getItem('user'));
        if (localName !== null) {
         setUserName(localName.username);
@@ -31,48 +25,58 @@ const Dashboard = () => {
 
     const fetchGallery = async() => {
       //SENDS userName AS A SEARCH PARAMETER TO CLOUDINARY
-        dispatch(getUserGallery({ userName }))
-          .unwrap()
-          .then(function(response)  {
-            // setUserGalleryResponse(response.results.resources)
-            const resources = response.results.resources;
-            const images = resources.map((resource) => {
-             
-              return {
-                id: resource.asset_id,
-                //REMOVES THE FOLDER PREFIX AND THE FILE EXTENSION THEN RETURNS THE FILENAME
-                //THIS IS SO ONLY THE FILENAME IS DISPLAYED
-                title: resource.public_id.split(/(?:\/|\.)+/)[1],
-                image: resource.secure_url,
-                name: resource.public_id,
-                count: resource.length,
-            };
-          });
-          setUserGalleryResponse(images)
-          setCount(images.length)
-          setLoading(false);
+      const req = await fetch(`https://photo-mode.herokuapp.com/api/cloudinary/usergallery?folderData=${userName}`, {
+        // const req = await fetch(`http://localhost:8080/api/cloudinary/usergallery?folderData=${userName}`, {
+      });
+      const data = await req.json();
+      if (data.status === "ok") {
+        //NUMBER OF UPLOADS BY USER
+        const countData = data.results.total_count;
+        //IMAGE DATA
+        const resources = data.results.resources;
+        const images = resources.map((resource) => {
           
-        })
-        .catch(() => {
-          setLoading(false);
-        });
+        return {
+          id: resource.asset_id,
+          //REMOVES THE FOLDER PREFIX AND THE FILE EXTENSION THEN RETURNS THE FILENAME
+          //THIS IS SO THE FILENAME ALONE IS DISPLAYED
+          title: resource.public_id.split(/(?:\/|\.)+/)[1],
+          image: resource.secure_url,
+          name: resource.public_id,
       };
-      fetchName();
-      fetchGallery();
-    },[userName, dispatch]);
+    });
     
-    
+    if (isSubscribed) {
+        setUserGallery(images);
+        setCount(countData)
+    } else {
+      alert(data.error);
+    }
+  }}
+
+  fetchGallery();
+  getName()
+  return() => isSubscribed = false
+},[userName]);
+
+//VARIANT OBJECT FOR ANIMATION  
+const container = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1 }
+}
 
   return (
-<AnimatedPage>
+
   <StyledContainer     
+    variants={container}
+    initial="hidden"
+    animate="show"
+    transition={{ delay: .3}}
   >
     <Title>
       <h1>Dashboard</h1>
     </Title>
-    {!loading ? 
-    <>
-    <InfoContainer>
+    <StatsUpload>
     <StyledCol>
       <Stats 
         name={userName}
@@ -84,18 +88,16 @@ const Dashboard = () => {
           folderName={userName}
         />
     </StyledCol>
-    </InfoContainer>
+    </StatsUpload>
     <StyledCol>
         <UserGallery
-          userGalleryResponse={userGalleryResponse}
+          userGallery={userGallery}
+          userName={userName}
         />
     </StyledCol>
-    </>
-    : <h1>Loading...</h1>}
   </StyledContainer>
-  </AnimatedPage>
+
      );
 };
 
 export default Dashboard;
-

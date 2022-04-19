@@ -25,21 +25,21 @@ const login = (username, password) => {
   });
 };
 
-const editBio = (bio, nameData, emailData) => {
-  return API.post("/auth/editBio", {
-    username: nameData,
-    email: emailData,
-    bio: bio,
-  }).then((response) => {
-    console.log(response.data.bio);
-    return response.data.bio;
-  });
-};
+// const editBio = (bio, nameData, emailData) => {
+//   return API.post("http://localhost:8080/api/auth/editBio", {
+//     username: nameData,
+//     email: emailData,
+//     bio: bio,
+//   }).then((response) => {
+//     console.log(response.data.bio);
+//     return response.data.bio;
+//   });
+// };
 
 const authService = {
   register,
   login,
-  editBio,
+  // editBio,
 };
 
 export default authService;

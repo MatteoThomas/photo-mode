@@ -1,66 +1,67 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect  } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from "react-router-dom";
 
-// import { login } from "../../../slices/auth";
-
+import { login } from "../../../slices/auth";
+import { clearMessage } from "../../../slices/message";
 
 import { StyledButton } from "../../../components/Button/Button.style";
 import { StyledInput, StyledInputWrapper } from "../../../components/Input/Input.style";
 import { ButtonsWrapper } from "./LoginForm.style";
 
 
+
 function LoginForm() {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
 
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const { isLoggedIn } = useSelector((state) => state.auth);
+  const { message } = useSelector((state) => state.message);
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    dispatch(clearMessage());
+  }, [dispatch]);
 
 
   
+  const handleLogin = (e) => {
+    e.preventDefault()
+    setLoading(true);
+    dispatch(login({ username, password }))
+      .unwrap()
+      .then(() => {
+        window.history.push("/dashboard");
+        window.location.reload();
+      })
+      .catch(() => {
+        setLoading(false);
+        console.log(message)
+      });
+  };
 
-  async function loginUser(event) {
-    event.preventDefault();
-    const response = await fetch("https://photo-mode.herokuapp.com/api/auth/signin", {
-      // const response = await fetch("http://localhost:8080/api/auth/signin", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    });
-
-    const data = await response.json();
-console.log(data)
-    if (data == null) {
-      alert("Check your name and password");
-    } else {
-      localStorage.setItem("user", JSON.stringify(data));
-      window.location.href = "/dashboard";
-    }
+  if (isLoggedIn) {
+    window.location.href = "/dashboard"
   }
 
     return (
       <>      {!loading ? 
         <form 
         
-        onSubmit={loginUser}>
+        onSubmit={handleLogin}>
             <label>Email</label>
             <br />
             <StyledInputWrapper>
             <StyledInput
             
-            inputLabel="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                name="Email"
+            inputLabel="Username"
+                value={username}
+                onChange={(e) => setUserName(e.target.value)}
+                name="username"
                 type="text"
                 required
-                placeholder="Email"
+                placeholder="username"
             ></StyledInput></StyledInputWrapper>
             <br/>
             <label>Password</label>

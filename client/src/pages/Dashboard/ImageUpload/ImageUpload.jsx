@@ -7,7 +7,8 @@ const ImageUpload = ( props ) => {
   const [imagePrev, setImagePrev] = useState("");
   const [imageName, setImageName] = useState("");
   //DESTRUCTURE PROPS
-  const {folderName = ""} =  props
+  const {folderName = ""} = props
+  const {uploadProp = props.uploadedProp} = props
 
   const uploadImage = () => {
     setImage("");
@@ -22,7 +23,11 @@ const ImageUpload = ( props ) => {
       method: "post",
       body: data,
     })
-    .then((resp) => resp.json())
+    .then((resp) => {
+      resp.json()
+      //RELOADS PARENT COMPONENT WHEN UPLOAD BUTTON CLICKED
+      uploadProp()
+    })
     .catch((err) => console.log(err));
   };
 

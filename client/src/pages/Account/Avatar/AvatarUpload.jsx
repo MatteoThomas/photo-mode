@@ -40,12 +40,13 @@ const AvatarUpload = ( props ) => {
     reader.readAsDataURL(file);
   };
 
-  //RENDERS IMAGE PREVIEW IF ONE EXISTS
+  //RENDERS AVATAR PREVIEW IF ONE EXISTS
   const previewUrl =  avatarPrev.avatarPreviewUrl && 
     <Image 
       src={avatarPrev.avatarPreviewUrl} 
       alt="avatar preview"
     /> 
+    
   //RENDERS UPLOAD BUTTON IF imagePrev EXISTS
   const uploadButton = avatarPrev && 
     <UploadButton onClick={uploadAvatar}>

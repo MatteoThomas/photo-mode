@@ -4,13 +4,13 @@ const CLOUDINARY_URL = "http://localhost:8080/api/cloudinary/";
 // const CLOUDINARY_URL = "https://photo-mode.herokuapp.com/api/cloudinary/";
 
 const getUserGallery = async (userName) => {
-  return await axios.get(CLOUDINARY_URL + "usergallery", {
+  return await axios.get("http://localhost:8080/api/cloudinary/usergallery", {
     params: { folderData: userName },
   });
 };
 
 const getExploreGallery = async () => {
-  return await axios.get(CLOUDINARY_URL + "gallery", {});
+  return await axios.get("http://localhost:8080/api/cloudinary/gallery", {});
 };
 
 const cloudinaryService = {

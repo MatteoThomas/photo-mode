@@ -10,32 +10,50 @@ const Account = () => {
   const [avatar, setAvatar] = useState([]);
   const [showAvatarGallery, setShowAvatarGallery] = useState(false)
   const [userName, setUserName] = useState("")
+  const [userEmail, setUserEmail] = useState("")
+  const [userBio, setUserBio] = useState("")
   const [loading, setLoading] = useState(false);
   
   useEffect(() => {
     
+    const getEmail = async() => {
+      setLoading(true);
+      const localEmail = await JSON.parse(window.localStorage.getItem('user'));
+       if (localEmail !== null) {
+        setUserEmail(localEmail.email);
+      } else {
+        alert("userEmail not set");
+      }}
 
-    const fetchName = async() => {
+    const getName = async() => {
       setLoading(true);
       const localName = await JSON.parse(window.localStorage.getItem('user'));
        if (localName !== null) {
         setUserName(localName.username);
-        // await console.log(userName)
       } else {
         alert("userName not set");
       }}
 
+      const getBio = async() => {
+        setLoading(true);
+        const localBio = await JSON.parse(window.localStorage.getItem('user'));
+         if (localBio !== null) {
+          setUserBio(localBio.bio);
+        } else {
+          alert("userBio not set");
+        }}
+
     const fetchAvatar = async() => {
       //SENDS userName AS A SEARCH PARAMETER
-      const req = await fetch(`http://localhost:8080/api/cloudinary/avatar?folderData=${userName}`)
+      const req = await fetch(`https://photo-mode.herokuapp.com/api/cloudinary/avatar?folderData=${userName}`)
+      // const req = await fetch(`http://localhost:8080/api/cloudinary/avatar?folderData=${userName}`)
       const data = await req.json();
-      (data.status === "ok" && data.results.total_count) ?
-      setAvatar(data.results.resources[0].secure_url)
-      :
-      console.log("No avatar selected");
+      (data.status === "ok" && data.results.total_count) &&
+      await setAvatar(data.results.resources[0].secure_url)
     }
- 
-      fetchName();
+      getBio();
+      getEmail();
+      getName();
       fetchAvatar();
       setLoading(false);
 
@@ -53,7 +71,6 @@ const Account = () => {
   //VARIABLE THAT CHECKS CONDITION OF showAvatarGallery THEN RENDERS AvatarUpload COMPONENT or DIV
   const userAvatar = avatar.length > 0  ? 
     <>
-    {/* <div>Click to change</div>  */}
       <AvatarImg src={avatar} alt="avatar" onClick={() => handleAvatarClick()} />
     </> 
     : <div onClick={() => handleAvatarClick()}>
@@ -72,7 +89,11 @@ const Account = () => {
       </Title>
       {!loading ? 
       <>
-      <NameAndBio/>
+      <NameAndBio
+        nameProp={userName}
+        emailProp={userEmail}
+        bioProp={userBio}
+      />
       <AvatarContainer>
         <Tooltiptext className="tooltip-text">
             Click to Change

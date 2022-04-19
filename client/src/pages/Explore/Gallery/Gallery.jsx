@@ -1,21 +1,17 @@
 
 import React, { useState, useEffect } from "react";
 import { StyledContainer, GalleryMotion, Image, ImageContainer, ImageInfo } from "./Gallery.style";
-import { useDispatch } from "react-redux";
-import { getExploreGallery } from "../../../slices/cloudinary";
+
+
 import  ImageModal  from "./ImageModal";
 
 const Gallery = () => {
   const [userName, setUserName] = useState("");
   const [gallery, setGallery] = useState([]);
   const [loading, setLoading] = useState(false);
-  const dispatch = useDispatch(); 
-
   const [showModal, setShowModal] = useState(false);
   const [singleImage, setSingleImage] = useState("")
   const [singleImageUser, setSingleImageUser] = useState("")
-
-
 
   const openModal = (e) => {
     setShowModal(prev => !prev);
@@ -25,7 +21,6 @@ const Gallery = () => {
   };
 
   useEffect(() => {
-
     const fetchName = async() => {
       setLoading(true);
       const localName = await JSON.parse(window.localStorage.getItem('user'));
@@ -36,13 +31,14 @@ const Gallery = () => {
         alert("userName not set");
       }}
       
-      const exploreGallery = async() => {
-   
-    dispatch(getExploreGallery({ userName }))
-    .unwrap()
-    .then(function(response)  {
+      async function exploreGallery() {
+        const req = await fetch("https://photo-mode.herokuapp.com/api/cloudinary/gallery");
+        // const req = await fetch("http://localhost:8080/api/cloudinary/gallery");
+        const data = await req.json();
+        console.log(data)
+        if (data.status === "ok") {
 
-        let resources = response.results.resources
+          const resources = data.results.resources;
 
         const images = resources.map((resource) => {
                 return {
@@ -56,12 +52,12 @@ const Gallery = () => {
 
               setGallery(images);
               setLoading(false);
-            })
+            }
           }
 
         fetchName();
         exploreGallery();
-        }, [userName, dispatch]);
+        }, [userName]);
  
       return (
         <>         
