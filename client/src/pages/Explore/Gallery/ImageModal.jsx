@@ -36,7 +36,7 @@ function ImageModal({singleImage, singleImageUser, setShowModal}) {
     
     const fetchAvatar = async() => {
       //SENDS userName AS A SEARCH PARAMETER
-      const req = await fetch(`http://localhost:8080/api/cloudinary/avatar?folderData=${singleImageUser}`)
+      const req = await fetch(`https://photo-mode.herokuapp.com/api/cloudinary/avatar?folderData=${singleImageUser}`)
       const data = await req.json();
       (data.status === "ok" && data.results.total_count) ?
       setAvatar(data.results.resources[0].secure_url)
