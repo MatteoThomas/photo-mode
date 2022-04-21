@@ -15,8 +15,9 @@ function LoginForm() {
   async function loginUser(event) {
     setLoading(true)
     event.preventDefault();
-    // const response = await fetch("https://photo-mode.herokuapp.com/api/auth/signin", {
-      axios.post("http://localhost:8080/api/auth/signin", {
+
+      // axios.post("http://localhost:8080/api/auth/signin", {
+        axios.post("https://photo-mode.herokuapp.com/api/auth/signin", {
         username: username,
         password: password,
       }).then((response) => {
