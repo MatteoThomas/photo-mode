@@ -5,6 +5,10 @@ const API = axios.create({
   baseURL: "http://localhost:8080/api/",
 });
 
+// const api = axios.create({
+//   baseURL: BASE_URL,
+// });
+
 const register = (username, email, password) => {
   return API.post("/auth/signup", {
     username,

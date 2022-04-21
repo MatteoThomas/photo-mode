@@ -3,8 +3,51 @@ import styled from "styled-components";
 export const NameBioWrapper = styled.div`
   background-color: gray;
   width: clamp(350px, 30%, 600px);
-  height: fit-content;
+  /* height: fit-content; */
   margin-bottom: 2rem;
+  border-radius: 10px;
+`;
+
+export const NameAndAvatar = styled.div`
+  display: flex;
+  justify-content: space-between;
+  border: 0.5px rgb(97, 97, 97) solid;
+  border-radius: 10px;
+  margin: 0.5rem 0.5rem 0.5rem 1rem;
+  padding: 0.5rem;
+  height: fit-content;
+`;
+
+export const AvatarContainer = styled.div`
+  /* display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border: 0.5px rgb(97, 97, 97) solid;
+  border-radius: 10px;
+  padding: 0.5rem; */
+  word-wrap: break-word;
+  border: 0.5px rgb(97, 97, 97) solid;
+  border-radius: 10px;
+  margin: 0.5rem 0.5rem 0.5rem 1rem;
+  padding: 0.5rem;
+  height: fit-content;
+`;
+
+export const Tooltiptext = styled.div`
+  filter: opacity(0);
+  width: 120px;
+  background-color: #e47a83;
+  color: #2e2e2e;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  ${AvatarContainer}:hover & {
+    transition: all 0.5s;
+    filter: opacity(1);
+  }
 `;
 
 export const StyledCol = styled.div`
@@ -47,4 +90,12 @@ export const StyledSubmitButton = styled.button`
 export const ButtonLabel = styled.label`
   font-size: 1rem;
   color: aliceblue;
+`;
+
+export const AvatarImg = styled.img`
+  height: fit-content;
+  vertical-align: middle;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
 `;

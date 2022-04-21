@@ -1,79 +1,63 @@
+import axios from "axios";
 import React, { useState } from "react";
-
 import { Link } from "react-router-dom";
-
-// import { login } from "../../../slices/auth";
-
-
 import { StyledButton } from "../../../components/Button/Button.style";
-import { StyledInput, StyledInputWrapper } from "../../../components/Input/Input.style";
-import { ButtonsWrapper } from "./LoginForm.style";
 
+import { StyledInputWrapper } from "../../../components/Input/Input.style";
+import { ButtonsWrapper, Input  } from "./LoginForm.style";
 
 function LoginForm() {
-  const [email, setEmail] = useState("");
-
+  const [username, setUsername] = useState("");
+  // const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-
-
-  
-
   async function loginUser(event) {
+    setLoading(true)
     event.preventDefault();
-    const response = await fetch("https://photo-mode.herokuapp.com/api/auth/signin", {
-      // const response = await fetch("http://localhost:8080/api/auth/signin", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    });
-
-    const data = await response.json();
-console.log(data)
-    if (data == null) {
-      alert("Check your name and password");
-    } else {
-      localStorage.setItem("user", JSON.stringify(data));
-      window.location.href = "/dashboard";
+    // const response = await fetch("https://photo-mode.herokuapp.com/api/auth/signin", {
+      axios.post("http://localhost:8080/api/auth/signin", {
+        username: username,
+        password: password,
+      }).then((response) => {
+       {response.data.error == null ?
+     (window.localStorage.setItem("user", JSON.stringify(response)))
+    (window.location.href = "/dashboard") 
+    : alert("Check Name and Password")}
+      }).catch((err) => {
+       
+        console.log(err + "!")
+      })
+  
     }
-  }
 
     return (
       <>      {!loading ? 
         <form 
-        
-        onSubmit={loginUser}>
-            <label>Email</label>
-            <br />
-            <StyledInputWrapper>
-            <StyledInput
-            
-            inputLabel="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                name="Email"
-                type="text"
-                required
-                placeholder="Email"
-            ></StyledInput></StyledInputWrapper>
+          onSubmit={loginUser}>
+        <label>Name</label>
+        <br />
+          <StyledInputWrapper>
+          <Input
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            name="username"
+            type="text"
+            required
+            placeholder="Name"
+            ></Input></StyledInputWrapper>
             <br/>
             <label>Password</label>
             <br />
             <StyledInputWrapper>
-            <StyledInput
-                value={password}
-                name="password"
+            <Input
                 type="password"
+                value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                name="password"
                 required
-                placeholder="Email"
-            ></StyledInput></StyledInputWrapper>
+                placeholder="Password"
+            ></Input></StyledInputWrapper>
             <br />
             <ButtonsWrapper>
                 <StyledButton 

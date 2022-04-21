@@ -24,12 +24,13 @@ router.post("/signup", async (req, res) => {
 });
 
 router.post("/signin", async (req, res) => {
+  console.log(req);
   try {
     const user = await User.findOne({
-      email: req.body.email,
+      username: req.body.username,
     });
-    console.log(user);
     if (!user) {
+      console.log(err);
       return { status: "error", error: "Invalid login" };
     }
     // BCRYPT COMPARING HASHED PASSWORD WITH USER TYPED PASSWORD
@@ -40,7 +41,7 @@ router.post("/signin", async (req, res) => {
     if (isPasswordValid) {
       const token = jwt.sign(
         {
-          name: user.name,
+          username: user.username,
           email: user.email,
         },
         process.env.SECRET
@@ -69,7 +70,7 @@ router.get("/signin", async (req, res) => {
     const email = decoded.email;
     const user = await User.findOne({ email: email });
 
-    return res.json({ status: "ok", name: user.name });
+    return res.json({ status: "ok", name: user.username });
   } catch (error) {
     res.json({ status: "error", error: "invalid token!" });
   }
@@ -92,6 +93,7 @@ router.get("/bio", async (req, res) => {
 
 //POSTS USER BIO
 router.post("/editBio", async (req, res) => {
+  console.log(req.body);
   User.updateOne(
     { email: req.body.email },
     { $set: { bio: req.body.bio } }

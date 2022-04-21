@@ -1,15 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { ButtonsWrapper, Input } from "./RegisterForm.style"
 
-import { register } from "../../../slices/auth";
-import { clearMessage } from "../../../slices/message";
-
-import { ButtonsWrapper } from "./RegisterForm.style"
-
-import { StyledInput } from "../../../components/Input/Input.style"
 import { StyledButton } from "../../../components/Button/Button.style";
-
+import axios from "axios";
 
 
 function RenderForm()  {
@@ -17,32 +11,26 @@ function RenderForm()  {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const { message } = useSelector((state) => state.message);
-    const dispatch = useDispatch();
-
     async function registerUser(event) {
       event.preventDefault();
   
-      const response = await fetch("https://photo-mode.herokuapp.com/api/auth/signup", {
-        // const response = await fetch("http://localhost:8080/api/auth/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username,
-          email,
-          password,
-        }),
-      });
-      
-      const data = await response.json();
-  
-      if (data.status === "ok") {
-        window.location.href = "/login";
-      }
-    }
+      // const response = await fetch("https://photo-mode.herokuapp.com/api/auth/signup", {
+        axios.post("http://localhost:8080/api/auth/signup", {
+          username: username,
+          email: email,
+          password: password
 
+      }).then((response) => {
+        console.log(response.data.status)
+       { response.data.status == "ok" ?
+ (window.location.href = "/login")  :      alert("Something went wrong")}
+        }).catch((err) => {
+        alert("An error occured.");
+        console.log(err)
+      })
+  
+    }
+  
     return (
   
     <form onSubmit={registerUser}>
@@ -50,7 +38,7 @@ function RenderForm()  {
       <div className="input-container">
         <label>Name</label>
         <br />
-        <StyledInput
+        <Input
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           type="text"
@@ -62,7 +50,7 @@ function RenderForm()  {
       <div className="input-container">
         <label>Email</label>
         <br />
-        <StyledInput
+        <Input
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           type="email"
@@ -74,7 +62,7 @@ function RenderForm()  {
       <div className="input-container">
         <label>Password</label>
         <br />
-        <StyledInput
+        <Input
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           type="password"

@@ -11,7 +11,7 @@ export const UploadContainer = styled.div`
 
 export const StyledRow = styled.div`
   display: flex;
-  flex-direction: column;
+
   justify-content: flex-start;
   align-items: flex-start;
   margin: 0.5rem auto 0;
@@ -31,7 +31,12 @@ export const UploadButton = styled.button`
     border: 1px grey solid;
   }
 `;
-export const Input = styled.div``;
+export const Input = styled.div`
+  width: clamp(350px, 30%, 600px);
+  height: fit-content;
+  margin-bottom: 2rem;
+  border-radius: 10px;
+`;
 
 export const Image = styled.img`
   margin: 1rem auto 0;

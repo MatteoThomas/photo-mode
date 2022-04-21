@@ -17,12 +17,11 @@ const Gallery = () => {
     setShowModal(prev => !prev);
     setSingleImage(e.target.src)
     setSingleImageUser(e.target.name)
-
   };
 
   useEffect(() => {
-    const fetchName = async() => {
-      setLoading(true);
+    const getName = async() => {
+
       const localName = await JSON.parse(window.localStorage.getItem('user'));
       if (localName !== null) {
         //SETS userName
@@ -32,8 +31,8 @@ const Gallery = () => {
       }}
       
       async function exploreGallery() {
-        const req = await fetch("https://photo-mode.herokuapp.com/api/cloudinary/gallery");
-        // const req = await fetch("http://localhost:8080/api/cloudinary/gallery");
+        // const req = await fetch("https://photo-mode.herokuapp.com/api/cloudinary/gallery");
+        const req = await fetch("http://localhost:8080/api/cloudinary/gallery");
         const data = await req.json();
         console.log(data)
         if (data.status === "ok") {
@@ -48,21 +47,26 @@ const Gallery = () => {
                   name: resource.public_id.split("/")[1],
                   id: resource.asset_id,
                 };
-      })
-
+        })
+        console.log(images[0].image)
               setGallery(images);
               setLoading(false);
             }
           }
 
-        fetchName();
-        exploreGallery();
-        }, [userName]);
+      getName();
+      exploreGallery();
+      }, [userName]);
  
       return (
         <>         
         {loading ? <h1>Loading...</h1> : null}
-        {showModal ?  <ImageModal singleImage={singleImage} singleImageUser={singleImageUser} showModal={showModal} setShowModal={setShowModal} />  
+        {showModal ?
+        <ImageModal 
+          singleImage={singleImage} 
+          singleImageUser={singleImageUser} 
+          showModal={showModal} 
+          setShowModal={setShowModal} />  
         : 
   
       <StyledContainer>

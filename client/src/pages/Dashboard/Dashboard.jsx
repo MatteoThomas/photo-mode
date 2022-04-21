@@ -18,32 +18,36 @@ const Dashboard = () => {
 
       const localName = await JSON.parse(window.localStorage.getItem('user'));
        if (localName !== null) {
-        setUserName(localName.username);
+         setUserName(localName.data.username);
       } else {
         alert("userName not set");
+        console.log("userName not set")
       }}
 
-    const fetchGallery = async() => {
+    async function fetchGallery() {
       //SENDS userName AS A SEARCH PARAMETER TO CLOUDINARY
-      const req = await fetch(`https://photo-mode.herokuapp.com/api/cloudinary/usergallery?folderData=${userName}`, {
-        // const req = await fetch(`http://localhost:8080/api/cloudinary/usergallery?folderData=${userName}`, {
-      });
+      // const req = await fetch(`https://photo-mode.herokuapp.com/api/cloudinary/usergallery?folderData=${userName}`, {
+        const req = await fetch(`http://localhost:8080/api/cloudinary/usergallery?folderData=${userName}`)
+ 
       const data = await req.json();
+      
       if (data.status === "ok") {
         //NUMBER OF UPLOADS BY USER
+        console.log(data)
         const countData = data.results.total_count;
+        await console.log(userName)
         //IMAGE DATA
         const resources = data.results.resources;
         const images = resources.map((resource) => {
-          
-        return {
-          id: resource.asset_id,
-          //REMOVES THE FOLDER PREFIX AND THE FILE EXTENSION THEN RETURNS THE FILENAME
-          //THIS IS SO THE FILENAME ALONE IS DISPLAYED
-          title: resource.public_id.split(/(?:\/|\.)+/)[1],
-          image: resource.secure_url,
-          name: resource.public_id,
-      };
+          return {
+            id: resource.asset_id,
+            //REMOVES THE FOLDER PREFIX AND THE FILE EXTENSION THEN
+            //RETURNS THE FILENAME THIS IS SO THE
+            //FILENAME ALONE IS DISPLAYED
+            title: resource.public_id.split(/(?:\/|\.)+/)[1],
+            image: resource.secure_url,
+            username: resource.folderName,
+            };
     });
     
     if (isSubscribed) {
@@ -52,13 +56,14 @@ const Dashboard = () => {
     } else {
       alert(data.error);
     }
+  
   }}
 
   fetchGallery();
   getName()
   return() => isSubscribed = false
 },[userName]);
-
+console.log(userName)
 //VARIANT OBJECT FOR ANIMATION  
 const container = {
   hidden: { opacity: 0 },

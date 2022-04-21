@@ -17,8 +17,11 @@ export const NameBioWrapper = styled.div`
 export const Input = styled.input``;
 
 export const AvatarImg = styled.img`
-  width: 300px;
   height: fit-content;
+  vertical-align: middle;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
 `;
 
 export const AvatarContainer = styled.div`

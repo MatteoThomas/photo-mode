@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import { UploadContainer, StyledRow, UploadButton, Input } from "./AvatarUpload.style";
+import { UploadContainer, StyledRow, UploadButton, Input, Image } from "./AvatarUpload.style";
 
 
 const AvatarUpload = ( props ) => {
   const [avatar, setAvatar] = useState([]);
-  // const [avatarPrev, setAvatarPrev] = useState("");
+  const [avatarPrev, setAvatarPrev] = useState("");
   //DESTRUCTURE PROPS
   const {folderName = ""} = props
 
-  console.log(avatar)
+  
   const uploadAvatar = () => {
     setAvatar("");
-
+    setAvatarPrev("");
 
     const formData = new FormData();
       formData.append("file", avatar);
@@ -25,9 +25,7 @@ const AvatarUpload = ( props ) => {
       body: formData
     })
     .then((response) => {
-
-      alert("Avatar Uploaded")
-   
+      console.log(response)
       return response.text()
     })
     .catch((err) => console.log(err));
@@ -37,21 +35,25 @@ const AvatarUpload = ( props ) => {
     e.preventDefault();
     let reader = new FileReader();
     let file = e.target.files[0];
+    setAvatar(file);
     reader.onloadend = () => {
-      setAvatar(file);
+      setAvatarPrev({
+        file: file,
+        avatarPreviewUrl: reader.result,
+      });
     };
     reader.readAsDataURL(file);
   };
-// 
-  // RENDERS AVATAR PREVIEW IF ONE EXISTS
-  // const previewUrl =  avatarPrev.avatarPreviewUrl && 
-  //   <Image 
-  //     src={avatarPrev.avatarPreviewUrl} 
-  //     alt="avatar preview"
-  //   /> 
+
+  //RENDERS AVATAR PREVIEW IF ONE EXISTS
+  const previewUrl =  avatarPrev.avatarPreviewUrl && 
+    <Image 
+      src={avatarPrev.avatarPreviewUrl} 
+      alt="avatar preview"
+    /> 
     
   //RENDERS UPLOAD BUTTON IF imagePrev EXISTS
-  const uploadButton = avatar && 
+  const uploadButton = avatarPrev && 
     <UploadButton onClick={uploadAvatar}>
         Upload
     </UploadButton>
@@ -64,12 +66,12 @@ const AvatarUpload = ( props ) => {
             type="file" 
             accept="image/png, image/jpeg, image/svg, image/gif" 
             onChange={(e) => avatarPreview(e)}
-          />
+          /> Choose Avatar
         </Input>
         {uploadButton}
       </StyledRow>
       <StyledRow>
-        {/* {previewUrl}  */}
+        {previewUrl} 
         </StyledRow>
     </UploadContainer>
   );

@@ -8,4 +8,6 @@ export const StatsContainer = styled.div`
   padding: 0.7rem 0 0 0.7rem;
 `;
 
-export const RowLeft = styled.div``;
+export const RowLeft = styled.div`
+  padding: 0.7rem 0 0 0.7rem;
+`;

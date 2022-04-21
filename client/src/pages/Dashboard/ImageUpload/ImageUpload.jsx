@@ -3,6 +3,7 @@ import "./file-input-button.css";
 import { UploadContainer, ChooseButton, UploadButton, Image, StyledRow } from "./ImageUpload.style";
 
 const ImageUpload = ( props ) => {
+  console.log(props)
   const [image, setImage] = useState([]);
   const [imagePrev, setImagePrev] = useState("");
   const [imageName, setImageName] = useState("");
@@ -26,7 +27,7 @@ const ImageUpload = ( props ) => {
     .then((resp) => {
       resp.json()
       //RELOADS PARENT COMPONENT WHEN UPLOAD BUTTON CLICKED
-      uploadProp()
+      console.log(uploadProp)
     })
     .catch((err) => console.log(err));
   };
