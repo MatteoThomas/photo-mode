@@ -7,10 +7,31 @@ import axios from "axios";
 
 
 function RenderForm()  {
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [verify, setVerify] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [verify, setVerify] = useState("");
+  
+  //FUNCTION RESTRICTS USERNAME INPUT
+  const handleUserName = e => {
+    if (e.key === " " || userName < 3 || userName > 10 ) {
+      e.preventDefault();
+      setVerify(false)
+    } else {
+      setVerify(true)
+    }
+  };
+
+    //FUNCTION RESTRICTS PASSWORD INPUT
+    const handleUserPassword = e => {
+      if (e.key === " " || userName < 8 || userName > 20 ) {
+        e.preventDefault();
+        setVerify(false)
+      } else {
+        setVerify(true)
+      }
+    };
+  
 
     async function registerUser(event) {
       event.preventDefault();
@@ -36,11 +57,12 @@ function RenderForm()  {
     <form onSubmit={registerUser}>
 
       <div className="input-container">
-        <label>Name</label>
+        <label>Name must be 3 - 10 characters, no spaces</label>
         <br />
         <Input
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          onKeyDown={handleUserName}
           type="text"
           required
           placeholder="Username"
@@ -60,11 +82,12 @@ function RenderForm()  {
       </div>
 
       <div className="input-container">
-        <label>Password</label>
+        <label>Password must be 8 - 20 characters, no space</label>
         <br />
         <Input
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          onKeyDown={handleUserPassword}
           type="password"
           required
           placeholder="Password"

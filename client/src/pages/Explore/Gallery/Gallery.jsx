@@ -28,7 +28,6 @@ const Gallery = () => {
       // const req = await fetch("http://localhost:8080/api/cloudinary/gallery");
       const data = await req.json();
       if (data.status === "ok") {
-        console.log(data.results.resources)
       const resources = data.results.resources;
       const images = resources.map((resource) => {
         return {
@@ -89,7 +88,7 @@ const Gallery = () => {
               onClick={(e) => openModal(e)}
             />   
             <ImageInfo>
-              {/* <div>{img.folder} / {img.name}</div> */}
+
             </ImageInfo>
           </ImageContainer>
           </CardMotion>
