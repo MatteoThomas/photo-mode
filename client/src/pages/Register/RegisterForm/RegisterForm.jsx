@@ -1,38 +1,52 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { ButtonsWrapper, Input } from "./RegisterForm.style"
-
+import { ButtonsWrapper, Input, FormContainer } from "./RegisterForm.style"
 import { StyledButton } from "../../../components/Button/Button.style";
 import axios from "axios";
 
 
 function RenderForm()  {
   const [username, setUsername] = useState("");
+  const [namePassed, setNamePassed] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordPassed, setPasswordPassed] = useState(false);
   const [verify, setVerify] = useState("");
   const [allowSubmit, setAllowSubmit] = useState(false);
 
-  // RESTRICTS USER INPUT
-  const inputCheck = e => {
-    if (e.key === " " || verify !== password) {
-    setAllowSubmit(false) 
+const nameCheck = () => {
+  if(username > 3 && username < 10){
+    setNamePassed(true)
   } else {
-    setAllowSubmit(true) 
+    setNamePassed(false)
+  }
+}
+
+const passwordCheck = () => {
+  if(password > 7 && password < 21){
+    setPasswordPassed(true)
+  } else {
+    setPasswordPassed(false)
+  }
+}
+
+const submitCheck = () => {
+  if(namePassed && passwordPassed && verify) {
+    setAllowSubmit(true)
+  } else {
+    setAllowSubmit(false)
   }}
 
-//RESTRICTS USER INPUT
-  // const inputCheck = e => {
-  //   if (e.key === " " 
-  //   || username < 3 
-  //   || username > 10 
-  //   || password < 8 
-  //   || password > 20 
-  //   || verify !== password) {
-  //   setAllowSubmit(false) 
-  // } else {
-  //   setAllowSubmit(true) 
-  // }}
+const verifyCheck = () => {
+  if(password == verify ){
+    setVerify(true)
+    submitCheck()
+  } else {
+    setVerify(false)
+  }
+}
+
+
 
     async function registerUser(event) {
       event.preventDefault();
@@ -55,20 +69,19 @@ function RenderForm()  {
   
     return (
   
+<FormContainer>
     <form onSubmit={registerUser}>
-
       <div className="input-container">
-        <label>Name <span>3-10 characters, no spaces</span></label>
+        <label>Name </label>
         <br />
         <Input
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          onKeyDown={inputCheck}
+          onKeyDown={nameCheck}
           type="text"
           required
           placeholder="Username"
-          minlength="3" maxlength="10"
-        />
+        /><span>3-10 characters, no spaces</span>
       </div>
 
       <div className="input-container">
@@ -77,7 +90,6 @@ function RenderForm()  {
         <Input
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          onKeyDown={inputCheck}
           type="email"
           required
           placeholder="Email"
@@ -86,23 +98,23 @@ function RenderForm()  {
       </div>
 
       <div className="input-container">
-        <label><span>Password 8-20 characters, no spaces</span></label>
+        <label></label>
         <br />
         <Input
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          onKeyDown={inputCheck}
+          onKeyDown={passwordCheck}
           type="password"
           required
           placeholder="Password"
-          minlength="8" maxlength="20"
-        />
+        /><span>Password 8-20 characters, no spaces</span>
         <br />
         <label>Verify Password</label>
         <br />
         <Input
           value={verify}
           onChange={(e) => setVerify(e.target.value)}
+          onKeyDown={verifyCheck}
           type="password"
           required
           placeholder="Verify Password"
@@ -126,7 +138,7 @@ function RenderForm()  {
         </Link>
       </ButtonsWrapper>
     </form>
-
+    </FormContainer>
 
     )
 };

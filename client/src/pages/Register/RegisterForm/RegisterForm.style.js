@@ -13,3 +13,10 @@ export const Input = styled.input`
   margin: 0.3rem 0 2rem 0;
   padding: 0 0 0 0.5rem;
 `;
+
+export const FormContainer = styled.div`
+  & span {
+    font-size: 0.8em;
+    color: antiquewhite;
+  }
+`;
