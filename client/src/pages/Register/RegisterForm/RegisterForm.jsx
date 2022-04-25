@@ -92,7 +92,6 @@ function RenderForm()  {
         <Input
           value={verify}
           onChange={(e) => setVerify(e.target.value)}
-          onKeyDown={inputCheck}
           type="password"
           required
           placeholder="Verify Password"
