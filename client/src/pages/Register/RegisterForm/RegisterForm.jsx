@@ -24,7 +24,7 @@ function RenderForm()  {
     setAllowSubmit(false) 
   } else {
     setAllowSubmit(true) 
-  }
+  }}
 
     async function registerUser(event) {
       event.preventDefault();
