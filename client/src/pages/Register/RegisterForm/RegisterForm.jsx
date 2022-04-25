@@ -11,20 +11,28 @@ function RenderForm()  {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [verify, setVerify] = useState("");
-  const [allowSubmit, setAllowSubmit] = useState("");
+  const [allowSubmit, setAllowSubmit] = useState(false);
 
-//RESTRICTS USER INPUT
+  // RESTRICTS USER INPUT
   const inputCheck = e => {
-    if (e.key === " " 
-    || username < 3 
-    || username > 10 
-    || password < 8 
-    || password > 20 
-    || verify !== password) {
+    if (e.key === " " || verify !== password) {
     setAllowSubmit(false) 
   } else {
     setAllowSubmit(true) 
   }}
+
+//RESTRICTS USER INPUT
+  // const inputCheck = e => {
+  //   if (e.key === " " 
+  //   || username < 3 
+  //   || username > 10 
+  //   || password < 8 
+  //   || password > 20 
+  //   || verify !== password) {
+  //   setAllowSubmit(false) 
+  // } else {
+  //   setAllowSubmit(true) 
+  // }}
 
     async function registerUser(event) {
       event.preventDefault();
@@ -59,6 +67,7 @@ function RenderForm()  {
           type="text"
           required
           placeholder="Username"
+          minlength="3" maxlength="10"
         />
       </div>
 
@@ -72,6 +81,7 @@ function RenderForm()  {
           type="email"
           required
           placeholder="Email"
+
         />
       </div>
 
@@ -85,6 +95,7 @@ function RenderForm()  {
           type="password"
           required
           placeholder="Password"
+          minlength="8" maxlength="20"
         />
         <br />
         <label>Verify Password</label>
