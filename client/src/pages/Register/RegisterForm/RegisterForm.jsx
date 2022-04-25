@@ -14,7 +14,7 @@ function RenderForm()  {
   
   //FUNCTION RESTRICTS USERNAME INPUT
   const handleUserName = e => {
-    if (e.key === " " || userName < 3 || userName > 10 ) {
+    if (e.key === " " || username < 3 || username > 10 ) {
       e.preventDefault();
       setVerify(false)
     } else {
@@ -24,7 +24,7 @@ function RenderForm()  {
 
     //FUNCTION RESTRICTS PASSWORD INPUT
     const handleUserPassword = e => {
-      if (e.key === " " || userName < 8 || userName > 20 ) {
+      if (e.key === " " || password < 8 || password > 20 ) {
         e.preventDefault();
         setVerify(false)
       } else {
