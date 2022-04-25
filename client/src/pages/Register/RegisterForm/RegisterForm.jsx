@@ -11,27 +11,20 @@ function RenderForm()  {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [verify, setVerify] = useState("");
-  
-  //FUNCTION RESTRICTS USERNAME INPUT
-  const handleUserName = e => {
-    if (e.key === " " || username < 3 || username > 10 ) {
+  const [allowSubmit, setAllowSubmit] = useState("");
 
-      setVerify(false)
-    } else {
-      setVerify(true)
-    }
-  };
-
-    //FUNCTION RESTRICTS PASSWORD INPUT
-    const handleUserPassword = e => {
-      if (e.key === " " || password < 8 || password > 20 ) {
-  
-        setVerify(false)
-      } else {
-        setVerify(true)
-      }
-    };
-  
+//RESTRICTS USER INPUT
+  const inputCheck = e => {
+    if (e.key === " " 
+    || username < 3 
+    || username > 10 
+    || password < 8 
+    || password > 20 
+    || verify !== password) {
+    setAllowSubmit(false) 
+  } else {
+    setAllowSubmit(true) 
+  }
 
     async function registerUser(event) {
       event.preventDefault();
@@ -57,12 +50,12 @@ function RenderForm()  {
     <form onSubmit={registerUser}>
 
       <div className="input-container">
-        <label>Name 3 - 10 characters, no spaces</label>
+        <label>Name <span>3-10 characters, no spaces</span></label>
         <br />
         <Input
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          onKeyDown={handleUserName}
+          onKeyDown={inputCheck}
           type="text"
           required
           placeholder="Username"
@@ -75,6 +68,7 @@ function RenderForm()  {
         <Input
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          onKeyDown={inputCheck}
           type="email"
           required
           placeholder="Email"
@@ -82,12 +76,12 @@ function RenderForm()  {
       </div>
 
       <div className="input-container">
-        <label>Password 8 - 20 characters, no spaces</label>
+        <label><span>Password 8-20 characters, no spaces</span></label>
         <br />
         <Input
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          onKeyDown={handleUserPassword}
+          onKeyDown={inputCheck}
           type="password"
           required
           placeholder="Password"
@@ -98,6 +92,7 @@ function RenderForm()  {
         <Input
           value={verify}
           onChange={(e) => setVerify(e.target.value)}
+          onKeyDown={inputCheck}
           type="password"
           required
           placeholder="Verify Password"
@@ -109,7 +104,7 @@ function RenderForm()  {
           className="Btn" 
           type="submit" 
           value="Register"  
-          disabled={verify !== password}
+          disabled={!allowSubmit}
         > 
         </StyledButton>
     
