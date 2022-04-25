@@ -15,25 +15,22 @@ function LoginForm() {
   async function loginUser(event) {
     setLoading(true)
     event.preventDefault();
-
-      // axios.post("http://localhost:8080/api/auth/signin", {
-        axios.post("https://photo-mode.herokuapp.com/api/auth/signin", {
-        username: username,
-        password: password,
-      }).then((response) => {
-       {response.data.error == null ?
-     (window.localStorage.setItem("user", JSON.stringify(response)))
-    (window.location.href = "/dashboard") 
-    : alert("Check Name and Password")}
-      }).catch((err) => {
-       
-        console.log(err + "!")
+    axios.post("https://photo-mode.herokuapp.com/api/auth/signin", {
+    // axios.post("http://localhost:8080/api/auth/signin", {
+      username: username,
+      password: password,
+    }).then((response) => {
+       setLoading(false)
+      window.localStorage.setItem("user", JSON.stringify(response))
+      window.location.href = "/dashboard" }
+      ).catch((err) => {
+        setLoading(false)
+        console.log(err)
       })
-  
     }
 
     return (
-      <>      {!loading ? 
+      <> {!loading ? 
         <form 
           onSubmit={loginUser}>
         <label>Name</label>
@@ -74,7 +71,6 @@ function LoginForm() {
         </form>
         : <h1>Loading</h1>}
         </>
-
     );
     }
 

@@ -1,9 +1,8 @@
 import styled from "styled-components";
 
-export const NameBioWrapper = styled.div`
+export const AccountInfoContainer = styled.div`
   background-color: gray;
   width: clamp(350px, 30%, 600px);
-  /* height: fit-content; */
   margin-bottom: 2rem;
   border-radius: 10px;
 `;
@@ -11,26 +10,21 @@ export const NameBioWrapper = styled.div`
 export const NameAndAvatar = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   border: 0.5px rgb(97, 97, 97) solid;
   border-radius: 10px;
   margin: 0.5rem 0.5rem 0.5rem 1rem;
   padding: 0.5rem;
-  height: fit-content;
+  height: 100px;
 `;
 
 export const AvatarContainer = styled.div`
-  /* display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  border: 0.5px rgb(97, 97, 97) solid;
-  border-radius: 10px;
-  padding: 0.5rem; */
   word-wrap: break-word;
   border: 0.5px rgb(97, 97, 97) solid;
   border-radius: 10px;
   margin: 0.5rem 0.5rem 0.5rem 1rem;
   padding: 0.5rem;
-  height: fit-content;
+  align-items: center;
 `;
 
 export const Tooltiptext = styled.div`
@@ -80,7 +74,6 @@ export const StyledSubmitButton = styled.button`
     color: aliceblue;
     background-color: grey;
   }
-
   &:active {
     border: 1px black solid;
     background-color: black;

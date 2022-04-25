@@ -7,6 +7,7 @@ export const StyledContainer = styled.div`
   justify-content: center;
 `;
 export const GalleryMotion = styled(motion.div)``;
+export const CardMotion = styled(motion.div)``;
 
 export const Image = styled.img`
   padding: 0.5rem 0.5rem 0 0.5rem;

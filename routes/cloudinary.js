@@ -53,7 +53,8 @@ router.get("/deleteImage", async (req, res) => {
   const image = req.query.deleteImage;
   cloudinary.uploader
     .destroy(image)
-    .then((result) => res.json({ status: "ok", results: result }));
+    .then((result) => res.json({ status: "ok", results: result }))
+    .catch((err) => res.json({ status: "failed", error: err }));
 });
 
 module.exports = router;

@@ -1,14 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import  Gallery  from "./Gallery/Gallery";
 import { Title } from "./Explore.style";
 import { StyledContainer } from "../../components/Container/Container.style";
 import AnimatedPage from "../../animation/AnimatedPage";
 
 const Explore = () => {
-
-  useEffect(() => {
-
-  }, []);
 
   return (
     <AnimatedPage>

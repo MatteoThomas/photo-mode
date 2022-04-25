@@ -29,7 +29,6 @@ export const AvatarContainer = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   border: 0.5px rgb(97, 97, 97) solid;
-  border-radius: 10px;
   padding: 0.5rem;
 `;
 

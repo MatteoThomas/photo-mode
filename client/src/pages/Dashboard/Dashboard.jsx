@@ -4,6 +4,7 @@ import ImageUpload from "./ImageUpload/ImageUpload";
 import UserGallery from "./UserGallery/UserGallery"
 import { StyledContainer } from "../../components/Container/Container.style";
 import { Title, StatsUpload, StyledCol } from "./Dashboard.style";
+import AnimatedPage from "../../animation/AnimatedPage";
 
 const Dashboard = () => {
   const [userName, setUserName] = useState("");
@@ -15,13 +16,12 @@ const Dashboard = () => {
     //GETS USER NAME FROM MONGODB
 
     const getName = async() => {
-
       const localName = await JSON.parse(window.localStorage.getItem('user'));
-       if (localName !== null) {
-         setUserName(localName.data.username);
+      if (localName !== null) {
+        setUserName(localName.data.username);
       } else {
-        alert("userName not set");
-        console.log("userName not set")
+        window.location.href = "/login"
+        alert("userName not set")
       }}
 
     async function fetchGallery() {
@@ -33,9 +33,8 @@ const Dashboard = () => {
       
       if (data.status === "ok") {
         //NUMBER OF UPLOADS BY USER
-        console.log(data)
         const countData = data.results.total_count;
-        await console.log(userName)
+
         //IMAGE DATA
         const resources = data.results.resources;
         const images = resources.map((resource) => {
@@ -49,29 +48,28 @@ const Dashboard = () => {
             username: resource.folderName,
             };
     });
-    
     if (isSubscribed) {
         setUserGallery(images);
         setCount(countData)
     } else {
-      alert(data.error);
+      
+      window.location.href = "/login"
     }
-  
-  }}
 
-  fetchGallery();
-  getName()
-  return() => isSubscribed = false
-},[userName]);
-console.log(userName)
-//VARIANT OBJECT FOR ANIMATION  
-const container = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1 }
-}
+    }}
+      fetchGallery();
+      getName()
+    return() => isSubscribed = false
+      },[userName]);
+
+  //VARIANT OBJECT FOR ANIMATION  
+  const container = {
+    hidden: { opacity: 0 },
+    show: { opacity: 1 }
+  }
 
   return (
-
+    <AnimatedPage>
   <StyledContainer     
     variants={container}
     initial="hidden"
@@ -101,7 +99,7 @@ const container = {
         />
     </StyledCol>
   </StyledContainer>
-
+  </AnimatedPage>
      );
 };
 

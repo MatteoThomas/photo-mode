@@ -5,25 +5,35 @@ export const UploadContainer = styled.div`
   color: aliceblue;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
+  transition: transform 0.35s ease-in-out;
+`;
+
+export const AvatarContainer = styled.div`
+  word-wrap: break-word;
+  border: 0.5px rgb(97, 97, 97) solid;
+  border-radius: 10px;
+  margin: 0.5rem 0.5rem 0.5rem 1rem;
+  padding: 0.5rem;
+  align-items: center;
+  height: fit-content;
 `;
 
 export const StyledRow = styled.div`
   display: flex;
-
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content: space-between;
+  align-items: center;
   margin: 0.5rem auto 0;
-  width: 100%;
 `;
 
 export const UploadButton = styled.button`
   border: 1px transparent solid;
   border-radius: 4px;
   transition: 0.4s;
-  height: 42px;
-  margin: 1rem 0 0 0;
+  height: 39px;
+  margin: 0rem 0 0 2.5rem;
   &:hover {
     transition: all 0.4s;
     color: aliceblue;
@@ -31,14 +41,17 @@ export const UploadButton = styled.button`
     border: 1px grey solid;
   }
 `;
+
 export const Input = styled.div`
-  width: clamp(350px, 30%, 600px);
-  height: fit-content;
-  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  width: 30%;
+  height: 80px;
   border-radius: 10px;
 `;
 
 export const Image = styled.img`
-  margin: 1rem auto 0;
-  width: 200px;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
 `;

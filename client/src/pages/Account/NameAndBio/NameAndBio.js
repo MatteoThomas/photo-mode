@@ -3,13 +3,12 @@ import axios from "axios";
 import AvatarUpload from "../Avatar/AvatarUpload";
 import { StyledSubmitButton } from "./NameAndBio.style";
 import {
-  NameBioWrapper,
+  AccountInfoContainer,
   StyledCol,
   Bio,
   Input,
   AvatarImg,
   NameAndAvatar,
-  AvatarContainer,
 } from "./NameAndBio.style";
 
 const NameAndBio = (props) => {
@@ -20,7 +19,6 @@ const NameAndBio = (props) => {
   const [bioData, setBioData] = useState("");
   const [avatar, setAvatar] = useState([]);
   const [showAvatarGallery, setShowAvatarGallery] = useState(false);
-  const [fallback, setFallback] = useState(false);
 
   useEffect(() => {
     setNameData(nameProp);
@@ -28,44 +26,28 @@ const NameAndBio = (props) => {
     setBioData(bioProp);
     setAvatar(avatarProp);
 
-    // if (AvatarImg) {
-    //   setAvatar(AvatarImg);
-    // }
-
     return () => {};
   }, [nameProp, emailProp, bioProp, avatarProp]);
-
-  // const reloadSrc = (e) => {
-  //   if (fallback) {
-  //     // e.target.src = "../";
-  //     console.log("fallback");
-  //   } else {
-  //     e.target.src = avatar;
-  //     setFallback(true);
-  //   }
-  // };
 
   async function updateBio(e) {
     editLocalUser();
     e.preventDefault();
-    return (
-      axios
+    return axios
+      .post("https://photo-mode.herokuapp.com/api/api/auth/editBio", {
         // .post("http://localhost:8080/api/auth/editBio", {
-        .post("https://photo-mode.herokuapp.com/api/api/auth/editBio", {
-          email: emailData,
-          bio: tempBio,
-        })
-        .then((response) => {
-          console.log(response);
-          editLocalUser();
-          setBioData(response.data.bio);
-          e.target.reset();
-          return response.data.bio;
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-    );
+        email: emailData,
+        bio: tempBio,
+      })
+      .then((response) => {
+        console.log(response);
+        editLocalUser();
+        setBioData(response.data.bio);
+        e.target.reset();
+        return response.data.bio;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   // UPDATES THE LOCAL STORAGE OBJECT "user" WITH tempBio
@@ -87,34 +69,27 @@ const NameAndBio = (props) => {
     setShowAvatarGallery(!showAvatarGallery);
   };
 
-  // VARIABLE CHECKS CONDITION OF showAvatarGallery THEN
+  // VARIABLE CHECKS CONDITION OF
+  // avatar THEN
   // RENDERS AvatarUpload COMPONENT OR DIV
-  const avatarElement =
-    avatar.length > 0 ? (
-      <>
-        <AvatarImg
-          src={avatar}
-          alt="avatar"
-          onClick={showAvatarUpload}
-          // onError={reloadSrc}
-        />
-      </>
-    ) : (
-      <div onClick={showAvatarUpload}>Upload Avatar</div>
-    );
+  const avatarElement = avatar ? (
+    <AvatarImg src={avatar} alt="user avatar" onClick={showAvatarUpload} />
+  ) : (
+    <div onClick={showAvatarUpload}>Upload Avatar</div>
+  );
 
   const avatarUploadElement = showAvatarGallery && (
     <AvatarUpload folderName={nameData} />
   );
 
   return (
-    <NameBioWrapper>
+    <AccountInfoContainer>
       <NameAndAvatar>
         <h1>{nameData}</h1>
         {avatarElement}
       </NameAndAvatar>
 
-      <AvatarContainer>{avatarUploadElement}</AvatarContainer>
+      {avatarUploadElement}
 
       <StyledCol>
         <form onSubmit={updateBio}>
@@ -142,7 +117,7 @@ const NameAndBio = (props) => {
           Logout
         </StyledSubmitButton>
       </StyledCol>
-    </NameBioWrapper>
+    </AccountInfoContainer>
   );
 };
 

@@ -10,21 +10,20 @@ function RenderForm()  {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [verify, setVerify] = useState("");
 
     async function registerUser(event) {
       event.preventDefault();
   
-   
-        // axios.post("http://localhost:8080/api/auth/signup", {
-          axios.post("https://photo-mode.herokuapp.com/api/auth/signup", {
+      axios.post("https://photo-mode.herokuapp.com/api/auth/signup", {
+            // axios.post("http://localhost:8080/api/auth/signup", {
           username: username,
           email: email,
           password: password
 
       }).then((response) => {
         console.log(response.data.status)
-       { response.data.status == "ok" ?
- (window.location.href = "/login")  :      alert("Something went wrong")}
+        window.location.href = "/login"   
         }).catch((err) => {
         alert("An error occured.");
         console.log(err)
@@ -71,6 +70,15 @@ function RenderForm()  {
           placeholder="Password"
         />
         <br />
+        <label>Verify Password</label>
+        <br />
+        <Input
+          value={verify}
+          onChange={(e) => setVerify(e.target.value)}
+          type="password"
+          required
+          placeholder="Verify Password"
+        />
       </div>
       <ButtonsWrapper>
         <StyledButton
@@ -78,6 +86,7 @@ function RenderForm()  {
           className="Btn" 
           type="submit" 
           value="Register"  
+          disabled={verify !== password}
         > 
         </StyledButton>
     

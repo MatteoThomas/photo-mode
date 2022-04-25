@@ -24,7 +24,6 @@ router.post("/signup", async (req, res) => {
 });
 
 router.post("/signin", async (req, res) => {
-  console.log(req);
   try {
     const user = await User.findOne({
       username: req.body.username,
@@ -59,7 +58,7 @@ router.post("/signin", async (req, res) => {
       return res.json({ status: "error", user: false });
     }
   } catch (err) {
-    res.json({ error: "/api/login failed" });
+    res.json({ error: "login failed" });
   }
 });
 
@@ -102,16 +101,16 @@ router.post("/editBio", async (req, res) => {
 });
 
 //GETS USER AVATAR URL FROM MONGODB - THE URL IS A CLOUDINARY FILE
-router.get("/avatarUrl", async (req, res) => {
-  const token = req.headers["x-access-token"];
-  try {
-    const decoded = jwt.verify(token, process.env.SECRET);
-    const email = decoded.email;
-    const user = await User.findOne({ email: email });
-    return res.json({ status: "ok", avatar: user.avatar });
-  } catch (error) {
-    res.json({ status: "error", error: "invalid token!" });
-  }
-});
+// router.get("/avatarUrl", async (req, res) => {
+//   const token = req.headers["x-access-token"];
+//   try {
+//     const decoded = jwt.verify(token, process.env.SECRET);
+//     const email = decoded.email;
+//     const user = await User.findOne({ email: email });
+//     return res.json({ status: "ok", avatar: user.avatar });
+//   } catch (error) {
+//     res.json({ status: "error", error: "invalid token!" });
+//   }
+// });
 
 module.exports = router;

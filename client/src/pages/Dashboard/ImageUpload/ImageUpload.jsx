@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import "./file-input-button.css";
-import { UploadContainer, ChooseButton, UploadButton, Image, StyledRow } from "./ImageUpload.style";
+import { UploadContainer, ChooseButton, UploadButton, Image, StyledRow, Input } from "./ImageUpload.style";
 
 const ImageUpload = ( props ) => {
-  console.log(props)
   const [image, setImage] = useState([]);
   const [imagePrev, setImagePrev] = useState("");
-  const [imageName, setImageName] = useState("");
+  const [userImageName, setUserImageName] = useState("");
+  const [imageTags, setImageTags] = useState("")
+
+
   //DESTRUCTURE PROPS
   const {folderName = ""} = props
-  const {uploadProp = props.uploadedProp} = props
 
   const uploadImage = () => {
     setImage("");
@@ -17,20 +18,22 @@ const ImageUpload = ( props ) => {
     const data = new FormData();
     data.append("file", image);
     data.append("folder", folderName);
-    data.append("public_id", imageName);
+    data.append("public_id", userImageName);
+    data.append("tags", imageTags);
     data.append("upload_preset", "gallery");
     data.append("cloud_name", "proj3");
     fetch("  https://api.cloudinary.com/v1_1/proj3/image/upload", {
       method: "post",
       body: data,
     })
-    .then((resp) => {
-      resp.json()
-      //RELOADS PARENT COMPONENT WHEN UPLOAD BUTTON CLICKED
-      console.log(uploadProp)
+    .then((result) => {
+      result.json()
     })
     .catch((err) => console.log(err));
   };
+
+
+
 
   const imagePreview = (e) => {
     e.preventDefault();
@@ -38,19 +41,45 @@ const ImageUpload = ( props ) => {
     let file = e.target.files[0];
     setImage(file);
     reader.onloadend = () => {
-      setImageName(file.name)
       setImagePrev({
         file: file,
         imagePreviewUrl: reader.result,
       });
     };
     reader.readAsDataURL(file);
+    // setImage(reader.result)
+    // console.log(reader.result)
   };
 
 //RENDERS IMAGE PREVIEW IF ONE EXISTS
 const previewUrl =  imagePrev.imagePreviewUrl && <Image src={imagePrev.imagePreviewUrl} alt="NEED ALT DATA"/> 
-//RENDERS UPLOAD BUTTON IF imagePrev EXISTS
-const uploadButton = imagePrev && <UploadButton onClick={uploadImage}>Upload</UploadButton>
+
+const canSubmit = userImageName.length > 2 && userImageName.length < 11
+console.log(canSubmit)
+//RENDERS UPLOAD FORM IF imagePrev EXISTS
+const uploadElement = imagePrev && 
+  <UploadContainer>
+  <UploadButton 
+    onClick={uploadImage}
+    disabled={!canSubmit}
+    >Upload
+  </UploadButton>      
+
+  <Input
+    value={userImageName}
+    name="userImageName"
+    type="text"
+    placeholder="Image name must be 3 - 10 characters"
+    onChange={(e) => setUserImageName(e.target.value)}
+  />
+  <Input
+    value={imageTags}
+    name="userImageDesc"
+    type="text"
+    placeholder="Image tags, separate with a comma"
+    onChange={(e) => setImageTags(e.target.value)}
+  />
+  </UploadContainer>
 
   return (
     <UploadContainer>
@@ -63,10 +92,9 @@ const uploadButton = imagePrev && <UploadButton onClick={uploadImage}>Upload</Up
           type="file" 
           accept="image/png, image/jpeg, image/svg, image/gif" 
           onChange={(e) => imagePreview(e)}
-          />
+          />    
         </ChooseButton>
-        
-          {uploadButton}
+          {uploadElement}
       </StyledRow>
       {previewUrl}
     </UploadContainer>

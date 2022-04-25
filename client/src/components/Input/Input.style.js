@@ -16,4 +16,5 @@ export const StyledInput = styled(Input)`
 export const InputLabel = styled.input`
   font-size: 1rem;
   color: aliceblue;
+  background-color: aqua;
 `;

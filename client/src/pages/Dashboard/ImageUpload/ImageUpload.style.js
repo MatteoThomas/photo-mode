@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const UploadContainer = styled.div`
-  font-size: 1rem;
-  color: aliceblue;
+  display: flex;
+  flex-direction: column;
 `;
 export const ChooseButton = styled.div`
   margin: 0 1rem 0 1rem;
@@ -38,4 +38,13 @@ export const StyledRow = styled.div`
   align-items: center;
   padding: 0 0 0 0.7rem;
   /* background-color:blue; */
+`;
+
+export const Input = styled.input`
+  border-radius: 4px;
+  border: none;
+  width: 300px;
+  height: 1.6rem;
+  margin: 0.3rem 0 2rem 0;
+  padding: 0 0 0 0.5rem;
 `;
