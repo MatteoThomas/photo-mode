@@ -33,7 +33,7 @@ const NameAndBio = (props) => {
     editLocalUser();
     e.preventDefault();
     return axios
-      .post("https://photo-mode.herokuapp.com/api/api/auth/editBio", {
+      .post("https://photo-mode.herokuapp.com/api/auth/editBio", {
         // .post("http://localhost:8080/api/auth/editBio", {
         email: emailData,
         bio: tempBio,

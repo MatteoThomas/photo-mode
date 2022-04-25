@@ -45,7 +45,6 @@ router.post("/signin", async (req, res) => {
         },
         process.env.SECRET
       );
-
       return res.json({
         status: "ok",
         id: user._id,
@@ -78,7 +77,6 @@ router.get("/signin", async (req, res) => {
 //GETS USER BIO
 router.get("/bio", async (req, res) => {
   const token = req.headers["x-access-token"];
-
   try {
     const decoded = jwt.verify(token, process.env.SECRET);
     const email = decoded.email;
@@ -99,18 +97,5 @@ router.post("/editBio", async (req, res) => {
   ).then();
   return res.json({ status: "ok", bio: req.body.bio });
 });
-
-//GETS USER AVATAR URL FROM MONGODB - THE URL IS A CLOUDINARY FILE
-// router.get("/avatarUrl", async (req, res) => {
-//   const token = req.headers["x-access-token"];
-//   try {
-//     const decoded = jwt.verify(token, process.env.SECRET);
-//     const email = decoded.email;
-//     const user = await User.findOne({ email: email });
-//     return res.json({ status: "ok", avatar: user.avatar });
-//   } catch (error) {
-//     res.json({ status: "error", error: "invalid token!" });
-//   }
-// });
 
 module.exports = router;
