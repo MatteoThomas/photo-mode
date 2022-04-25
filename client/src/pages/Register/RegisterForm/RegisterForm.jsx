@@ -15,7 +15,7 @@ function RenderForm()  {
   //FUNCTION RESTRICTS USERNAME INPUT
   const handleUserName = e => {
     if (e.key === " " || username < 3 || username > 10 ) {
-      e.preventDefault();
+
       setVerify(false)
     } else {
       setVerify(true)
@@ -25,7 +25,7 @@ function RenderForm()  {
     //FUNCTION RESTRICTS PASSWORD INPUT
     const handleUserPassword = e => {
       if (e.key === " " || password < 8 || password > 20 ) {
-        e.preventDefault();
+  
         setVerify(false)
       } else {
         setVerify(true)
@@ -57,7 +57,7 @@ function RenderForm()  {
     <form onSubmit={registerUser}>
 
       <div className="input-container">
-        <label>Name must be 3 - 10 characters, no spaces</label>
+        <label>Name 3 - 10 characters, no spaces</label>
         <br />
         <Input
           value={username}
@@ -82,7 +82,7 @@ function RenderForm()  {
       </div>
 
       <div className="input-container">
-        <label>Password must be 8 - 20 characters, no space</label>
+        <label>Password 8 - 20 characters, no spaces</label>
         <br />
         <Input
           value={password}
