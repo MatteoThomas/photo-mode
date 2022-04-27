@@ -3,7 +3,7 @@ import { Img, ModalWrapper, ModalInfoContainer, ModalInfo, AvatarImg, NoAvatar} 
 
 function ImageModal({ singleImage, imageName, singleImageUser, setShowModal}) {
   const [avatar, setAvatar] = useState("");
-console.log(imageName)
+
   useEffect(() => {
 
     async function fetchAvatar() {

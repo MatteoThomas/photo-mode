@@ -1,30 +1,39 @@
 import styled from "styled-components";
+import { css } from "styled-components";
+
+export const mobile = (props) => {
+  return css`
+    @media only screen and (max-width: 416px) {
+      ${props}
+    }
+  `;
+};
 
 export const AccountInfoContainer = styled.div`
-  background-color: gray;
   width: clamp(350px, 30%, 600px);
-  margin-bottom: 2rem;
   border-radius: 10px;
+  ${mobile({ width: "95vw" })}
+  margin: 0 auto;
 `;
 
 export const NameAndAvatar = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 0.5px rgb(97, 97, 97) solid;
+  border: 0.5px lightgray solid;
   border-radius: 10px;
-  margin: 0.5rem 0.5rem 0.5rem 1rem;
   padding: 0.5rem;
   height: 100px;
+  margin: 1rem 0 0;
 `;
 
 export const AvatarContainer = styled.div`
   word-wrap: break-word;
-  border: 0.5px rgb(97, 97, 97) solid;
+  border: 0.5px lightgray solid;
   border-radius: 10px;
-  margin: 0.5rem 0.5rem 0.5rem 1rem;
   padding: 0.5rem;
   align-items: center;
+  margin: 1rem 0 0;
 `;
 
 export const Tooltiptext = styled.div`
@@ -46,11 +55,11 @@ export const Tooltiptext = styled.div`
 
 export const StyledCol = styled.div`
   word-wrap: break-word;
-  border: 0.5px rgb(97, 97, 97) solid;
+  border: 0.5px lightgray solid;
   border-radius: 10px;
-  margin: 0.5rem 0.5rem 0.5rem 1rem;
   padding: 0.5rem;
   height: fit-content;
+  margin: 1rem 0 0;
 `;
 
 export const Bio = styled.div`

@@ -10,6 +10,7 @@ export const StyledInput = styled(Input)`
     height: 1.6rem;
     margin: 0.3rem 0 2rem 0;
     padding: 0 0 0 0.5rem;
+    background-color: aqua;
   }
 `;
 

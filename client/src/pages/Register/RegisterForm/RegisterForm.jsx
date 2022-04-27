@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { ButtonsWrapper, Input, FormContainer } from "./RegisterForm.style"
+import { ButtonsWrapper, Input, RegisterFormContainer } from "./RegisterForm.style"
 import { StyledButton } from "../../../components/Button/Button.style";
 import axios from "axios";
-
 
 function RenderForm()  {
   const [username, setUsername] = useState("");
@@ -11,72 +10,57 @@ function RenderForm()  {
   const [password, setPassword] = useState("");
   const [verify, setVerify] = useState("");
 
-
-
-
-    async function registerUser(event) {
-      event.preventDefault();
+  async function registerUser(event) {
+    event.preventDefault();
   
-      axios.post("https://photo-mode.herokuapp.com/api/auth/signup", {
-            // axios.post("http://localhost:8080/api/auth/signup", {
-          username: username,
-          email: email,
-          password: password
-
-      }).then((response) => {
-        console.log(response.data.status)
+    axios.post("https://photo-mode.herokuapp.com/api/auth/signup", {
+    // axios.post("http://localhost:8080/api/auth/signup", {
+    username: username,
+    email: email,
+    password: password
+      }).then(() => {
+        alert("Registration Successful");
         window.location.href = "/login"   
         }).catch((err) => {
         alert("An error occured.");
         console.log(err)
       })
-  
     }
-  
+
     return (
+    <RegisterFormContainer>
+      <form onSubmit={registerUser}>
+        <label>User Name</label>
   
-<FormContainer>
-    <form onSubmit={registerUser}>
-      <div className="input-container">
-        <label>Name </label>
-        <br />
         <Input
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-
           type="text"
           required
-          placeholder="Username"
-        /><br/><span>3-10 characters, no spaces</span>
-      </div>
-
-      <div className="input-container">
+          placeholder="User Name - 3-10 characters, no spaces"
+        />
+        <br /> 
         <label>Email</label>
-        <br />
+   
         <Input
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           type="email"
           required
           placeholder="Email"
+        /><br />
+        <label>Password</label>
 
-        />
-      </div>
-
-      <div className="input-container">
-        <label></label>
-        <br />
         <Input
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-
           type="password"
           required
-          placeholder="Password"
-        /><br/><span>Password 8-20 characters, no spaces</span>
-        <br />
+          placeholder="Password - 8-20 characters, no spaces"
+        />
+        <br />  
         <label>Verify Password</label>
-        <br />
+  
         <Input
           value={verify}
           onChange={(e) => setVerify(e.target.value)}
@@ -84,7 +68,13 @@ function RenderForm()  {
           required
           placeholder="Verify Password"
         />
-      </div>
+        {/* <Input
+          value={verify}
+          onChange={(e) => setVerify(e.target.value)}
+          type="password"
+          required
+          placeholder="Verify Password"
+        /> */}
       <ButtonsWrapper>
         <StyledButton
           buttonLabel="Register"
@@ -94,7 +84,6 @@ function RenderForm()  {
           disabled={verify !== password}
         > 
         </StyledButton>
-    
         <Link to="/Login">
           <StyledButton 
             buttonLabel="Login"
@@ -103,8 +92,7 @@ function RenderForm()  {
         </Link>
       </ButtonsWrapper>
     </form>
-    </FormContainer>
-
+    </RegisterFormContainer>
     )
 };
 

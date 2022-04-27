@@ -8,7 +8,6 @@ const ImageUpload = ( props ) => {
   const [userImageName, setUserImageName] = useState("");
   const [imageTags, setImageTags] = useState("")
 
-
   //DESTRUCTURE PROPS
   const {folderName = ""} = props
 
@@ -32,9 +31,6 @@ const ImageUpload = ( props ) => {
     .catch((err) => console.log(err));
   };
 
-
-
-
   const imagePreview = (e) => {
     e.preventDefault();
     let reader = new FileReader();
@@ -56,9 +52,10 @@ const previewUrl =  imagePrev.imagePreviewUrl && <Image src={imagePrev.imagePrev
 
 const canSubmit = userImageName.length > 2 && userImageName.length < 11
 console.log(canSubmit)
+
 //RENDERS UPLOAD FORM IF imagePrev EXISTS
 const uploadElement = imagePrev && 
-  <UploadContainer>
+  <>
   <UploadButton 
     onClick={uploadImage}
     disabled={!canSubmit}
@@ -79,7 +76,7 @@ const uploadElement = imagePrev &&
     placeholder="Image tags, separate with a comma"
     onChange={(e) => setImageTags(e.target.value)}
   />
-  </UploadContainer>
+  </>
 
   return (
     <UploadContainer>
@@ -94,8 +91,8 @@ const uploadElement = imagePrev &&
           onChange={(e) => imagePreview(e)}
           />    
         </ChooseButton>
-          {uploadElement}
       </StyledRow>
+          {uploadElement}
       {previewUrl}
     </UploadContainer>
   );

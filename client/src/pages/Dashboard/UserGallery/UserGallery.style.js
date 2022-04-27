@@ -1,5 +1,14 @@
 import styled from "styled-components";
 import { motion } from "framer-motion/dist/framer-motion";
+import { css } from "styled-components";
+
+export const mobile = (props) => {
+  return css`
+    @media only screen and (max-width: 416px) {
+      ${props}
+    }
+  `;
+};
 
 export const GalleryContainer = styled.div`
   display: flex;
@@ -13,7 +22,6 @@ export const CardContainer = styled.div`
   flex-wrap: wrap;
   background-color: transparent;
   transition: background-color 0.4s;
-  /* margin: 1rem; */
 `;
 
 export const CardMotion = styled(motion.div)``;
@@ -61,6 +69,7 @@ export const Tooltiptext = styled.div`
 
 export const Image = styled.img`
   width: 220px;
+  ${mobile({ width: "95vw" })}
 `;
 
 export const Name = styled.h2`

@@ -16,6 +16,10 @@ export const StyledContainer = styled.div`
 
 export const RegisterMotion = styled(motion.div)``;
 
+export const FormContainer = styled.div`
+  width: 300px;
+`;
+
 export const RegisterHeading = styled.h1`
   font-family: "Raleway" sans-serif;
   font-weight: 100;

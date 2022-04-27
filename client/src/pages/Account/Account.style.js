@@ -7,13 +7,6 @@ export const Title = styled.div`
   margin: 0 0 2rem 0;
 `;
 
-export const NameBioWrapper = styled.div`
-  background-color: gray;
-  width: clamp(350px, 30%, 600px);
-  height: fit-content;
-  margin-bottom: 2rem;
-`;
-
 export const Input = styled.input``;
 
 export const AvatarImg = styled.img`
