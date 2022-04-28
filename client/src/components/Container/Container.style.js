@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StyledContainer = styled.div`
-  width: clamp(300px, 100%, 1000px);
+  width: clamp(300px, 100%, 1200px);
   margin: 0 auto;
   color: aliceblue;
 `;
@@ -12,7 +12,7 @@ export const StyledAppContainer = styled.div`
   flex-wrap: wrap;
   gap: 1rem;
   justify-content: center;
-  width: clamp(300px, 95%, 1000px);
+  width: clamp(300px, 95%, 1200px);
   margin: 0 auto;
   color: aliceblue;
 `;

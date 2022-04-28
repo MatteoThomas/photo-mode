@@ -10,6 +10,14 @@ const ImageUpload = ( props ) => {
 
   //DESTRUCTURE PROPS
   const {folderName = ""} = props
+  
+  const handleClick = () => {
+    if (userImageName.length > 2 && userImageName.length < 11) {
+    uploadImage() }
+    else {
+      alert("Image name must be between 3 - 10 characters.")
+    }
+  }
 
   const uploadImage = () => {
     setImage("");
@@ -43,39 +51,36 @@ const ImageUpload = ( props ) => {
       });
     };
     reader.readAsDataURL(file);
-    // setImage(reader.result)
-    // console.log(reader.result)
   };
-
+  
 //RENDERS IMAGE PREVIEW IF ONE EXISTS
-const previewUrl =  imagePrev.imagePreviewUrl && <Image src={imagePrev.imagePreviewUrl} alt="NEED ALT DATA"/> 
+const previewUrl =  imagePrev.imagePreviewUrl && <Image src={imagePrev.imagePreviewUrl} alt={userImageName}/> 
 
-const canSubmit = userImageName.length > 2 && userImageName.length < 11
-console.log(canSubmit)
+// const canSubmit = userImageName.length > 2 && userImageName.length < 11
 
 //RENDERS UPLOAD FORM IF imagePrev EXISTS
 const uploadElement = imagePrev && 
   <>
-  <UploadButton 
-    onClick={uploadImage}
-    disabled={!canSubmit}
-    >Upload
-  </UploadButton>      
+    <UploadButton 
+      onClick={handleClick}
+      // disabled={!canSubmit}
+      >Upload
+    </UploadButton>      
 
-  <Input
-    value={userImageName}
-    name="userImageName"
-    type="text"
-    placeholder="Image name must be 3 - 10 characters"
-    onChange={(e) => setUserImageName(e.target.value)}
-  />
-  <Input
-    value={imageTags}
-    name="userImageDesc"
-    type="text"
-    placeholder="Image tags, separate with a comma"
-    onChange={(e) => setImageTags(e.target.value)}
-  />
+    <Input
+      value={userImageName}
+      name="userImageName"
+      type="text"
+      placeholder="Image name must be 3 - 10 characters"
+      onChange={(e) => setUserImageName(e.target.value)}
+    />
+    <Input
+      value={imageTags}
+      name="userImageDesc"
+      type="text"
+      placeholder="Image tags, separate with a comma"
+      onChange={(e) => setImageTags(e.target.value)}
+    />
   </>
 
   return (
@@ -91,9 +96,9 @@ const uploadElement = imagePrev &&
           onChange={(e) => imagePreview(e)}
           />    
         </ChooseButton>
-      </StyledRow>
+        </StyledRow>
           {uploadElement}
-      {previewUrl}
+          {previewUrl}
     </UploadContainer>
   );
 };

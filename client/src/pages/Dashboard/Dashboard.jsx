@@ -3,7 +3,7 @@ import Stats from "./Stats/Stats";
 import ImageUpload from "./ImageUpload/ImageUpload";
 import UserGallery from "./UserGallery/UserGallery"
 import { StyledContainer } from "../../components/Container/Container.style";
-import { Title, StatsUpload, StyledCol } from "./Dashboard.style";
+import { Title, DashboardGrid, StatsStyledCol, ImageStyledCol, GalleryStyledCol } from "./Dashboard.style";
 import AnimatedPage from "../../animation/AnimatedPage";
 
 const Dashboard = () => {
@@ -70,35 +70,35 @@ const Dashboard = () => {
 
   return (
     <AnimatedPage>
-  <StyledContainer     
-    variants={container}
-    initial="hidden"
-    animate="show"
-    transition={{ delay: .3}}
-  >
+    <StyledContainer     
+      variants={container}
+      initial="hidden"
+      animate="show"
+      transition={{ delay: .3}}
+    >
     <Title>
       <h1>Dashboard</h1>
     </Title>
-    <StatsUpload>
-    <StyledCol>
-      <Stats 
-        name={userName}
-        count={count}
-      />
-    </StyledCol>
-    <StyledCol>
-        <ImageUpload
-          folderName={userName}
+    <DashboardGrid className="dashboard">
+      <StatsStyledCol className="stats">
+        <Stats 
+          name={userName}
+          count={count}
         />
-    </StyledCol>
-    </StatsUpload>
-    <StyledCol>
-        <UserGallery
-          userGallery={userGallery}
-          userName={userName}
-        />
-    </StyledCol>
-  </StyledContainer>
+      </StatsStyledCol>
+      <ImageStyledCol className="upload">
+          <ImageUpload
+            folderName={userName}
+          />
+      </ImageStyledCol>
+        <GalleryStyledCol className="gallery">
+          <UserGallery
+            userGallery={userGallery}
+            userName={userName}
+            />
+          </GalleryStyledCol>
+          </DashboardGrid>
+      </StyledContainer>
   </AnimatedPage>
      );
 };

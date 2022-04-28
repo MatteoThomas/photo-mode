@@ -8,7 +8,7 @@ const Login = () => {
   return (
     <AnimatedPage>
       <StyledContainer>
-        <LoginHeading >Log In</LoginHeading>
+        <LoginHeading >Login</LoginHeading>
         <LoginForm/>
       </StyledContainer>
     </AnimatedPage>

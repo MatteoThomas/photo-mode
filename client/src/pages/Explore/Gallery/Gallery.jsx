@@ -18,7 +18,6 @@ const Gallery = () => {
     setSingleImage(e.target.src)
     setSingleImageUser(e.target.name)
     setSingleImageName(e.target.alt)
-    console.log(e.target)
   };
 
   useEffect(() => {

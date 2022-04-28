@@ -24,7 +24,7 @@ const UserGallery = ({ userName, userGallery }) => {
       if (data.status === "ok") { 
         alert(`${imgToDeleteName} Deleted`)
       } else {
-       console.log(data.error);
+        
       }
     }
     
@@ -49,9 +49,7 @@ const UserGallery = ({ userName, userGallery }) => {
               transition={{ delay: i * .13}}
             >
               <CardHeader>
-
               <Name>{images.title}</Name>
-              
               <Icon>   
               <DeleteEl
                 value={images.title}
@@ -62,7 +60,6 @@ const UserGallery = ({ userName, userGallery }) => {
                   Double Click to Delete
                 </Tooltiptext>
               </Icon>
-
               </CardHeader>
               <Image 
                 src={images.image}
@@ -78,7 +75,6 @@ const UserGallery = ({ userName, userGallery }) => {
 
   return (
     <GalleryContainer>
-      {/* {galleryContainer} */}
       {userGallery !==  0 && <ImageCard />}
     </GalleryContainer>
 )}

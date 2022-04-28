@@ -14,7 +14,7 @@ export const GalleryContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1rem;
+  gap: 0.5rem;
 `;
 
 export const CardContainer = styled.div`

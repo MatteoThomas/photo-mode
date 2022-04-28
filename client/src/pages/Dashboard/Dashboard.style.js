@@ -1,13 +1,4 @@
 import styled from "styled-components";
-import { css } from "styled-components";
-
-export const mobile = (props) => {
-  return css`
-    @media only screen and (max-width: 416px) {
-      ${props}
-    }
-  `;
-};
 
 export const Title = styled.div`
   width: 100%;
@@ -15,15 +6,37 @@ export const Title = styled.div`
   margin: 0 0 1rem 0;
 `;
 
-export const StatsUpload = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: clamp(350px, 100%, 700px);
-  border-radius: 10px;
-  margin: 0 0 1rem 0;
-  ${mobile({ flexDirection: "column" })}
+export const DashboardGrid = styled.div`
+  display: grid;
+  grid-gap: 1em;
+  grid-template-columns: 300px auto auto;
+  grid-template-rows: 90px auto auto;
+  grid-template-areas:
+    "stats  gallery  gallery"
+    "upload gallery gallery"
+    "upload  gallery gallery";
+  @media (max-width: 416px) {
+    grid-template-columns: auto;
+    grid-template-areas:
+      "stats"
+      "upload"
+      "gallery";
+  }
 `;
 
-export const StyledCol = styled.div`
+export const StatsStyledCol = styled.div`
+  grid-area: stats;
+  border-radius: 10px;
+  border: 1px lightgray solid;
+  padding: 0 0 1rem 0;
+`;
+
+export const ImageStyledCol = styled.div`
+  grid-area: upload;
+  border-radius: 10px;
+`;
+
+export const GalleryStyledCol = styled.div`
+  grid-area: gallery;
   border-radius: 10px;
 `;

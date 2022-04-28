@@ -18,8 +18,9 @@ export const Jumbotron = styled.div`
   border-radius: 4px;
   height: 50%;
   color: aliceblue;
-  margin: 5rem 0.5rem 5rem 0;
-  ${mobile({ margin: "4rem 0.5rem 0 0" })}
+  padding: 7rem 0.5rem 4rem 0;
+  ${mobile({ padding: "6rem 0.5rem 0 0" })}/* margin: 6rem 0.5rem 4rem 0; */
+  /* ${mobile({ margin: "4rem 0.5rem 0 0" })} */
 `;
 
 export const Title = styled.div`

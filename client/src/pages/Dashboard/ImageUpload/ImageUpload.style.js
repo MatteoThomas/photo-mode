@@ -12,34 +12,36 @@ export const mobile = (props) => {
 export const UploadContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 0.5rem;
   border-radius: 10px;
   border: 1px lightgray solid;
-  ${mobile({ margin: "1.5rem auto" })}
+  margin: 0 0 2rem 0;
 `;
+
 export const ChooseButton = styled.div`
-  margin: 0 1rem 0 1rem;
   width: 100px;
 `;
+
 export const UploadButton = styled.button`
-  color: rgb(136, 136, 136);
+  color: aliceblue;
   border: 1px transparent solid;
   border-radius: 10px;
   transition: all 0.4s;
-  background-color: #b7eb7d;
+  background-color: rgb(129, 174, 132);
   height: 42px;
-  width: 100%;
+  width: 95%;
+  margin: 0 auto;
   &:hover {
     transition: all 0.4s;
     background-color: transparent;
-    border: 1px #b7eb7d solid;
-    color: #b7eb7d;
+    border: 1px rgb(129, 174, 132) solid;
+    color: aliceblue;
   }
 `;
 
 export const Image = styled.img`
-  margin: 1rem;
-  width: 300px;
+  margin: 1rem auto 0.5rem;
+  width: 95%;
+  padding: 0 0.5rem;
 `;
 
 export const StyledRow = styled.div`
@@ -51,9 +53,9 @@ export const StyledRow = styled.div`
 `;
 
 export const Input = styled.input`
-  border-radius: 4px;
-  border: none;
+  border-radius: 10px;
   height: 1.6rem;
-  margin: 1rem 0 0rem 0;
+  margin: 1rem auto 0rem;
   padding: 0 0 0 0.5rem;
+  width: 93%;
 `;
