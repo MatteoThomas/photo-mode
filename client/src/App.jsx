@@ -31,8 +31,7 @@ const App = () => {
         setHeader(false);
       } else if (user) {
         setHeader(true);
-      
-    }
+        }
   }, []);
   
   //CONDITIONALLY RENDER NAV OR HEADER

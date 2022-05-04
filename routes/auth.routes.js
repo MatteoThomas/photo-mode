@@ -19,7 +19,7 @@ router.post("/signup", async (req, res) => {
     });
     res.json({ status: "ok" });
   } catch (err) {
-    res.json({ status: "error", error: err });
+    res.json({ status: "error", error: res.err });
   }
 });
 
@@ -30,7 +30,7 @@ router.post("/signin", async (req, res) => {
     });
     if (!user) {
       console.log(err);
-      return { status: "error", error: "Invalid login" };
+      return res.json({ status: "error", error: "Invalid login" });
     }
     // BCRYPT COMPARING HASHED PASSWORD WITH USER TYPED PASSWORD
     const isPasswordValid = await bcrypt.compare(
@@ -57,7 +57,7 @@ router.post("/signin", async (req, res) => {
       return res.json({ status: "error", user: false });
     }
   } catch (err) {
-    res.json({ error: "login failed" });
+    res.json({ error: err });
   }
 });
 

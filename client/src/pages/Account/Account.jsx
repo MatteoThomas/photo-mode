@@ -46,8 +46,8 @@ const Account = () => {
 
     async function fetchAvatar() {
       //SENDS userName AS A SEARCH PARAMETER
-      const req = await fetch(`https://photo-mode.herokuapp.com/api/cloudinary/avatar?folderData=${userName}`)
-      // const req = await fetch(`http://localhost:8080/api/cloudinary/avatar?folderData=${userName}`)
+      // const req = await fetch(`https://photo-mode.herokuapp.com/api/cloudinary/avatar?folderData=${userName}`)
+      const req = await fetch(`http://localhost:8080/api/cloudinary/avatar?folderData=${userName}`)
       const data = await req.json();
       if (data.status === "ok" && data.results.total_count) {
         await setAvatar(data.results.resources[0].url)

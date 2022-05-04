@@ -15,6 +15,7 @@ export const UploadContainer = styled.div`
   border-radius: 10px;
   border: 1px lightgray solid;
   margin: 0 0 2rem 0;
+  position: sticky;
 `;
 
 export const ChooseButton = styled.div`

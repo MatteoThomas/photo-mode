@@ -23,8 +23,8 @@ const Gallery = () => {
   useEffect(() => {
 
     async function exploreGallery() {
-      const req = await fetch("https://photo-mode.herokuapp.com/api/cloudinary/gallery");
-      // const req = await fetch("http://localhost:8080/api/cloudinary/gallery");
+      // const req = await fetch("https://photo-mode.herokuapp.com/api/cloudinary/gallery");
+      const req = await fetch("http://localhost:8080/api/cloudinary/gallery");
       const data = await req.json();
       if (data.status === "ok") {
       const resources = data.results.resources;
@@ -44,9 +44,12 @@ const Gallery = () => {
             return(data.status)
           }
         }
-    exploreGallery();
-    }, []);
-
+        exploreGallery();
+      }, []);
+    //RANDOMIZES ORDER OF IMAGES IN gallery
+    // const shuffle = gallery => [...gallery].sort(() => Math.random() - 0.5);
+    // const newGallery= shuffle(gallery);
+    
     const container = {
       hidden: { opacity: 0 },
       show: { opacity: 1 }
@@ -76,7 +79,7 @@ const Gallery = () => {
                 variants={container}
                 initial="hidden"
                 animate="show"
-                transition={{ delay: i * .13}}
+                transition={{ delay: i * .04}}
               >
           <ImageContainer>
             <Image

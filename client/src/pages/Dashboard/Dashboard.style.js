@@ -6,25 +6,8 @@ export const Title = styled.div`
   margin: 0 0 1rem 0;
 `;
 
-export const DashboardGrid = styled.div`
-  display: grid;
-  grid-gap: 1em;
-  grid-template-columns: 300px auto auto;
-  grid-template-rows: 90px auto auto;
-  grid-template-areas:
-    "stats  gallery  gallery"
-    "upload gallery gallery"
-    "upload  gallery gallery";
-  @media (max-width: 416px) {
-    grid-template-columns: auto;
-    grid-template-areas:
-      "stats"
-      "upload"
-      "gallery";
-  }
-`;
-
 export const StatsStyledCol = styled.div`
+  position: sticky;
   grid-area: stats;
   border-radius: 10px;
   border: 1px lightgray solid;
@@ -39,4 +22,23 @@ export const ImageStyledCol = styled.div`
 export const GalleryStyledCol = styled.div`
   grid-area: gallery;
   border-radius: 10px;
+`;
+
+export const DashboardGrid = styled.div`
+  display: grid;
+  grid-gap: 1em;
+  grid-template-columns: 300px auto;
+  grid-template-rows: 90px auto;
+  grid-template-areas:
+    "stats  gallery "
+    "upload gallery"
+    "upload  gallery";
+
+  @media (max-width: 415px) {
+    grid-template-columns: 95%;
+    grid-template-areas:
+      "stats"
+      "upload"
+      "gallery";
+  }
 `;

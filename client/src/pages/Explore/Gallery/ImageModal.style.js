@@ -21,6 +21,7 @@ export const ModalWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 0 0 1rem 0;
 `;
 
 export const ModalInfoContainer = styled.div`

@@ -11,11 +11,12 @@ const ImageUpload = ( props ) => {
   //DESTRUCTURE PROPS
   const {folderName = ""} = props
   
+  //VALIDATES IMAGE NAME INPUT
   const handleClick = () => {
-    if (userImageName.length > 2 && userImageName.length < 11) {
+    if (userImageName.length > 2 && userImageName.length < 21) {
     uploadImage() }
     else {
-      alert("Image name must be between 3 - 10 characters.")
+      alert("Image name must be between 3 - 20 characters.")
     }
   }
 
@@ -56,14 +57,11 @@ const ImageUpload = ( props ) => {
 //RENDERS IMAGE PREVIEW IF ONE EXISTS
 const previewUrl =  imagePrev.imagePreviewUrl && <Image src={imagePrev.imagePreviewUrl} alt={userImageName}/> 
 
-// const canSubmit = userImageName.length > 2 && userImageName.length < 11
-
 //RENDERS UPLOAD FORM IF imagePrev EXISTS
 const uploadElement = imagePrev && 
   <>
     <UploadButton 
       onClick={handleClick}
-      // disabled={!canSubmit}
       >Upload
     </UploadButton>      
 
@@ -71,7 +69,7 @@ const uploadElement = imagePrev &&
       value={userImageName}
       name="userImageName"
       type="text"
-      placeholder="Image name must be 3 - 10 characters"
+      placeholder="Image name must be 3 - 20 characters"
       onChange={(e) => setUserImageName(e.target.value)}
     />
     <Input

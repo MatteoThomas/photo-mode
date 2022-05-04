@@ -15,8 +15,8 @@ const UserGallery = ({ userName, userGallery }) => {
   }
   
   async function deleteImage() {
-    const req = await fetch(`https://photo-mode.herokuapp.com/api/cloudinary/deleteImage?deleteImage=${imgToDelete}`, {
-      // const req = await fetch(`http://localhost:8080/api/cloudinary/deleteImage?deleteImage=${imgToDelete}`, {
+    // const req = await fetch(`https://photo-mode.herokuapp.com/api/cloudinary/deleteImage?deleteImage=${imgToDelete}`, {
+      const req = await fetch(`http://localhost:8080/api/cloudinary/deleteImage?deleteImage=${imgToDelete}`, {
       });
       const data = await req.json();
       //REMOVES USER NAME FROM IMAGE NAME

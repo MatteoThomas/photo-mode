@@ -8,8 +8,8 @@ function ImageModal({ singleImage, imageName, singleImageUser, setShowModal}) {
 
     async function fetchAvatar() {
         //SENDS singleImageUser AS A SEARCH PARAMETER
-        const req = await fetch(`https://photo-mode.herokuapp.com/api/cloudinary/avatar?folderData=${singleImageUser}`)
-        // const req = await fetch(`http://localhost:8080/api/cloudinary/avatar?folderData=${singleImageUser}`)
+        // const req = await fetch(`https://photo-mode.herokuapp.com/api/cloudinary/avatar?folderData=${singleImageUser}`)
+        const req = await fetch(`http://localhost:8080/api/cloudinary/avatar?folderData=${singleImageUser}`)
         const data = await req.json();
         if (data.status === "ok" && data.results.total_count) {
           await setAvatar(data.results.resources[0].url)

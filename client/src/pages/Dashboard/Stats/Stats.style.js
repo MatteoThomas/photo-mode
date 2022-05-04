@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const StatsContainer = styled.div`
+  position: sticky;
   display: flex;
   justify-content: left;
   align-items: center;

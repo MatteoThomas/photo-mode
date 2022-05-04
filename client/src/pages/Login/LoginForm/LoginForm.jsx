@@ -8,27 +8,31 @@ import { ButtonsWrapper, Input  } from "./LoginForm.style";
 
 function LoginForm() {
   const [username, setUsername] = useState("");
-  // const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-
+  
   async function loginUser(event) {
     setLoading(true)
     event.preventDefault();
-    axios.post("https://photo-mode.herokuapp.com/api/auth/signin", {
-    // axios.post("http://localhost:8080/api/auth/signin", {
+    // axios.post("https://photo-mode.herokuapp.com/api/auth/signin", {
+    axios.post("http://localhost:8080/api/auth/signin", {
       username: username,
       password: password,
     }).then((response) => {
-       setLoading(false)
+      if (response.data.status === "ok"){
+      window.location.href = "/dashboard" 
+      console.log(response.data.status)
       window.localStorage.setItem("user", JSON.stringify(response))
-      window.location.href = "/dashboard" }
-      ).catch((err) => {
-        setLoading(false)
-        console.log(err)
-      })
+      } else {
+        alert("Check name and password")
+      }}
+    ).catch(function () {
+      setLoading(false)
+    })
+    setLoading(false)
     }
 
+    
     return (
       <> {!loading ? 
         <form 

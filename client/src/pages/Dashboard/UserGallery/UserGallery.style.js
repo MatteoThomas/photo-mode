@@ -10,11 +10,27 @@ export const mobile = (props) => {
   `;
 };
 
+// export const tablet = (props) => {
+//   return css`
+//     @media only screen and (max-width: 600px) {
+//       display: grid;
+//   grid-gap: 1em;
+//   grid-template-columns: 300px auto auto;
+//   grid-template-rows: 90px auto auto;
+//   grid-template-areas:
+//     "stats  gallery  gallery"
+//     "upload gallery gallery"
+//     "upload  gallery gallery";
+//     }
+//   `;
+// };
+
 export const GalleryContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 0.5rem;
+  margin: 0 auto 1rem;
 `;
 
 export const CardContainer = styled.div`
@@ -69,7 +85,7 @@ export const Tooltiptext = styled.div`
 
 export const Image = styled.img`
   width: 220px;
-  ${mobile({ width: "95vw" })}
+  ${mobile({ width: "100%" })}
 `;
 
 export const Name = styled.h2`
