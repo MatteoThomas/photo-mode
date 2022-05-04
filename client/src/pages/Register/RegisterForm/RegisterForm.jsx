@@ -13,8 +13,8 @@ function RenderForm()  {
   async function registerUser(event) {
     event.preventDefault();
   
-    // axios.post("https://photo-mode.herokuapp.com/api/auth/signup", {
-    axios.post("http://localhost:8080/api/auth/signup", {
+    axios.post("https://photo-mode.herokuapp.com/api/auth/signup", {
+    // axios.post("http://localhost:8080/api/auth/signup", {
     username: username,
     email: email,
     password: password

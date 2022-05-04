@@ -26,8 +26,8 @@ const Dashboard = () => {
 
     async function fetchGallery() {
       //SENDS userName AS A SEARCH PARAMETER TO CLOUDINARY
-      // const req = await fetch(`https://photo-mode.herokuapp.com/api/cloudinary/usergallery?folderData=${userName}`, )
-        const req = await fetch(`http://localhost:8080/api/cloudinary/usergallery?folderData=${userName}`)
+      const req = await fetch(`https://photo-mode.herokuapp.com/api/cloudinary/usergallery?folderData=${userName}`, )
+        // const req = await fetch(`http://localhost:8080/api/cloudinary/usergallery?folderData=${userName}`)
  
       const data = await req.json();
       

@@ -10,21 +10,6 @@ export const mobile = (props) => {
   `;
 };
 
-// export const tablet = (props) => {
-//   return css`
-//     @media only screen and (max-width: 600px) {
-//       display: grid;
-//   grid-gap: 1em;
-//   grid-template-columns: 300px auto auto;
-//   grid-template-rows: 90px auto auto;
-//   grid-template-areas:
-//     "stats  gallery  gallery"
-//     "upload gallery gallery"
-//     "upload  gallery gallery";
-//     }
-//   `;
-// };
-
 export const GalleryContainer = styled.div`
   display: flex;
   flex-wrap: wrap;

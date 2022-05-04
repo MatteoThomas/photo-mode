@@ -7,19 +7,13 @@ import { StyledAppContainer }from "./components/Container/Container.style"
 import Fallback from "./components/Fallback"
 
 const Nav = lazy(() => import("./components/Nav/Nav"));
-// import Nav from "./components/Nav/Nav"
 const Hero = lazy(() => import("./components/Hero/Hero"));
-// import Hero from "./components/Hero/Hero"
 const Login = lazy(() => import("./pages/Login/Login"));
-// import Login from "./pages/Login/Login";
 const Register = lazy(() => import("./pages/Register/Register"));
-// import Register from "./pages/Register/Register";
 const Explore = lazy(() => import("./pages/Explore/Explore"));
-// import Explore from "./pages/Explore/Explore";
 const Dashboard = lazy(() => import("./pages/Dashboard/Dashboard"));
-// import Dashboard from "./pages/Dashboard/Dashboard";
 const Account = lazy(() => import("./pages/Account/Account"));
-// import Account from "./pages/Account/Account";
+
 
 const App = () => {
   const [header, setHeader] = useState(false);

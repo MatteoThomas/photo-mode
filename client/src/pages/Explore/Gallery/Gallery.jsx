@@ -23,8 +23,8 @@ const Gallery = () => {
   useEffect(() => {
 
     async function exploreGallery() {
-      // const req = await fetch("https://photo-mode.herokuapp.com/api/cloudinary/gallery");
-      const req = await fetch("http://localhost:8080/api/cloudinary/gallery");
+      const req = await fetch("https://photo-mode.herokuapp.com/api/cloudinary/gallery");
+      // const req = await fetch("http://localhost:8080/api/cloudinary/gallery");
       const data = await req.json();
       if (data.status === "ok") {
       const resources = data.results.resources;

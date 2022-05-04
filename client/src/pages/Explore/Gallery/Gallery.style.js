@@ -21,23 +21,11 @@ export const Image = styled.img`
   }
 `;
 export const ImageContainer = styled.div`
-  /* margin: 0 auto; */
-  /* display: flex;
-  flex-wrap: wrap; */
-  /* flex-direction: column; */
-  /* word-break: break-all; */
-  /* align-items: center; */
-  /* width: 100%; */
   color: transparent;
   transition: all 0.4s;
 `;
 
-export const ImageInfo = styled.div`
-  /* display: flex;
-  justify-content: space-between;
-  padding: 0 0.5rem 0.5rem 0.5rem;
-  color: aliceblue; */
-`;
+export const ImageInfo = styled.div``;
 
 export const Loading = styled.h3`
   color: aliceblue;
