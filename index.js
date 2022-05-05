@@ -41,10 +41,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use((req, res, next) => {
-  res.setHeader(
+  res.header(
     "Access-Control-Allow-Origin",
-    // "http://localhost:3000"
     "*"
+    // "http://localhost:3000"
   );
 
   next();
