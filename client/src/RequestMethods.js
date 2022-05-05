@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default axios.create({
   // baseURL: "http://localhost:8080",
-  baseURL: "https://photo-mode.herokuapp.com/",
+  baseURL: "https://photo-mode.herokuapp.com",
 });
 
 // axios.defaults.baseURL = "http://localhost:8080";

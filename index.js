@@ -30,7 +30,7 @@ app.use(
     // DEVELOPMENT //s
     // origin: "http://localhost:3000",
     // PRODUCTION
-    origin: "https://photo-mode.herokuapp.com/",
+    origin: "https://photo-mode.herokuapp.com",
   })
 );
 
@@ -44,12 +44,9 @@ app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
     // "http://localhost:3000"
-    "https://photo-mode.herokuapp.com/"
+    "https://photo-mode.herokuapp.com"
   );
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
+
   next();
 });
 
