@@ -1,7 +1,7 @@
 import React, { useState} from "react";
 import deleteIcon  from "../../../components/icons/delete-icon.png"
 import { GalleryContainer, CardContainer, CardHeader, Icon, Tooltiptext, Image, Name, DeleteEl, CardMotion } from "./UserGallery.style";
-
+import API from "../../../RequestMethods"
 const UserGallery = ({ userName, userGallery }) => {
 
   const [imgToDelete, setImgToDelete] = useState("");
@@ -15,19 +15,16 @@ const UserGallery = ({ userName, userGallery }) => {
   }
   
   async function deleteImage() {
-    const req = await fetch(`https://photo-mode.herokuapp.com/api/cloudinary/deleteImage?deleteImage=${imgToDelete}`, {
-      // const req = await fetch(`http://localhost:8080/api/cloudinary/deleteImage?deleteImage=${imgToDelete}`, {
-      });
-      const data = await req.json();
-      //REMOVES USER NAME FROM IMAGE NAME
-      const imgToDeleteName = imgToDelete.split("/")[1]
-      if (data.status === "ok") { 
+    API.get(`/api/cloudinary/deleteImage?deleteImage=${imgToDelete}`, 
+      // API.get(`/api/cloudinary/deleteImage?deleteImage=${imgToDelete}`, {
+      ).then(res => {
+        //REMOVES USER NAME FROM IMAGE NAME
+        console.log(res)
+        const imgToDeleteName = imgToDelete.split("/")[1]
         alert(`${imgToDeleteName} Deleted`)
-      } else {
-        
-      }
-    }
-    
+
+      })
+  }
     //VARIANT OBJECT FOR ANIMATION    
   const container = {
     hidden: { opacity: 0 },

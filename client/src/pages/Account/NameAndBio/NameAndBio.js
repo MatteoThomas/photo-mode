@@ -11,6 +11,8 @@ import {
   NameAndAvatar,
 } from "./NameAndBio.style";
 
+import API from "../../../RequestMethods";
+
 const NameAndBio = (props) => {
   const { nameProp, emailProp, bioProp, avatarProp } = props;
   const [tempBio, setTempBio] = useState(null);
@@ -32,22 +34,24 @@ const NameAndBio = (props) => {
   async function updateBio(e) {
     editLocalUser();
     e.preventDefault();
-    return axios
-      .post("https://photo-mode.herokuapp.com/api/auth/editBio", {
-        // .post("http://localhost:8080/api/auth/editBio", {
-        email: emailData,
-        bio: tempBio,
-      })
-      .then((response) => {
-        console.log(response);
-        editLocalUser();
-        setBioData(response.data.bio);
-        e.target.reset();
-        return response.data.bio;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    return (
+      API
+        // .post("https://photo-mode.herokuapp.com/api/auth/editBio", {
+        .post("/api/auth/editBio", {
+          email: emailData,
+          bio: tempBio,
+        })
+        .then((response) => {
+          console.log(response);
+          editLocalUser();
+          setBioData(response.data.bio);
+          e.target.reset();
+          return response.data.bio;
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    );
   }
 
   // UPDATES THE LOCAL STORAGE OBJECT "user" WITH tempBio

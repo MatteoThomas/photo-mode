@@ -48,10 +48,12 @@ export const Input = styled.div`
   width: 30%;
   height: 80px;
   border-radius: 10px;
+  cursor: move;
 `;
 
 export const Image = styled.img`
   width: 90px;
   height: 90px;
   border-radius: 50%;
+  cursor: move;
 `;

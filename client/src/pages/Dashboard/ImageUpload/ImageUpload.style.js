@@ -24,6 +24,7 @@ export const ChooseButton = styled.div`
 
 export const UploadButton = styled.button`
   color: aliceblue;
+
   border: 1px transparent solid;
   border-radius: 10px;
   transition: all 0.4s;

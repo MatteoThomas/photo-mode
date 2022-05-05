@@ -70,18 +70,26 @@ export const Bio = styled.div`
 
 export const Input = styled.input`
   margin: 0 1rem 0 0;
+  background-color: transparent;
+  border: none;
+  & :focus {
+    border: none;
+  }
 `;
 
 export const StyledSubmitButton = styled.button`
+  background-color: transparent;
+  color: rgb(255, 255, 255);
   border: 1px transparent solid;
-  border-radius: 2px;
-  transition: 0.4s;
-  height: 32px;
-  margin: 0 1rem 0 0;
+  border-radius: 7px;
+  transition: 0.7s;
+  height: 42px;
+  width: 100%;
   &:hover {
-    transition: all 0.4s;
-    color: aliceblue;
-    background-color: grey;
+    background-color: #e9ff6f;
+    border: 1px transparent solid;
+    transition: 0.3s;
+    color: black;
   }
   &:active {
     border: 1px black solid;

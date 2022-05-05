@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+
 import { Link } from "react-router-dom";
 import { ButtonsWrapper, Input, RegisterFormContainer } from "./RegisterForm.style"
 import { StyledButton } from "../../../components/Button/Button.style";
-import axios from "axios";
+
+import API from "../../../RequestMethods"
 
 function RenderForm()  {
   const [username, setUsername] = useState("");
@@ -12,9 +14,7 @@ function RenderForm()  {
 
   async function registerUser(event) {
     event.preventDefault();
-  
-    axios.post("https://photo-mode.herokuapp.com/api/auth/signup", {
-    // axios.post("http://localhost:8080/api/auth/signup", {
+      API.post("/api/auth/signup", {
     username: username,
     email: email,
     password: password

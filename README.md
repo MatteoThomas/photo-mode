@@ -1,46 +1,73 @@
-![Homepage screenshot](/photomode_hero.svg)
 <h3 align="center">
+ <img src="./img/photomode_hero.svg">
 	A MERN stack photo-sharing app.
 </h3>
-<p align="center">
-<img src="./Explore_Screenshot.png">
-</p>
-
 
 <p align="center">
 	<strong>
-		<a href="https://photo-mode.herokuapp.com/" font-size="4rem">Deployed App</a>
+		<a href="https://photo-mode.herokuapp.com/">Deployed App</a>
 		•
-		<a href="https://github.com/MatteoThomas/photo-mode">Gihub Repo</a>
+		<a href="https://github.com/MatteoThomas/photo-mode">Github Repo</a>
 		•
 		<a href="https://github.com/MatteoThomas">Github</a>
 	</strong>
 </p>
 
-## clone or download
+- [User story](#user-story)
+- [Usage](#usage)
+- [Screenshots](#screenshots)
+- [Future Development](#future-development)
+- [Known Issues](#known-issues)
+- [Install](#install)
+	- [Clone](#clone)
+	- [Environmental variables](#environmental-variables)
+	- [Install packages](#install-packages)
+- [Dependencies](#dependencies)
+- [Bugs / Comments](#bugs--comments)
+- [Author](#author)
+- [License](#license)
+  
+# User story
+	As a user....
+# Usage
+	Register /
+	Login /
+	Upload /
+	Delete /
+	Explore /
+	Write bio /
+	Add avatar /
+# Screenshots
+<p align="left" >
+ <img src="./img/Dashboard.png"><img src="./img/Explore2.png"><img src="./img/Image_Modal.png"><img src="./img/Account2.png">
+</p>
+
+# Future Development
+	- Dry up / Organize API calls
+	- Implement ContextAPI for user data across app
+	- Image comments and likes
+  
+# Known Issues
+# Install
+## Clone
 ```terminal
 $ git clone git@github.com:MatteoThomas/photo-mode.git
 ```
 
-### Set environmental variables for the backend
-	SECRET
+## Environmental variables
+	- SECRET
+	- MONGODB_URI
+	- CLOUD_NAME
+	- CLOUD_KEY
+	- CLOUD_SECRET
 
-	MONGODB_URI
-
-	CLOUD_NAME
-
-	CLOUD_KEY
-
-	CLOUD_SECRET
-
-### Start
+## Install packages
 ```terminal
 $ cd photomode // go to app folder
 $ npm i // install packages
 $ cd client // go to client folder
 $ npm i // install packages
 ```
-
 
 # Dependencies
 | Front End  | Back End |
@@ -60,18 +87,12 @@ $ npm i // install packages
 | - |nodemon: 2.0.15 |
 | - | uuid: 8.3.2  |
 
+# Bugs / Comments
 
-# Screenshots of this project
-<p align="left" >
-	<img src="./Explore_Screenshot.png">
-</p>
+[Create Issue](https://github.com/MatteoThomas/photo-mode/issues) 
 
-## Bugs or Comments
-
-[Create new Issues](https://github.com/MatteoThomas/photo-mode/issues) 
-
-## Author
+# Author
 [Matthew Elliott](https://melliott.co/)
 
-### License
+# License
 [MIT](https://github.com/amazingandyyy/mern/blob/master/LICENSE)

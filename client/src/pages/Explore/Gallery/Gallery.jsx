@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { StyledContainer, GalleryMotion, CardMotion, Image, ImageContainer, ImageInfo } from "./Gallery.style";
 
 import  ImageModal  from "./ImageModal";
-
+import API from "../../../RequestMethods"
 const Gallery = () => {
 
   const [gallery, setGallery] = useState([]);
@@ -23,26 +23,26 @@ const Gallery = () => {
   useEffect(() => {
 
     async function exploreGallery() {
-      const req = await fetch("https://photo-mode.herokuapp.com/api/cloudinary/gallery");
-      // const req = await fetch("http://localhost:8080/api/cloudinary/gallery");
-      const data = await req.json();
-      if (data.status === "ok") {
-      const resources = data.results.resources;
-      const images = resources.map((resource) => {
-        return {
-          user: resource.public_id.split("/")[0],
-          folder: resource.public_id.split("/")[0],
-          imageURL: resource.url,
-          name: resource.public_id.split("/")[1],
-          id: resource.asset_id,
-        };
-      })
-            setGallery(images);
+      // const req = await fetch("https://photo-mode.herokuapp.com/api/cloudinary/gallery");
+     API.get("/api/cloudinary/gallery").then((res) => {
+
+       const resources = res.data.results.resources;
+       const images = resources.map((resource) => {
+         return {
+           user: resource.public_id.split("/")[0],
+           folder: resource.public_id.split("/")[0],
+           imageURL: resource.url,
+           name: resource.public_id.split("/")[1],
+           id: resource.asset_id,
+         };
+       })
+       setGallery(images);
+     }).catch(err => {
+       console.log(err)
+     })
             setLoading(false);
-          } else {
-            alert("Request timed out, refresh page.")
-            return(data.status)
-          }
+            // alert("Request timed out, refresh page.")
+            // return(data.status)
         }
         exploreGallery();
       }, []);

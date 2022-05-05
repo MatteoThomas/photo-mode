@@ -2,9 +2,13 @@ import React, { useEffect, useState } from "react";
 import Stats from "./Stats/Stats";
 import ImageUpload from "./ImageUpload/ImageUpload";
 import UserGallery from "./UserGallery/UserGallery"
+
+import AnimatedPage from "../../animation/AnimatedPage";
+
 import { StyledContainer } from "../../components/Container/Container.style";
 import { Title, DashboardGrid, StatsStyledCol, ImageStyledCol, GalleryStyledCol } from "./Dashboard.style";
-import AnimatedPage from "../../animation/AnimatedPage";
+
+import API from "../../RequestMethods"
 
 const Dashboard = () => {
   const [userName, setUserName] = useState("");
@@ -24,20 +28,16 @@ const Dashboard = () => {
         alert("userName not set")
       }}
 
-    async function fetchGallery() {
+    async function getGallery() {
       //SENDS userName AS A SEARCH PARAMETER TO CLOUDINARY
-      const req = await fetch(`https://photo-mode.herokuapp.com/api/cloudinary/usergallery?folderData=${userName}`, )
-        // const req = await fetch(`http://localhost:8080/api/cloudinary/usergallery?folderData=${userName}`)
- 
-      const data = await req.json();
-      
-      if (data.status === "ok") {
+     API.get(`/api/cloudinary/usergallery?folderData=${userName}`, )
+     .then(res => {
         //NUMBER OF UPLOADS BY USER
-        const countData = data.results.total_count;
-
-        //IMAGE DATA
-        const resources = data.results.resources;
-        const images = resources.map((resource) => {
+        const countData = res.data.results.resources.length;
+        //MAP IMAGE DATA
+        // console.log(res.data.results.resources)
+        const resources = res.data.results.resources;
+        let images = resources.map((resource) => {
           return {
             id: resource.asset_id,
             //REMOVES THE FOLDER PREFIX AND THE FILE EXTENSION THEN
@@ -46,18 +46,13 @@ const Dashboard = () => {
             title: resource.public_id.split(/(?:\/|\.)+/)[1],
             image: resource.secure_url,
             username: resource.folderName,
-            };
-    });
-    if (isSubscribed) {
+          };
+        })
         setUserGallery(images);
         setCount(countData)
-    } else {
-      
-      window.location.href = "/login"
+      })
     }
-
-    }}
-      fetchGallery();
+      getGallery();
       getName()
     return() => isSubscribed = false
       },[userName]);

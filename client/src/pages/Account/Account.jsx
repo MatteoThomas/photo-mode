@@ -3,7 +3,8 @@ import NameAndBio from "./NameAndBio/NameAndBio";
 import {  Title } from "./Account.style";
 import { StyledContainer } from "../../components/Container/Container.style";
 import AnimatedPage from "../../animation/AnimatedPage";
-
+import axios from "axios";
+import API from "../../RequestMethods"
 
 const Account = () => {
   const [avatar, setAvatar] = useState("");
@@ -46,14 +47,12 @@ const Account = () => {
 
     async function fetchAvatar() {
       //SENDS userName AS A SEARCH PARAMETER
-      const req = await fetch(`https://photo-mode.herokuapp.com/api/cloudinary/avatar?folderData=${userName}`)
-      // const req = await fetch(`http://localhost:8080/api/cloudinary/avatar?folderData=${userName}`)
-      const data = await req.json();
-      if (data.status === "ok" && data.results.total_count) {
-        await setAvatar(data.results.resources[0].url)
-      } else {
-
-      }}
+      // const req = await fetch(`https://photo-mode.herokuapp.com/api/cloudinary/avatar?folderData=${userName}`)
+      API.get(`/api/cloudinary/avatar?folderData=${userName}`)
+      .then(res => {
+        setAvatar(res.data.results.resources[0].url)
+      })
+    }
           fetchAvatar()
           getBio();
           getEmail();
@@ -71,12 +70,12 @@ const Account = () => {
         <h1>Account</h1>
       </Title>
       {!loading ? 
-      <NameAndBio
-        nameProp={userName}
-        emailProp={userEmail}
-        bioProp={userBio}
-        avatarProp={avatar}
-      />
+        <NameAndBio
+          nameProp={userName}
+          emailProp={userEmail}
+          bioProp={userBio}
+          avatarProp={avatar}
+        />
         : <h1>Loading...</h1>}
     </StyledContainer>
     </AnimatedPage>

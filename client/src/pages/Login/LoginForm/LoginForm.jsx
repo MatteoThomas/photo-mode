@@ -2,9 +2,10 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { StyledButton } from "../../../components/Button/Button.style";
-
 import { StyledInputWrapper } from "../../../components/Input/Input.style";
 import { ButtonsWrapper, Input  } from "./LoginForm.style";
+
+import API from "../../../RequestMethods"
 
 function LoginForm() {
   const [username, setUsername] = useState("");
@@ -14,8 +15,8 @@ function LoginForm() {
   async function loginUser(event) {
     setLoading(true)
     event.preventDefault();
-    axios.post("https://photo-mode.herokuapp.com/api/auth/signin", {
-    // axios.post("http://localhost:8080/api/auth/signin", {
+    // axios.post("https://photo-mode.herokuapp.com/api/auth/signin", {
+    API.post("/api/auth/signin", {
       username: username,
       password: password,
     }).then((response) => {
@@ -26,7 +27,8 @@ function LoginForm() {
       } else {
         alert("Check name and password")
       }}
-    ).catch(function () {
+    ).catch(err => {
+      console.log(err)
       setLoading(false)
     })
     setLoading(false)

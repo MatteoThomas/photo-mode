@@ -46,6 +46,7 @@ const AvatarUpload = ( props ) => {
     <Image 
       src={avatarPrev} 
       alt="profile pic preview"
+
     /> 
     
   //RENDERS UPLOAD BUTTON IF imagePrev EXISTS

@@ -27,7 +27,7 @@ db.mongoose
 
 app.use(
   cors({
-    // DEVELOPMENT //NEEDS TO MATCH FRONT END
+    // DEVELOPMENT //s
     // origin: "http://localhost:3000",
     // PRODUCTION
     origin: "https://photo-mode.herokuapp.com/",
@@ -39,6 +39,19 @@ app.use(bodyParser.json());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use((req, res, next) => {
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    // "http://localhost:3000"
+    "https://photo-mode.herokuapp.com"
+  );
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 
 app.use("/api/cloudinary", cloudinary);
 app.use("/api/auth", auth);

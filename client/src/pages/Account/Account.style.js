@@ -12,8 +12,7 @@ export const Input = styled.input``;
 export const AvatarImg = styled.img`
   height: fit-content;
   vertical-align: middle;
-  width: 90px;
-  height: 90px;
+
   border-radius: 50%;
 `;
 

@@ -32,7 +32,7 @@ const App = () => {
   const renderHeader = header ? (
     <Nav />  
   ) : (
-   
+  
       <Hero />
     
   );
