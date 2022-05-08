@@ -1,9 +1,10 @@
 const express = require("express");
+const app = express();
 const path = require("path");
 const cors = require("cors");
 const dotenv = require("dotenv");
-const app = express();
 const bodyParser = require("body-parser");
+
 const cloudinary = require("./routes/cloudinary");
 const auth = require("./routes/auth.routes");
 
@@ -42,7 +43,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "https://photo-mode.herokuapp.com");
-
   next();
 });
 

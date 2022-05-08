@@ -1,5 +1,5 @@
 import React from "react";
-import { HeroMotion, Jumbotron, Title } from "./Hero.style";
+import { HeroMotion, Jumbotron, Title } from "./Header.style";
 
 const Hero = () => {
   const container = {

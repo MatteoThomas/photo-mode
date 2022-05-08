@@ -7,37 +7,33 @@ const UserGallery = ({ userName, userGallery }) => {
   const [imgToDelete, setImgToDelete] = useState("");
 
   function handleClick( images ) {
-    //CREATED THE PUBLIC ID NEEDED TO DELETE FROM CLOUDINARY
-    //userName IS A PROP FROM DASHBOARD AND images.title COMES
-    //FROM THE CLICKED IMAGE
+    // userName IS A PROP FROM DASHBOARD AND 
+    // images.title IS FROM THE CLICKED IMAGE
     setImgToDelete(userName + "/" + images.title)
     deleteImage()
   }
   
   async function deleteImage() {
     API.get(`/api/cloudinary/deleteImage?deleteImage=${imgToDelete}`, 
-      // API.get(`/api/cloudinary/deleteImage?deleteImage=${imgToDelete}`, {
       ).then(res => {
         //REMOVES USER NAME FROM IMAGE NAME
         console.log(res)
         const imgToDeleteName = imgToDelete.split("/")[1]
         alert(`${imgToDeleteName} Deleted`)
-
       })
   }
-    //VARIANT OBJECT FOR ANIMATION    
+  //VARIANT OBJECT FOR ANIMATION    
   const container = {
     hidden: { opacity: 0 },
     show: { opacity: 1 }
   }
 
   function ImageCard() {
-   
     return (
       <>      
       {userGallery.map((images, i) => (
-          <CardContainer
-          key={images.image}
+          <CardContainer 
+            key={images.image}
           >  
             <CardMotion 
               variants={container}
@@ -63,9 +59,9 @@ const UserGallery = ({ userName, userGallery }) => {
                 alt={images.desc}
                 value={images.name} 
                 loading="lazy"
-                 />
+              />
             </CardMotion>
-            </CardContainer>
+          </CardContainer>
         ))}
         </>
     )}

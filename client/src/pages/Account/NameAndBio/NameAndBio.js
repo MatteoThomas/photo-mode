@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import AvatarUpload from "../Avatar/AvatarUpload";
 import { StyledSubmitButton } from "./NameAndBio.style";
 import {
@@ -34,24 +33,20 @@ const NameAndBio = (props) => {
   async function updateBio(e) {
     editLocalUser();
     e.preventDefault();
-    return (
-      API
-        // .post("https://photo-mode.herokuapp.com/api/auth/editBio", {
-        .post("/api/auth/editBio", {
-          email: emailData,
-          bio: tempBio,
-        })
-        .then((response) => {
-          console.log(response);
-          editLocalUser();
-          setBioData(response.data.bio);
-          e.target.reset();
-          return response.data.bio;
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-    );
+    return API.post("/api/auth/editBio", {
+      email: emailData,
+      bio: tempBio,
+    })
+      .then((response) => {
+        console.log(response);
+        editLocalUser();
+        setBioData(response.data.bio);
+        e.target.reset();
+        return response.data.bio;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   // UPDATES THE LOCAL STORAGE OBJECT "user" WITH tempBio
@@ -92,9 +87,7 @@ const NameAndBio = (props) => {
         <h1>{nameData}</h1>
         {avatarElement}
       </NameAndAvatar>
-
       {avatarUploadElement}
-
       <StyledCol>
         <form onSubmit={updateBio}>
           <Input
@@ -115,7 +108,6 @@ const NameAndBio = (props) => {
           <Bio>{tempBio ? tempBio : bioData}</Bio>
         </form>
       </StyledCol>
-
       <StyledCol>
         <StyledSubmitButton buttonLabel="Logout" type="button" onClick={logOut}>
           Logout

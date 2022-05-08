@@ -55,7 +55,8 @@ const ImageUpload = ( props ) => {
   };
   
 //RENDERS IMAGE PREVIEW IF ONE EXISTS
-const previewUrl =  imagePrev.imagePreviewUrl && <Image src={imagePrev.imagePreviewUrl} alt={userImageName}/> 
+const previewUrl = imagePrev.imagePreviewUrl && 
+  <Image src={imagePrev.imagePreviewUrl} alt={userImageName}/> 
 
 //RENDERS UPLOAD FORM IF imagePrev EXISTS
 const uploadElement = imagePrev && 
@@ -64,7 +65,6 @@ const uploadElement = imagePrev &&
       onClick={handleClick}
       >Upload
     </UploadButton>      
-
     <Input
       value={userImageName}
       name="userImageName"
@@ -89,14 +89,14 @@ const uploadElement = imagePrev &&
           buttonLabel="Choose File"
         >
           <input 
-          type="file" 
-          accept="image/png, image/jpeg, image/svg, image/gif" 
-          onChange={(e) => imagePreview(e)}
+            type="file" 
+            accept="image/png, image/jpeg, image/svg, image/gif" 
+            onChange={(e) => imagePreview(e)}
           />    
         </ChooseButton>
-        </StyledRow>
-          {uploadElement}
-          {previewUrl}
+      </StyledRow>
+      {uploadElement}
+      {previewUrl}
     </UploadContainer>
   );
 };

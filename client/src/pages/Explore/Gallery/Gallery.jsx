@@ -3,9 +3,10 @@ import React, { useState, useEffect } from "react";
 import { StyledContainer, GalleryMotion, CardMotion, Image, ImageContainer, ImageInfo } from "./Gallery.style";
 
 import  ImageModal  from "./ImageModal";
-import API from "../../../RequestMethods"
-const Gallery = () => {
 
+import API from "../../../RequestMethods"
+
+const Gallery = () => {
   const [gallery, setGallery] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -21,11 +22,8 @@ const Gallery = () => {
   };
 
   useEffect(() => {
-
     async function exploreGallery() {
-      // const req = await fetch("https://photo-mode.herokuapp.com/api/cloudinary/gallery");
      API.get("/api/cloudinary/gallery").then((res) => {
-
        const resources = res.data.results.resources;
        const images = resources.map((resource) => {
          return {
@@ -34,29 +32,24 @@ const Gallery = () => {
            imageURL: resource.url,
            name: resource.public_id.split("/")[1],
            id: resource.asset_id,
-         };
-       })
-       setGallery(images);
-     }).catch(err => {
-       console.log(err)
-     })
-            setLoading(false);
-            // alert("Request timed out, refresh page.")
-            // return(data.status)
-        }
-        exploreGallery();
-      }, []);
-    //RANDOMIZES ORDER OF IMAGES IN gallery
-    // const shuffle = gallery => [...gallery].sort(() => Math.random() - 0.5);
-    // const newGallery= shuffle(gallery);
-    
-    const container = {
-      hidden: { opacity: 0 },
-      show: { opacity: 1 }
+        };
+      })
+        setGallery(images);
+      }).catch(err => {
+        console.log(err)
+      })
+      setLoading(false);
     }
+    exploreGallery();
+  }, []);
 
-    return (
-      <>         
+  const container = {
+    hidden: { opacity: 0 },
+    show: { opacity: 1 }
+  }
+
+  return (
+    <>         
       {loading ? <h1>Loading...</h1> : null}
       {showModal ?
         <ImageModal 
@@ -81,25 +74,20 @@ const Gallery = () => {
                 animate="show"
                 transition={{ delay: i * .04}}
               >
-          <ImageContainer>
-            <Image
-              name={img.user}
-          
-              alt={img.name}
-              src={img.imageURL} 
-              onClick={(e) => openModal(e)}
-            />   
-            <ImageInfo>
-
-            </ImageInfo>
-          </ImageContainer>
-          </CardMotion>
+            <ImageContainer>
+              <Image
+                name={img.user}
+                alt={img.name}
+                src={img.imageURL} 
+                onClick={(e) => openModal(e)}
+              />   
+            </ImageContainer>
+            </CardMotion>
           </GalleryMotion>
-      ))}
-    </StyledContainer>
-}
-    </>
-
+          ))}
+        </StyledContainer>
+      }
+  </>
 )}
 
 export default Gallery

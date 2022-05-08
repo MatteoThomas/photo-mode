@@ -59,7 +59,6 @@ export const Tooltiptext = styled.div`
   text-align: center;
   border-radius: 6px;
   padding: 5px 0;
-  /* Position the tooltip */
   position: absolute;
   z-index: 1;
   ${Icon}:hover & {

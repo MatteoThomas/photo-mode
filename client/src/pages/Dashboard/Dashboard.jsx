@@ -17,7 +17,6 @@ const Dashboard = () => {
 
   useEffect(() => {
     let isSubscribed = true;
-    //GETS USER NAME FROM MONGODB
 
     const getName = async() => {
       const localName = await JSON.parse(window.localStorage.getItem('user'));
@@ -34,8 +33,6 @@ const Dashboard = () => {
      .then(res => {
         //NUMBER OF UPLOADS BY USER
         const countData = res.data.results.resources.length;
-        //MAP IMAGE DATA
-        // console.log(res.data.results.resources)
         const resources = res.data.results.resources;
         let images = resources.map((resource) => {
           return {
@@ -95,7 +92,7 @@ const Dashboard = () => {
           </DashboardGrid>
       </StyledContainer>
   </AnimatedPage>
-     );
+  );
 };
 
 export default Dashboard;

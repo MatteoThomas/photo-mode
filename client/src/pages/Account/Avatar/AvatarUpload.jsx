@@ -4,6 +4,7 @@ import { AvatarContainer, StyledRow, UploadButton, Input, Image } from "./Avatar
 const AvatarUpload = ( props ) => {
   const [avatar, setAvatar] = useState([]);
   const [avatarPrev, setAvatarPrev] = useState("");
+  
   //DESTRUCTURE PROPS
   const {folderName = ""} = props
 
@@ -40,13 +41,12 @@ const AvatarUpload = ( props ) => {
     };
     reader.readAsDataURL(file);
   };
-// 
+
   // RENDERS AVATAR PREVIEW IF ONE EXISTS
   const previewUrl =  avatarPrev && 
     <Image 
       src={avatarPrev} 
       alt="profile pic preview"
-
     /> 
     
   //RENDERS UPLOAD BUTTON IF imagePrev EXISTS
@@ -67,12 +67,7 @@ const AvatarUpload = ( props ) => {
             {previewUrl}
             {uploadButton}
         </Input>
-
-        </StyledRow>
-
-      <StyledRow>
-        {/* {previewUrl}  */}
-        </StyledRow>
+      </StyledRow>
     </AvatarContainer>
   );
 };

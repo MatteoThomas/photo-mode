@@ -14,24 +14,23 @@ function RenderForm()  {
 
   async function registerUser(event) {
     event.preventDefault();
-      API.post("/api/auth/signup", {
-    username: username,
-    email: email,
-    password: password
-      }).then(() => {
-        alert("Registration Successful");
-        window.location.href = "/login"   
-        }).catch((err) => {
-        alert("An error occured.");
-        console.log(err)
-      })
-    }
+    API.post("/api/auth/signup", {
+      username: username,
+      email: email,
+      password: password
+        }).then(() => {
+          alert("Registration Successful");
+          window.location.href = "/login"   
+          }).catch((err) => {
+          alert("An error occured.");
+          console.log(err)
+        })
+  }
 
-    return (
+  return (
     <RegisterFormContainer>
       <form onSubmit={registerUser}>
         <label>User Name</label>
-  
         <Input
           value={username}
           onChange={(e) => setUsername(e.target.value)}
@@ -41,7 +40,6 @@ function RenderForm()  {
         />
         <br /> 
         <label>Email</label>
-   
         <Input
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -50,7 +48,6 @@ function RenderForm()  {
           placeholder="Email"
         /><br />
         <label>Password</label>
-
         <Input
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -60,7 +57,6 @@ function RenderForm()  {
         />
         <br />  
         <label>Verify Password</label>
-  
         <Input
           value={verify}
           onChange={(e) => setVerify(e.target.value)}
@@ -68,13 +64,6 @@ function RenderForm()  {
           required
           placeholder="Verify Password"
         />
-        {/* <Input
-          value={verify}
-          onChange={(e) => setVerify(e.target.value)}
-          type="password"
-          required
-          placeholder="Verify Password"
-        /> */}
       <ButtonsWrapper>
         <StyledButton
           buttonLabel="Register"
@@ -93,7 +82,7 @@ function RenderForm()  {
       </ButtonsWrapper>
     </form>
     </RegisterFormContainer>
-    )
+  )
 };
 
 export default RenderForm

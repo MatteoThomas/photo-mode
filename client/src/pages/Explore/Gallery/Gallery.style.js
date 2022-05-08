@@ -5,8 +5,6 @@ export const StyledContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
 `;
-export const GalleryMotion = styled(motion.div)``;
-export const CardMotion = styled(motion.div)``;
 
 export const Image = styled.img`
   padding: 0.5rem;
@@ -20,13 +18,16 @@ export const Image = styled.img`
     height: 100%;
   }
 `;
+
 export const ImageContainer = styled.div`
   color: transparent;
   transition: all 0.4s;
 `;
 
-export const ImageInfo = styled.div``;
-
 export const Loading = styled.h3`
   color: aliceblue;
 `;
+
+export const GalleryMotion = styled(motion.div)``;
+export const ImageInfo = styled.div``;
+export const CardMotion = styled(motion.div)``;

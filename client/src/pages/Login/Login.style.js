@@ -14,10 +14,10 @@ export const StyledContainer = styled.div`
   margin: 0 auto;
 `;
 
-export const LoginMotion = styled(motion.div)``;
-
 export const LoginHeading = styled.h1`
   font-family: "Raleway" sans-serif;
   font-weight: 100;
   font-size: 3rem;
 `;
+
+export const LoginMotion = styled(motion.div)``;

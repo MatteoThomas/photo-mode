@@ -1,18 +1,16 @@
 <h3 align="center">
- <img src="./img/photomode_hero.svg">
+ <img src="https://res.cloudinary.com/proj3/image/upload/v1651976609/Photomode_Readme/photomode_hero_uzcafr.svg">
+ <br/>
 	A MERN stack photo-sharing app.
 </h3>
 
 <p align="center">
-	<strong>
-		<a href="https://photo-mode.herokuapp.com/">Deployed App</a>
-		•
-		<a href="https://github.com/MatteoThomas/photo-mode">Github Repo</a>
-		•
-		<a href="https://github.com/MatteoThomas">Github</a>
-	</strong>
-</p>
-
+<h1 align="center">
+ 	<a href="https://photo-mode.herokuapp.com/">Deployed App</a> •
+ 	<a href="https://github.com/MatteoThomas/photo-mode">Github Repo</a> •
+	<a href="https://github.com/MatteoThomas">Github</a>
+</h1>
+		
 - [User story](#user-story)
 - [Usage](#usage)
 - [Screenshots](#screenshots)
@@ -39,7 +37,9 @@
 	Add avatar /
 # Screenshots
 <p align="left" >
- <img src="./img/Dashboard.png"><img src="./img/Explore2.png"><img src="./img/Image_Modal.png"><img src="./img/Account2.png">
+ <img src="https://res.cloudinary.com/proj3/image/upload/v1651974555/Photomode_Readme/Explore2_pihurb.png" width="300" height="250">
+ <img src="https://res.cloudinary.com/proj3/image/upload/v1651974555/Photomode_Readme/Dashboard_gfgf7h.png" width="300" height="250">
+ <img src="https://res.cloudinary.com/proj3/image/upload/v1651974555/Photomode_Readme/Image_Modal_p9navy.png" width="300" height="250">
 </p>
 
 # Future Development

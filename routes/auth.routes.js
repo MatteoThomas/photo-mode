@@ -7,7 +7,7 @@ const bcrypt = require("bcryptjs");
 
 dotenv.config();
 
-// USER DATA //////////////////////////////////////////////////////////////////////////
+// USER DATA
 router.post("/signup", async (req, res) => {
   try {
     //BCRYPT HASHING PASSWORD BEFORE GETTING STORED IN DATABASE

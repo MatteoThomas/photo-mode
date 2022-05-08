@@ -3,7 +3,6 @@ import NameAndBio from "./NameAndBio/NameAndBio";
 import {  Title } from "./Account.style";
 import { StyledContainer } from "../../components/Container/Container.style";
 import AnimatedPage from "../../animation/AnimatedPage";
-import axios from "axios";
 import API from "../../RequestMethods"
 
 const Account = () => {
@@ -14,9 +13,7 @@ const Account = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-
     setLoading(true);
-    
     const getEmail = async() => {
       setLoading(true);
       const localEmail = await JSON.parse(window.localStorage.getItem('user'));
@@ -25,7 +22,6 @@ const Account = () => {
       } else {
         window.location.href = "/login"
       }}
-
     const getName = async() => {
       setLoading(true);
       const localName = await JSON.parse(window.localStorage.getItem('user'));
@@ -34,50 +30,45 @@ const Account = () => {
       } else {
         window.location.href = "/login"
       }}
-
-      const getBio = async() => {
-        setLoading(true);
-        const localBio = await JSON.parse(window.localStorage.getItem('user'));
-         if (localBio !== null) {
-          setUserBio(localBio.data.bio);
-        
+    const getBio = async() => {
+      setLoading(true);
+      const localBio = await JSON.parse(window.localStorage.getItem('user'));
+        if (localBio !== null) {
+        setUserBio(localBio.data.bio);
         } else {
           window.location.href = "/login"
         }}
-
     async function fetchAvatar() {
       //SENDS userName AS A SEARCH PARAMETER
-      // const req = await fetch(`https://photo-mode.herokuapp.com/api/cloudinary/avatar?folderData=${userName}`)
       API.get(`/api/cloudinary/avatar?folderData=${userName}`)
       .then(res => {
         setAvatar(res.data.results.resources[0].url)
       })
     }
-          fetchAvatar()
-          getBio();
-          getEmail();
-          getName();
-          return  (
-        setLoading(false)
-     
+    fetchAvatar()
+    getBio();
+    getEmail();
+    getName();
+    return  (
+      setLoading(false)
       ) 
-    }, [ loading, userName, userEmail, userBio]);
+  }, [ loading, userName, userEmail, userBio]);
 
   return (
     <AnimatedPage>
-    <StyledContainer>
-      <Title>
-        <h1>Account</h1>
-      </Title>
-      {!loading ? 
-        <NameAndBio
-          nameProp={userName}
-          emailProp={userEmail}
-          bioProp={userBio}
-          avatarProp={avatar}
-        />
-        : <h1>Loading...</h1>}
-    </StyledContainer>
+      <StyledContainer>
+        <Title>
+          <h1>Account</h1>
+        </Title>
+        {!loading ? 
+          <NameAndBio
+            nameProp={userName}
+            emailProp={userEmail}
+            bioProp={userBio}
+            avatarProp={avatar}
+          />
+          : <h1>Loading...</h1>}
+      </StyledContainer>
     </AnimatedPage>
   );
 };
